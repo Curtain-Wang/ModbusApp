@@ -84,7 +84,7 @@
 </string>
             </property>
             <property name="text">
-             <string>COMM</string>
+             <string>COM</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1607,7 +1607,7 @@ QLabel[status=&quot;disconnected&quot;] {
      <x>0</x>
      <y>0</y>
      <width>1326</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
