@@ -51,6 +51,8 @@ private slots:
     void on_pushButton_8_clicked();
 
     void on_pushButton_6_clicked();
+    void on_txResetTimer_timeout();
+    void on_rxResetTimer_timeout();
 
 private:
     Ui::MainWindow *ui;
@@ -62,5 +64,7 @@ private:
     QTimer* sendTimer = nullptr;
     QTimer* receiveTimer = nullptr;
     QLabel* connectStatusLabel;
+    QTimer* txResetTimer = nullptr;
+    QTimer* rxResetTimer = nullptr;
 };
 #endif // MAINWINDOW_H
