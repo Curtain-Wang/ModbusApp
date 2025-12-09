@@ -431,7 +431,7 @@ QPushButton:pressed {
 </string>
          </property>
          <property name="text">
-          <string>校准界面</string>
+          <string>固件下载</string>
          </property>
         </widget>
        </item>
@@ -1600,16 +1600,6 @@ QLabel[status=&quot;disconnected&quot;] {
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1326</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

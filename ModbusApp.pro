@@ -15,7 +15,8 @@ SOURCES += \
     mylineedit.cpp \
     tform1.cpp \
     tform7.cpp \
-    tformconfig1.cpp
+    tformconfig1.cpp \
+    tformdownload.cpp
 
 HEADERS += \
     headfile.h \
@@ -23,13 +24,15 @@ HEADERS += \
     mylineedit.h \
     tform1.h \
     tform7.h \
-    tformconfig1.h
+    tformconfig1.h \
+    tformdownload.h
 
 FORMS += \
     mainwindow.ui \
     tform1.ui \
     tform7.ui \
-    tformconfig1.ui
+    tformconfig1.ui \
+    tformdownload.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -18,3 +18,5 @@ int receiveStartIndex = 0;
 int receiveEndIndex = 0;
 quint16 lastEditAddr = 0;
 MainWindow* mainwindow = nullptr;
+int DownloadFlag = 0;
+QByteArray rxBuf;

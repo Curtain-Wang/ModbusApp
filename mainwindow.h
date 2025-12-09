@@ -7,6 +7,7 @@ class QLabel;
 class TForm1;
 class TFormConfig1;
 class TForm7;
+class TFormDownload;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -37,6 +38,8 @@ public:
     QString getEventText(quint16 value);
     void readHoldingRegCMDBuild();
     void manualWriteOneCMDBuild(quint16 addr, quint16 value);
+    void diyCMDBuild(QByteArray data, quint16 len);
+    quint16 getMessageSize();
 private slots:
     void on_connBtn_2_clicked();
     void onSendTimerTimeout();
@@ -55,6 +58,7 @@ private:
     TForm7* tform7 = nullptr;
     QSerialPort* serialPort;
     TFormConfig1* tformConfig1 = nullptr;
+    TFormDownload* tformDownload = nullptr;
     QTimer* sendTimer = nullptr;
     QTimer* receiveTimer = nullptr;
     QLabel* connectStatusLabel;

@@ -8,6 +8,7 @@
 #include "tform1.h"
 #include "tformconfig1.h"
 #include "tform7.h"
+#include "tformdownload.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -305,6 +306,10 @@ void MainWindow::dealMessage(quint8 *data)
     {
         readHoldingRegCMDBuild();
     }
+    if(data[1] == MASTER_CMD && data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
+    {
+        tformDownload->downloadRespDeal();
+    }
 }
 
 void MainWindow::refreshInput()
@@ -417,6 +422,55 @@ void MainWindow::manualWriteOneCMDBuild(quint16 addr, quint16 value)
     manualFlag = 1;
 }
 
+void MainWindow::diyCMDBuild(QByteArray data, quint16 len)
+{
+    if(manualFlag == 1)
+    {
+        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
+        return;
+    }
+    manualSendDataBuf.clear();
+    for(quint16 i = 0; i < len; i++)
+    {
+        manualSendDataBuf.append(data[i]);
+    }
+    QByteArray crcArray = calculateCRCArray(manualSendDataBuf, len);
+    manualSendDataBuf.append(crcArray[0]);
+    manualSendDataBuf.append(crcArray[1]);
+    manualFlag = 1;
+}
+
+quint16 MainWindow::getMessageSize()
+{
+    int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
+    if(cmd == 3 || cmd == 4)
+    {
+        return receiveDataBuf[(receiveStartIndex + 2) % 500] + 5;
+    }
+    if(cmd == 6)
+    {
+        return 8;
+    }
+    if(cmd == 16)
+    {
+        return 16;
+    }
+    if(cmd == 0xF0)
+    {
+        quint8 cmd2 = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 2) % 500]);
+        switch(cmd2)
+        {
+        case 0x06:
+            return 5;
+        case 0x07:
+            return 6;
+        case 0x08:
+            return 12;
+        }
+    }
+    return 0;
+}
+
 void MainWindow::onReceiveTimerTimeout()
 {
     if(connFlag == UNCONNECTED)
@@ -425,51 +479,40 @@ void MainWindow::onReceiveTimerTimeout()
     }
     cacheReceiveData();
     //当缓冲区的消息长度大于messageSize，那说明可能存在一条完整的响应
-    while ((receiveEndIndex + 500 - receiveStartIndex) % 500 >= 6) {
+    while (receiveEndIndex != receiveStartIndex) {
         int module = static_cast<uint8_t>(receiveDataBuf[receiveStartIndex]);
         int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
         //没有匹配到开始
-        if(module != MODULE || (cmd != 3 && cmd != 6 && cmd != 0x10 && cmd != 4))
+        if(module != MODULE || (cmd != 3 && cmd != 6 && cmd != 0x10 && cmd != 4 && cmd != 0xF0))
         {
             //更新开始点
             receiveStartIndex = (receiveStartIndex + 1) % 500;
             continue;
         }
         //匹配到开始,再匹配下长度是否符合
-        int messageSize = 0;
-        if(cmd == 3 || cmd == 4)
-        {
-            messageSize = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 2) % 500]) + 5;
-        }
-        if(cmd == 6)
-        {
-            messageSize = 8;
-        }
-        if(cmd == 16)
-        {
-            messageSize = 16;
-        }
+        int messageSize = getMessageSize();
         if((receiveEndIndex + 500 - receiveStartIndex) % 500 < messageSize){
             //消息还没接收完整，等下一次定时去接,不更新开始点
             break;
         }
+
+        rxBuf.clear();
         //构建消息
-        QByteArray buf;
         for (int var = 0; var < messageSize; var++) {
-            buf.append(receiveDataBuf[(receiveStartIndex + var) % 500]);
+            rxBuf.append(receiveDataBuf[(receiveStartIndex + var) % 500]);
         }
         //判断是否是一个完整的消息
-        if(receiveDataCRCCheck(buf))
+        if(receiveDataCRCCheck(rxBuf))
         {
             //首先更新接收缓冲区的开始坐标
             if(tform1 != nullptr)
             {
-                tform1->displayInfo("串口上传上来且验证通过的一条消息：" + buf.toHex());
+                tform1->displayInfo("串口上传上来且验证通过的一条消息：" + rxBuf.toHex());
             }
             receiveStartIndex = (receiveStartIndex + messageSize) % 500;
             //清空等待时间
             waitMessageRemaingTime = 0;
-            dealMessage(reinterpret_cast<quint8*>(buf.data()));
+            dealMessage(reinterpret_cast<quint8*>(rxBuf.data()));
             break;
         }
         //crc校验失败
@@ -481,6 +524,8 @@ void MainWindow::onReceiveTimerTimeout()
         }
     }
 }
+
+
 
 void MainWindow::onTFormDestroyed(QObject *obj)
 {
@@ -495,6 +540,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     if(obj == tformConfig1)
     {
         tformConfig1 = nullptr;
+    }
+    if(obj == tformDownload)
+    {
+        tformDownload = nullptr;
     }
 }
 
@@ -513,7 +562,13 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_pushButton_8_clicked()
 {
-
+    if(tformDownload == nullptr)
+    {
+        tformDownload = new TFormDownload(this);
+        tformDownload->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformDownload, &TFormDownload::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformDownload->show();
 }
 
 
