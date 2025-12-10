@@ -166,7 +166,7 @@ void MainWindow::onSendTimerTimeout()
             manualFlag = 0;
         }
         //说明没有手动命令要下发，就判断是否到了刷新时间
-        else if(dataRefreshRemaingTime <= 0)
+        else if(dataRefreshRemaingTime <= 0 && tformDownload == nullptr)
         {
             //获取实时数据
             sendGetRealTimeDataCMD();
@@ -341,7 +341,7 @@ void MainWindow::dealMessage(quint8 *data)
     {
         readHoldingRegCMDBuild();
     }
-    if(data[1] == MASTER_CMD && data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
+    if((data[1] == MASTER_CMD || data[1] == SLAVE_CMD) && data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
     {
         tformDownload->downloadRespDeal();
     }
@@ -490,7 +490,7 @@ quint16 MainWindow::getMessageSize()
     {
         return 16;
     }
-    if(cmd == 0xF0)
+    if(cmd == 0xF0 || cmd == 0xE0)
     {
         quint8 cmd2 = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 2) % 500]);
         switch(cmd2)
@@ -518,7 +518,7 @@ void MainWindow::onReceiveTimerTimeout()
         int module = static_cast<uint8_t>(receiveDataBuf[receiveStartIndex]);
         int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
         //没有匹配到开始
-        if(module != MODULE || (cmd != 3 && cmd != 6 && cmd != 0x10 && cmd != 4 && cmd != 0xF0))
+        if(module != MODULE || (cmd != 3 && cmd != 6 && cmd != 0x10 && cmd != 4 && cmd != 0xF0 && cmd != 0xE0))
         {
             //更新开始点
             receiveStartIndex = (receiveStartIndex + 1) % 500;

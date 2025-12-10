@@ -67,9 +67,12 @@ void TFormDownload::sendData()
         buf[0] = MODULE;
         if(upgradeFlag == MASTER) //主机升级命令
         {
-           buf[1] = 0xF0;
-           buf[2] = 0x06;
+            buf[1] = 0xF0;
+        }else if(upgradeFlag == SLAVE)
+        {
+            buf[1] = 0xE0;
         }
+        buf[2] = 0x06;
         for(quint16 i = 3; i < 198; i++)
         {
             buf[i] = 0xaa;
@@ -88,8 +91,11 @@ void TFormDownload::sendData()
         if(upgradeFlag == MASTER) //主机升级命令
         {
             buf[1] = 0xF0;
-            buf[2] = 0x07;
+        }else if(upgradeFlag == SLAVE)
+        {
+            buf[1] = 0xE0;
         }
+        buf[2] = 0x07;
         buf[3] = pageAddr;
         int copyLen = fileLen >= (pageAddr + 1) * 512 ? 512 : (fileLen - pageAddr * 512);
         memcpy(&buf[4], fileBuf.constData() + (512 * pageAddr), copyLen);
@@ -106,8 +112,11 @@ void TFormDownload::sendData()
         if(upgradeFlag == MASTER) //主机升级命令
         {
             buf[1] = 0xF0;
-            buf[2] = 0x08;
+        }else if(upgradeFlag == SLAVE)
+        {
+            buf[1] = 0xE0;
         }
+        buf[2] = 0x08;
         buf[3] = (fileCRC & 0xFF);
         buf[4] = (fileCRC >> 8);
         buf[5] = (swId & 0xFF);
@@ -282,9 +291,11 @@ void TFormDownload::on_pushButton_clicked()
     //输出板升级
     if(OUTPUT_SWID == swId)
     {
+        upgradeFlag = MASTER;
         ui->plainTextEdit->appendPlainText(QString("当前升级文件为%1，版本号为%2").arg("输出板程序").arg(downVer, 4, 16, QLatin1Char('0')));
     }else if(INPUT_SWID == swId)//输入板升级
     {
+        upgradeFlag = SLAVE;
         ui->plainTextEdit->appendPlainText(QString("当前升级文件为%1，版本号为%2").arg("输入板程序").arg(downVer, 4, 16, QLatin1Char('0')));
     }else
     {
@@ -305,7 +316,6 @@ void TFormDownload::on_master_btn_clicked()
     DownloadTXFlag = 1;
     DownloadRepeatNum = 3;
     ui->master_btn->setEnabled(false);
-    upgradeFlag = MASTER;
     ui->progressBar->setValue(0);
     timer->setInterval(10);
     timer->start();

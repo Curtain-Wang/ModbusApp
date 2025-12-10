@@ -26,6 +26,7 @@ typedef enum
     READ_INPUT_CMD = 0x04,
     WRITE_ONE_CMD = 0x06,
     MASTER_CMD = 0xF0,
+    SLAVE_CMD = 0xE0,
 }en_cmd1_t;
 
 typedef enum
