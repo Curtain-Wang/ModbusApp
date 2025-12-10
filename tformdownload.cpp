@@ -177,7 +177,7 @@ void TFormDownload::downloadRespDeal()
         if(rxBuf[3] == 0)
         {
             ui->progressBar->setValue(100);
-            ui->plainTextEdit->appendPlainText(QString("已升级到%1版本").arg(downVer, 4, 16, QLatin1Char('0')));
+            ui->plainTextEdit->appendPlainText(QString("已升级到%1%2版本").arg((downVer >> 8), 2, 16, QLatin1Char('0')).arg((downVer & 0xFF), 2, 16, QLatin1Char('0')));
             QMessageBox::information(this, "提示", "升级成功!");
         }else
         {
@@ -202,10 +202,7 @@ void TFormDownload::downloadRespDeal()
             }
             QMessageBox::information(this, "提示", "升级失败!");
         }
-        DownloadFlag = 5;
-        DownloadTime = 0;
-        DownloadTXFlag = 1;
-        DownloadRepeatNum = 3;
+        endDownload();
         break;
     }
 }

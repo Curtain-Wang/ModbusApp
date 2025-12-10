@@ -15,12 +15,14 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , connectStatusLabel(new QLabel(this))
+    , versionLabel(new QLabel(this))
     , serialPort(new QSerialPort(this))
     , txResetTimer(new QTimer(this))
     , rxResetTimer(new QTimer(this))
 
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/icon/images/app.ico"));
     init();
 }
 
@@ -63,10 +65,13 @@ void MainWindow::init()
     receiveTimer->start();
     //状态栏
     connectStatusLabel->setMinimumWidth(150);
-    ui->statusbar->addWidget(connectStatusLabel);
-    connectStatusLabel->setText(connStatus.arg("未连接"));
     connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
     ui->statusbar->addWidget(connectStatusLabel);
+    connectStatusLabel->setText(connStatus.arg("未连接"));
+
+    versionLabel->setMidLineWidth(300);
+    versionLabel->setText(versionStr.arg("未知").arg("未知"));
+    ui->statusbar->addWidget(versionLabel);
     setWindowTitle(TITLE);
     regPowInit();
     //指示灯定时器相关
@@ -383,7 +388,9 @@ void MainWindow::refresh()
     ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
     ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
     ui->bms_warn_prot->update();
-
+    QString version = versionStr.arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'))
+        .arg((inputRegs[15] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[15] & 0xFF), 2, 16, QLatin1Char('0'));
+    versionLabel->setText(version);
 }
 
 QString MainWindow::getEventText(quint16 value)

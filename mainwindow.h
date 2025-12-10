@@ -64,6 +64,7 @@ private:
     QTimer* sendTimer = nullptr;
     QTimer* receiveTimer = nullptr;
     QLabel* connectStatusLabel;
+    QLabel* versionLabel;
     QTimer* txResetTimer = nullptr;
     QTimer* rxResetTimer = nullptr;
 };

@@ -8,6 +8,7 @@ quint8 holdingPow[REG_NUM];
 
 int connFlag = 0;
 QString connStatus = "连接状态：%1";
+QString versionStr = "输入板版本：%1.%2, 输出板版本：%3.%4";
 int waitMessageRemaingTime = 0;
 int dataRefreshRemaingTime = 0;
 //手动标记，0自动 1手动 2双手动

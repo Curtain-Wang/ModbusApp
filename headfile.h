@@ -47,6 +47,7 @@ extern quint8 holdingPow[REG_NUM];
 //0未连接 1连接中 2已连接
 extern int connFlag;
 extern QString connStatus;
+extern QString versionStr;
 extern int waitMessageRemaingTime;
 extern int dataRefreshRemaingTime;
 //手动标记，0自动 1手动 2双手动
