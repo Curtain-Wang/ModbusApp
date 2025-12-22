@@ -44,6 +44,7 @@ void TFormConfig1::refresh()
     ui->h14->setText(QString::number(static_cast<float>(holdingRegs[14] * 1.0 / qPow(10, holdingPow[14])), 'f', holdingPow[14]));
     ui->h15->setText(QString::number(static_cast<float>(holdingRegs[15] * 1.0 / qPow(10, holdingPow[15])), 'f', holdingPow[15]));
     ui->h16->setText(QString::number(static_cast<float>(holdingRegs[16] * 1.0 / qPow(10, holdingPow[16])), 'f', holdingPow[16]));
+    ui->h17->setText(QString::number(holdingRegs[17]));
     ui->c0->blockSignals(true);
     ui->c3->blockSignals(true);
     ui->c5->blockSignals(true);

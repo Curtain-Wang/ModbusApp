@@ -70,7 +70,7 @@ void MainWindow::init()
     connectStatusLabel->setText(connStatus.arg("未连接"));
 
     versionLabel->setMidLineWidth(300);
-    versionLabel->setText(versionStr.arg("未知").arg("未知"));
+    versionLabel->setText(versionStr.arg("未知").arg("未知").arg("未知").arg("未知"));
     ui->statusbar->addWidget(versionLabel);
     setWindowTitle(TITLE);
     regPowInit();
@@ -99,6 +99,7 @@ void MainWindow::regPowInit()
     holdingPow[3] = 0;
     holdingPow[5] = 0;
     holdingPow[6] = 0;
+    holdingPow[17] = 0;
 }
 
 void MainWindow::sendPortData(QByteArray data)
@@ -537,7 +538,12 @@ void MainWindow::onReceiveTimerTimeout()
             //消息还没接收完整，等下一次定时去接,不更新开始点
             break;
         }
-
+        if(messageSize == 0)
+        {
+            //更新开始点
+            receiveStartIndex = (receiveStartIndex + 1) % 500;
+            continue;
+        }
         rxBuf.clear();
         //构建消息
         for (int var = 0; var < messageSize; var++) {
