@@ -392,6 +392,17 @@ void MainWindow::refresh()
     QString version = versionStr.arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'))
         .arg((inputRegs[15] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[15] & 0xFF), 2, 16, QLatin1Char('0'));
     versionLabel->setText(version);
+    //启停
+    if(inputRegs[1] == 1)
+    {
+        ui->pushButton_6->setText("停止");
+        ui->pushButton_6->setStyleSheet(RED_BUTTON_STYLE);
+    }else
+    {
+        ui->pushButton_6->setText("启动");
+        ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
+    }
+
 }
 
 QString MainWindow::getEventText(quint16 value)
@@ -622,13 +633,13 @@ void MainWindow::on_pushButton_8_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    if(tform1 == nullptr)
+    if(ui->pushButton_6->text() == "启动")
     {
-        tform1 = new TForm1(this);
-        tform1->setAttribute(Qt::WA_DeleteOnClose);
-        connect(tform1, &TForm1::destroyed, this, &MainWindow::onTFormDestroyed);
+        mainwindow->manualWriteOneCMDBuild(17 + HOLDING_REG_START, 1);
+    }else
+    {
+        mainwindow->manualWriteOneCMDBuild(17 + HOLDING_REG_START, 0);
     }
-    tform1->show();
 }
 
 void MainWindow::on_txResetTimer_timeout()

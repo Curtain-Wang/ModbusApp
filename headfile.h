@@ -19,6 +19,8 @@
 #define CONFIG_FILE_PATH  "./config.ini"
 #define BASE_CONFIG  "BASE_CONFIG"
 #define DOWNLOAD_FILE_DIR "download_file_dir"
+#define RED_BUTTON_STYLE            "QPushButton { background-color: #EF5350; border: 2px solid #E53935; color: white; font-size: 25px; padding: 10px; border-radius: 10px; width: 100px; height: 50px; text-align: center; }"
+#define GREEN_BUTTON_STYLE          "QPushButton { background-color: #66BB6A; border: 2px solid #43A047; color: white; font-size: 22px; padding: 10px; border-radius: 10px; width: 100px; height: 50px; text-align: center; }"
 
 typedef enum
 {
