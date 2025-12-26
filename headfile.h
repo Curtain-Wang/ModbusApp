@@ -5,7 +5,7 @@
 #define INPUT_REG_START_ADDR    0
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
-#define TITLE   "LED电源-V1.0.0"
+#define TITLE   "LED电源-V1.0.1"
 #define MODULE  0x01
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
