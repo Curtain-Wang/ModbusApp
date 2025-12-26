@@ -4,6 +4,7 @@
 #include <QSerialPortInfo>
 #include <QMessageBox>
 #include <QTimer>
+#include <QKeyEvent>
 #include "headfile.h"
 #include "tform1.h"
 #include "tformconfig1.h"
@@ -79,7 +80,10 @@ void MainWindow::init()
     connect(txResetTimer, &QTimer::timeout, this, &MainWindow::on_txResetTimer_timeout);
     rxResetTimer->setSingleShot(true);
     connect(rxResetTimer, &QTimer::timeout, this, &MainWindow::on_rxResetTimer_timeout);
-
+    // 确保控件可以获得焦点
+    setFocusPolicy(Qt::StrongFocus);
+    // 并且实际获得了焦点
+    setFocus();
 }
 
 void MainWindow::regPowInit()
@@ -253,6 +257,7 @@ void MainWindow::on_connBtn_clicked()
             ui->comboBox_2->setEnabled(false);
             ui->cb_br->setEnabled(false);
             ui->connBtn->setText("断开连接");
+            ui->connBtn->setStyleSheet(RED_BUTTON_STYLE);
             connectStatusLabel->setText(connStatus.arg("连接中..."));
             connectStatusLabel->setStyleSheet("QLabel { background-color : blue; color : white; }");
         }
@@ -270,7 +275,7 @@ void MainWindow::on_connBtn_clicked()
         connectStatusLabel->setText(connStatus.arg("未连接"));
         connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
         ui->connBtn->setText("建立连接");
-
+        ui->connBtn->setStyleSheet(GREEN_BUTTON_STYLE);
         ui->bms_warn_prot->setText("未连接");
         ui->bms_warn_prot->setProperty("status", "disconnected");
         ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
@@ -633,6 +638,11 @@ void MainWindow::on_pushButton_8_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
     if(ui->pushButton_6->text() == "启动")
     {
         mainwindow->manualWriteOneCMDBuild(17 + HOLDING_REG_START, 1);
@@ -662,5 +672,21 @@ void MainWindow::on_rxResetTimer_timeout()
         "    background-color: #D3D3D3;"
         "}"
         );
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_T) {
+        if(tform1 == nullptr)
+        {
+            tform1 = new TForm1(this);
+            tform1->setAttribute(Qt::WA_DeleteOnClose);
+            connect(tform1, &TForm1::destroyed, this, &MainWindow::onTFormDestroyed);
+        }
+        tform1->show();
+    } else {
+        // 调用父类的实现处理其他按键
+        QWidget::keyPressEvent(event);
+    }
 }
 

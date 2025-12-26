@@ -403,6 +403,21 @@ QComboBox::down-arrow {
     width: 100px;
     height: 50px;
     text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
 }</string>
          </property>
          <property name="text">
@@ -479,6 +494,21 @@ QComboBox::down-arrow {
     width: 100px;
     height: 50px;
     text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
 }</string>
          </property>
          <property name="text">
@@ -517,6 +547,21 @@ QComboBox::down-arrow {
     width: 100px;
     height: 50px;
     text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
 }</string>
          </property>
          <property name="text">
@@ -555,6 +600,21 @@ QComboBox::down-arrow {
     width: 100px;
     height: 50px;
     text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
 }</string>
          </property>
          <property name="text">
@@ -600,6 +660,9 @@ QComboBox::down-arrow {
           </item>
           <item>
            <widget class="QLineEdit" name="l0">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -695,6 +758,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -790,6 +856,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -885,6 +954,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l5">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -980,6 +1052,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l6">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1075,6 +1150,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l7">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1170,6 +1248,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l8">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1265,6 +1346,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l9">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1360,6 +1444,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l10">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1455,6 +1542,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l11">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1550,6 +1640,9 @@ QLineEdit:disabled {
           </item>
           <item>
            <widget class="QLineEdit" name="l13">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>

@@ -67,5 +67,9 @@ private:
     QLabel* versionLabel;
     QTimer* txResetTimer = nullptr;
     QTimer* rxResetTimer = nullptr;
+
+    // QWidget interface
+protected:
+    void keyPressEvent(QKeyEvent *event);
 };
 #endif // MAINWINDOW_H
