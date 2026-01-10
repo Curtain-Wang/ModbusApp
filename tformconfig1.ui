@@ -1621,7 +1621,7 @@ QLineEdit:disabled {
          </font>
         </property>
         <property name="text">
-         <string>PWM计数值设置</string>
+         <string>主从设置(主1，从0)</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1629,7 +1629,7 @@ QLineEdit:disabled {
        </widget>
       </item>
       <item>
-       <widget class="MyLineEdit" name="h17">
+       <widget class="MyLineEdit" name="h18">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -1686,7 +1686,7 @@ QLineEdit:disabled {
          </font>
         </property>
         <property name="text">
-         <string> </string>
+         <string/>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

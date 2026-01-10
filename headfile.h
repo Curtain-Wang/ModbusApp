@@ -10,7 +10,7 @@
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
 #define INPUT_REG_NUM       0x14
-#define HOLDING_REG_NUM     18
+#define HOLDING_REG_NUM     19
 #define DATA_REFRESH_CYCLE  10
 #define NO_WARN_PROT_STR    "无保护事件"
 #define UNCONNECTED     0
@@ -37,6 +37,28 @@ typedef enum
     DOWNLOAD_COMPLETE_CHECK_CMD = 0x08,
 }en_cmd2_t;
 
+typedef enum
+{
+    HI_RunMode           = 0,
+    HI_OutVolt,
+    HI_OutCur,
+    HI_DimingMode,
+    HI_FullLightCur, //满亮度电流值
+    HI_FanCtrlMode,
+    HI_FanPowSet,
+    HI_OutLimitVolt,
+    HI_OutLimitCur,
+    HI_OutOVPTS, //输出过压保护阈值
+    HI_OutOCPTS, //输出过流保护阈值
+    HI_InOVPTS,  //输入过压保护阈值
+    HI_InOCPTS,  //输入过流保护阈值
+    HI_InUVPTS,  //输入欠压保护阈值
+    HI_InUVPRTS, //输入欠压保护恢复阈值
+    HI_OTTS,    //过温阈值
+    HI_OHTS,    //过湿阈值
+    HI_OPEN,
+    HI_MASTER,  //是否主机
+}en_modbus_holding_data_index_t;
 
 #define BR 9600
 class MainWindow;

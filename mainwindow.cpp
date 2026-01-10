@@ -104,6 +104,7 @@ void MainWindow::regPowInit()
     holdingPow[5] = 0;
     holdingPow[6] = 0;
     holdingPow[17] = 0;
+    holdingPow[18] = 0;
 }
 
 void MainWindow::sendPortData(QByteArray data)
@@ -350,7 +351,16 @@ void MainWindow::dealMessage(quint8 *data)
     }
     if(data[1] == WRITE_ONE_CMD)
     {
-        readHoldingRegCMDBuild();
+        quint16 addr = ((data[2] << 8) | data[3]);
+        //启动失败
+        if(addr == HI_OPEN + HOLDING_REG_START && data[4] == 0xFF)
+        {
+            QMessageBox::warning(this, "告警", "检测到当前输出端已有电压, 不能手动启动!");
+        }else
+        {
+            holdingRegs[addr - HOLDING_REG_START] = ((data[4] << 8) | data[5]);
+        }
+        refreshHolding();
     }
     if((data[1] == MASTER_CMD || data[1] == SLAVE_CMD) && data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
     {
@@ -365,13 +375,14 @@ void MainWindow::refreshInput()
 
 void MainWindow::refreshHolding()
 {
-    tformConfig1->refresh();
+    if(tformConfig1 != nullptr)
+        tformConfig1->refresh();
 }
 
 void MainWindow::refresh()
 {
     ui->l0->setText(QString::number(static_cast<float>(inputRegs[0] * 1.0 / qPow(10, inputPow[0])), 'f', inputPow[0]));
-    ui->l2->setText(QString::number(static_cast<float>(inputRegs[2] * 1.0 / qPow(10, inputPow[2])), 'f', inputPow[2]));
+    ui->l4->setText(inputRegs[4] == 1 ? "主机" : "从机");
     ui->l3->setText(QString::number(static_cast<float>(inputRegs[3] * 1.0 / qPow(10, inputPow[3])), 'f', inputPow[3]));
     ui->l5->setText(QString::number(static_cast<float>(inputRegs[5] * 1.0 / qPow(10, inputPow[5])), 'f', inputPow[5]));
     ui->l6->setText(QString::number(static_cast<float>(inputRegs[6] * 1.0 / qPow(10, inputPow[6])), 'f', inputPow[6]));
@@ -394,8 +405,8 @@ void MainWindow::refresh()
     ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
     ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
     ui->bms_warn_prot->update();
-    QString version = versionStr.arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'))
-        .arg((inputRegs[15] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[15] & 0xFF), 2, 16, QLatin1Char('0'));
+    QString version = versionStr.arg((inputRegs[15] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[15] & 0xFF), 2, 16, QLatin1Char('0'))
+        .arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'));
     versionLabel->setText(version);
     //启停
     if(inputRegs[1] == 1)
@@ -645,10 +656,10 @@ void MainWindow::on_pushButton_6_clicked()
     }
     if(ui->pushButton_6->text() == "启动")
     {
-        mainwindow->manualWriteOneCMDBuild(17 + HOLDING_REG_START, 1);
+        mainwindow->manualWriteOneCMDBuild(HI_OPEN + HOLDING_REG_START, 1);
     }else
     {
-        mainwindow->manualWriteOneCMDBuild(17 + HOLDING_REG_START, 0);
+        mainwindow->manualWriteOneCMDBuild(HI_OPEN + HOLDING_REG_START, 0);
     }
 }
 
