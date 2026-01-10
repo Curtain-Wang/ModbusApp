@@ -21,3 +21,4 @@ quint16 lastEditAddr = 0;
 MainWindow* mainwindow = nullptr;
 int DownloadFlag = 0;
 QByteArray rxBuf;
+quint16 lastMSCommCount = 0;

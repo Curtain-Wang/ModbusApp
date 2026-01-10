@@ -83,5 +83,6 @@ extern quint16 lastEditAddr;
 extern MainWindow* mainwindow;
 extern int DownloadFlag;
 extern QByteArray rxBuf;
+extern quint16 lastMSCommCount;
 
 #endif // HEADFILE_H

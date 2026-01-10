@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     , serialPort(new QSerialPort(this))
     , txResetTimer(new QTimer(this))
     , rxResetTimer(new QTimer(this))
+    , msResetTimer(new QTimer(this))
 
 {
     ui->setupUi(this);
@@ -80,6 +81,8 @@ void MainWindow::init()
     connect(txResetTimer, &QTimer::timeout, this, &MainWindow::on_txResetTimer_timeout);
     rxResetTimer->setSingleShot(true);
     connect(rxResetTimer, &QTimer::timeout, this, &MainWindow::on_rxResetTimer_timeout);
+    msResetTimer->setSingleShot(true);
+    connect(msResetTimer, &QTimer::timeout, this, &MainWindow::on_msResetTimer_timeout);
     // 确保控件可以获得焦点
     setFocusPolicy(Qt::StrongFocus);
     // 并且实际获得了焦点
@@ -418,7 +421,23 @@ void MainWindow::refresh()
         ui->pushButton_6->setText("启动");
         ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
     }
-
+    //主从通讯灯亮一下
+    if(lastMSCommCount != inputRegs[16])
+    {
+        //闪一下绿色
+        ui->lab_ms_comm->setStyleSheet(
+            "QLabel {"
+            "    border-radius: 5px;"
+            "    background-color: #00F000;"
+            "}"
+            );
+        lastMSCommCount = inputRegs[16];
+        if(msResetTimer->isActive())
+        {
+            msResetTimer->stop();
+        }
+        msResetTimer->start(500);//500ms后恢复
+    }
 }
 
 QString MainWindow::getEventText(quint16 value)
@@ -678,6 +697,17 @@ void MainWindow::on_rxResetTimer_timeout()
 {
     //恢复灰色
     ui->lab_rx->setStyleSheet(
+        "QLabel {"
+        "    border-radius: 5px;"
+        "    background-color: #D3D3D3;"
+        "}"
+        );
+}
+
+void MainWindow::on_msResetTimer_timeout()
+{
+    //恢复灰色
+    ui->lab_ms_comm->setStyleSheet(
         "QLabel {"
         "    border-radius: 5px;"
         "    background-color: #D3D3D3;"
