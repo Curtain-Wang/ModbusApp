@@ -26,10 +26,15 @@ void TForm7::on_lineEdit_returnPressed()
         return;
     }
     quint16 iValue= 0;
-    if(lastEditAddr != 2)
+    if(lastEditAddr != HI_OutCur)
     {
         float fValue = ui->lineEdit->text().toFloat();
         iValue= (quint16)(fValue * qPow(10, holdingPow[lastEditAddr]) + 0.5);
+        //限流设置不能大于20.5A
+        if(lastEditAddr == HI_OutLimitCur && iValue > 205)
+        {
+            QMessageBox::warning(this, tr("警告"), tr("输出限流值最大不能超过20.5A"));
+        }
     }else
     {
         iValue = ui->lineEdit->text().toInt() * holdingRegs[4] / 100;
