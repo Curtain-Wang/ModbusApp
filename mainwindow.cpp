@@ -97,6 +97,7 @@ void MainWindow::regPowInit()
     }
     inputPow[12] = 0;
     inputPow[13] = 0;
+    inputPow[17] = 1;
 
     for(quint8 i = 0; i < REG_NUM; i++)
     {
@@ -385,7 +386,14 @@ void MainWindow::refreshHolding()
 void MainWindow::refresh()
 {
     ui->l0->setText(QString::number(static_cast<float>(inputRegs[0] * 1.0 / qPow(10, inputPow[0])), 'f', inputPow[0]));
-    ui->l4->setText(inputRegs[4] == 1 ? "主机" : "从机");
+    ui->l17->setText(QString::number(static_cast<float>(inputRegs[17] * 1.0 / qPow(10, inputPow[17])), 'f', inputPow[17]));
+    if(inputRegs[4] == 1)
+    {
+        ui->radioBtnM->setChecked(true);
+    }else
+    {
+        ui->radioBtnS->setChecked(true);
+    }
     ui->l3->setText(QString::number(static_cast<float>(inputRegs[3] * 1.0 / qPow(10, inputPow[3])), 'f', inputPow[3]));
     ui->l5->setText(QString::number(static_cast<float>(inputRegs[5] * 1.0 / qPow(10, inputPow[5])), 'f', inputPow[5]));
     ui->l6->setText(QString::number(static_cast<float>(inputRegs[6] * 1.0 / qPow(10, inputPow[6])), 'f', inputPow[6]));
