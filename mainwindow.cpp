@@ -109,6 +109,8 @@ void MainWindow::regPowInit()
     holdingPow[6] = 0;
     holdingPow[17] = 0;
     holdingPow[18] = 0;
+    holdingPow[19] = 0;
+    holdingPow[20] = 0;
 }
 
 void MainWindow::sendPortData(QByteArray data)
@@ -400,8 +402,8 @@ void MainWindow::refresh()
     ui->l7->setText(QString::number(static_cast<float>(inputRegs[7] * 1.0 / qPow(10, inputPow[7])), 'f', inputPow[7]));
     ui->l8->setText(QString::number(static_cast<float>(inputRegs[8] * 1.0 / qPow(10, inputPow[8])), 'f', inputPow[8]));
     ui->l9->setText(QString::number(static_cast<float>(inputRegs[9] * 1.0 / qPow(10, inputPow[9])), 'f', inputPow[9]));
-    ui->l10->setText(QString::number(static_cast<float>(inputRegs[10] * 1.0 / qPow(10, inputPow[10])), 'f', inputPow[10]));
-    ui->l11->setText(QString::number(static_cast<float>(inputRegs[11] * 1.0 / qPow(10, inputPow[11])), 'f', inputPow[11]));
+    ui->l2->setText(QString::number(static_cast<float>(inputRegs[2] * 1.0 / qPow(10, inputPow[2])), 'f', inputPow[2]));
+    ui->l18->setText(QString::number(inputRegs[18]));
     ui->l13->setText(QString::number(inputRegs[13]));
     QString eventStr = getEventText(inputRegs[12]);
     if(eventStr.length() == 0)
