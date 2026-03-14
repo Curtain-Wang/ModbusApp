@@ -90,14 +90,14 @@ void TFormConfig1::refresh()
 
 void TFormConfig1::on_c0_currentIndexChanged(int index)
 {
+    ui->c0->blockSignals(true);
+    ui->c0->setCurrentIndex(preRunModeIndex);
+    ui->c0->blockSignals(false);
     if(connFlag != CONNECTED)
     {
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    ui->c0->blockSignals(true);
-    ui->c0->setCurrentIndex(preRunModeIndex);
-    ui->c0->blockSignals(false);
     mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, index);
 }
 

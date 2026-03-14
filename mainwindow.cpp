@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     , serialPort(new QSerialPort(this))
     , txResetTimer(new QTimer(this))
     , rxResetTimer(new QTimer(this))
-    , msResetTimer(new QTimer(this))
 
 {
     ui->setupUi(this);
@@ -81,12 +80,11 @@ void MainWindow::init()
     connect(txResetTimer, &QTimer::timeout, this, &MainWindow::on_txResetTimer_timeout);
     rxResetTimer->setSingleShot(true);
     connect(rxResetTimer, &QTimer::timeout, this, &MainWindow::on_rxResetTimer_timeout);
-    msResetTimer->setSingleShot(true);
-    connect(msResetTimer, &QTimer::timeout, this, &MainWindow::on_msResetTimer_timeout);
     // 确保控件可以获得焦点
     setFocusPolicy(Qt::StrongFocus);
     // 并且实际获得了焦点
     setFocus();
+    preRunModeIndex = ui->c0->currentIndex();
 }
 
 void MainWindow::regPowInit()
@@ -389,13 +387,6 @@ void MainWindow::refresh()
 {
     ui->l0->setText(QString::number(static_cast<float>(inputRegs[0] * 1.0 / qPow(10, inputPow[0])), 'f', inputPow[0]));
     ui->l17->setText(QString::number(static_cast<float>(inputRegs[17] * 1.0 / qPow(10, inputPow[17])), 'f', inputPow[17]));
-    if(inputRegs[4] == 1)
-    {
-        ui->radioBtnM->setChecked(true);
-    }else
-    {
-        ui->radioBtnS->setChecked(true);
-    }
     ui->l3->setText(QString::number(static_cast<float>(inputRegs[3] * 1.0 / qPow(10, inputPow[3])), 'f', inputPow[3]));
     ui->l5->setText(QString::number(static_cast<float>(inputRegs[5] * 1.0 / qPow(10, inputPow[5])), 'f', inputPow[5]));
     ui->l6->setText(QString::number(static_cast<float>(inputRegs[6] * 1.0 / qPow(10, inputPow[6])), 'f', inputPow[6]));
@@ -405,6 +396,7 @@ void MainWindow::refresh()
     ui->l2->setText(QString::number(static_cast<float>(inputRegs[2] * 1.0 / qPow(10, inputPow[2])), 'f', inputPow[2]));
     ui->l18->setText(QString::number(inputRegs[18]));
     ui->l13->setText(QString::number(inputRegs[13]));
+    ui->lPow->setText(QString::number(inputRegs[3] * inputRegs[5] / 100));
     QString eventStr = getEventText(inputRegs[12]);
     if(eventStr.length() == 0)
     {
@@ -418,8 +410,7 @@ void MainWindow::refresh()
     ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
     ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
     ui->bms_warn_prot->update();
-    QString version = versionStr.arg((inputRegs[15] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[15] & 0xFF), 2, 16, QLatin1Char('0'))
-        .arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'));
+    QString version = versionStr.arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'));
     versionLabel->setText(version);
     //启停
     if(inputRegs[1] == 1)
@@ -431,23 +422,10 @@ void MainWindow::refresh()
         ui->pushButton_6->setText("启动");
         ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
     }
-    //主从通讯灯亮一下
-    if(lastMSCommCount != inputRegs[16])
-    {
-        //闪一下绿色
-        ui->lab_ms_comm->setStyleSheet(
-            "QLabel {"
-            "    border-radius: 5px;"
-            "    background-color: #00F000;"
-            "}"
-            );
-        lastMSCommCount = inputRegs[16];
-        if(msResetTimer->isActive())
-        {
-            msResetTimer->stop();
-        }
-        msResetTimer->start(500);//500ms后恢复
-    }
+    //运行模式
+    ui->c0->blockSignals(true);
+    ui->c0->setCurrentIndex(inputRegs[19]);
+    preRunModeIndex = inputRegs[19];
 }
 
 QString MainWindow::getEventText(quint16 value)
@@ -714,17 +692,6 @@ void MainWindow::on_rxResetTimer_timeout()
         );
 }
 
-void MainWindow::on_msResetTimer_timeout()
-{
-    //恢复灰色
-    ui->lab_ms_comm->setStyleSheet(
-        "QLabel {"
-        "    border-radius: 5px;"
-        "    background-color: #D3D3D3;"
-        "}"
-        );
-}
-
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_T) {
@@ -739,5 +706,25 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         // 调用父类的实现处理其他按键
         QWidget::keyPressEvent(event);
     }
+}
+
+
+void MainWindow::on_c0_currentIndexChanged(int index)
+{
+    ui->c0->blockSignals(true);
+    ui->c0->setCurrentIndex(preRunModeIndex);
+    ui->c0->blockSignals(false);
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, index);
+}
+
+
+void MainWindow::on_c0_activated(int index)
+{
+
 }
 

@@ -53,7 +53,7 @@ private slots:
     void on_pushButton_6_clicked();
     void on_txResetTimer_timeout();
     void on_rxResetTimer_timeout();
-    void on_msResetTimer_timeout();
+    void on_c0_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
@@ -68,7 +68,7 @@ private:
     QLabel* versionLabel;
     QTimer* txResetTimer = nullptr;
     QTimer* rxResetTimer = nullptr;
-    QTimer* msResetTimer = nullptr;
+    quint8 preRunModeIndex;
     // QWidget interface
 protected:
     void keyPressEvent(QKeyEvent *event);
