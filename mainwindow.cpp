@@ -423,9 +423,14 @@ void MainWindow::refresh()
         ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
     }
     //运行模式
-    ui->c0->blockSignals(true);
-    ui->c0->setCurrentIndex(inputRegs[19]);
-    preRunModeIndex = inputRegs[19];
+    if(ui->c0->currentIndex() != inputRegs[19])
+    {
+        ui->c0->blockSignals(true);
+        ui->c0->setCurrentIndex(inputRegs[19]);
+        preRunModeIndex = inputRegs[19];
+        ui->c0->blockSignals(false);
+    }
+
 }
 
 QString MainWindow::getEventText(quint16 value)
@@ -719,12 +724,5 @@ void MainWindow::on_c0_currentIndexChanged(int index)
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, index);
+    manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, index);
 }
-
-
-void MainWindow::on_c0_activated(int index)
-{
-
-}
-
