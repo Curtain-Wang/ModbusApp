@@ -159,7 +159,7 @@ QLineEdit:disabled {
          <string notr="true">QComboBox {
     border: 1px solid #cccccc; /* 边框 */
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: white;  /* 设置下拉框背景为白色 */
 }
 QComboBox::drop-down {
     border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
@@ -167,6 +167,13 @@ QComboBox::drop-down {
 }
 QComboBox::down-arrow {
     image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
 }
 </string>
         </property>
@@ -235,7 +242,7 @@ QComboBox::down-arrow {
          <string notr="true">QComboBox {
     border: 1px solid #cccccc; /* 边框 */
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: white;  /* 设置下拉框背景为白色 */
 }
 QComboBox::drop-down {
     border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
@@ -243,6 +250,13 @@ QComboBox::drop-down {
 }
 QComboBox::down-arrow {
     image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
 }
 </string>
         </property>
@@ -429,7 +443,7 @@ QLineEdit:disabled {
          <string notr="true">QComboBox {
     border: 1px solid #cccccc; /* 边框 */
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: white;  /* 设置下拉框背景为白色 */
 }
 QComboBox::drop-down {
     border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
@@ -437,6 +451,13 @@ QComboBox::drop-down {
 }
 QComboBox::down-arrow {
     image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
 }
 </string>
         </property>

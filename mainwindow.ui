@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: white;
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
@@ -114,7 +118,7 @@
              <string notr="true">QComboBox {
     border: 1px solid #cccccc; /* 边框 */
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: white;  /* 设置下拉框背景为白色 */
 }
 QComboBox::drop-down {
     border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
@@ -122,6 +126,13 @@ QComboBox::drop-down {
 }
 QComboBox::down-arrow {
     image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
 }
 </string>
             </property>
@@ -213,7 +224,7 @@ QComboBox::down-arrow {
              <string notr="true">QComboBox {
     border: 1px solid #cccccc; /* 边框 */
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: white;  /* 设置下拉框背景为白色 */
 }
 QComboBox::drop-down {
     border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
@@ -221,6 +232,13 @@ QComboBox::drop-down {
 }
 QComboBox::down-arrow {
     image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
 }
 </string>
             </property>
@@ -261,6 +279,12 @@ QComboBox::down-arrow {
        </item>
        <item>
         <widget class="QGroupBox" name="groupBox_18">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>50</width>
@@ -398,65 +422,62 @@ QComboBox::down-arrow {
              </font>
             </property>
             <property name="text">
-             <string>运行模式</string>
+             <string>运行模式：</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QComboBox" name="c0">
-            <property name="minimumSize">
-             <size>
-              <width>150</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>150</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei</family>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QComboBox {
-    border: 1px solid #cccccc; /* 边框 */
-    border-radius: 5px;
-    background-color: #ffffff;
-}
-QComboBox::drop-down {
-    border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
-    width: 30px;
-}
-QComboBox::down-arrow {
-    image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbtn0">
+         <property name="styleSheet">
+          <string notr="true">QRadioButton {
+    spacing: 8px;
+    font-family: &quot;SF Pro Text&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+    font-size: 14px;
+    color: #28a745;          /* 文字绿色 */
+    min-height: 24px;
+}</string>
+         </property>
+         <property name="text">
+          <string>恒压（CV）</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbtn1">
+         <property name="styleSheet">
+          <string notr="true">QRadioButton {
+    spacing: 8px;
+    font-family: &quot;SF Pro Text&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+    font-size: 14px;
+    color: #007AFF;          /* 文字蓝色 */
+    min-height: 24px;
 }
 </string>
-            </property>
-            <item>
-             <property name="text">
-              <string>恒压限流</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>恒流限压</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>手动控制</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
+         </property>
+         <property name="text">
+          <string>恒流（CI）</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">buttonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -788,7 +809,7 @@ QLineEdit:disabled {
 }</string>
             </property>
             <property name="text">
-             <string>0</string>
+             <string/>
             </property>
             <property name="readOnly">
              <bool>true</bool>
@@ -1969,9 +1990,54 @@ QLabel[status=&quot;disconnected&quot;] {
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1418</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="actQuit"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <action name="actQuit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="toolTip">
+    <string>退出</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>394</x>
+     <y>63</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>708</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
  </buttongroups>

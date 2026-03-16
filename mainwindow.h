@@ -8,6 +8,7 @@ class TForm1;
 class TFormConfig1;
 class TForm7;
 class TFormDownload;
+class QCloseEvent;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -53,7 +54,9 @@ private slots:
     void on_pushButton_6_clicked();
     void on_txResetTimer_timeout();
     void on_rxResetTimer_timeout();
-    void on_c0_currentIndexChanged(int index);
+    void on_rbtn0_clicked(bool checked);
+
+    void on_rbtn1_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
@@ -72,5 +75,6 @@ private:
     // QWidget interface
 protected:
     void keyPressEvent(QKeyEvent *event);
+    virtual void closeEvent(QCloseEvent *event) override;
 };
 #endif // MAINWINDOW_H

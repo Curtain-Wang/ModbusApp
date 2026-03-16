@@ -84,7 +84,7 @@ void MainWindow::init()
     setFocusPolicy(Qt::StrongFocus);
     // 并且实际获得了焦点
     setFocus();
-    preRunModeIndex = ui->c0->currentIndex();
+    preRunModeIndex = ui->rbtn0->isChecked() ? 0 : 1;
 }
 
 void MainWindow::regPowInit()
@@ -423,12 +423,14 @@ void MainWindow::refresh()
         ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
     }
     //运行模式
-    if(ui->c0->currentIndex() != inputRegs[19])
+    if(inputRegs[19] == 0)
     {
-        ui->c0->blockSignals(true);
-        ui->c0->setCurrentIndex(inputRegs[19]);
-        preRunModeIndex = inputRegs[19];
-        ui->c0->blockSignals(false);
+        ui->rbtn0->setChecked(true);
+        preRunModeIndex = 0;
+    }else
+    {
+        ui->rbtn1->setChecked(true);
+        preRunModeIndex = 1;
     }
 
 }
@@ -713,16 +715,51 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-
-void MainWindow::on_c0_currentIndexChanged(int index)
+void MainWindow::closeEvent(QCloseEvent *event)
 {
-    ui->c0->blockSignals(true);
-    ui->c0->setCurrentIndex(preRunModeIndex);
-    ui->c0->blockSignals(false);
+    QMessageBox::StandardButton resBtn;
+    resBtn = QMessageBox::question(this, "提示",
+                                   "确定要退出嘛？",
+                                   QMessageBox::No | QMessageBox::Yes,
+                                   QMessageBox::Yes);
+    if (resBtn != QMessageBox::Yes) {
+        event->ignore();
+    } else {
+        event->accept();
+    }
+}
+
+void MainWindow::on_rbtn0_clicked(bool checked)
+{
+    if(preRunModeIndex == 0)
+    {
+        return;
+    }
+    ui->rbtn1->blockSignals(true);
+    ui->rbtn1->setChecked(true);
+    ui->rbtn1->blockSignals(false);
     if(connFlag != CONNECTED)
     {
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, index);
+    manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, 0);
 }
+
+void MainWindow::on_rbtn1_clicked(bool checked)
+{
+    if(preRunModeIndex == 1)
+    {
+        return;
+    }
+    ui->rbtn0->blockSignals(true);
+    ui->rbtn0->setChecked(true);
+    ui->rbtn0->blockSignals(false);
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, 1);
+}
+
