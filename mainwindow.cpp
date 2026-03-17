@@ -10,6 +10,10 @@
 #include "tformconfig1.h"
 #include "tform7.h"
 #include "tformdownload.h"
+#include <QFile>
+#include <QSettings>
+#include <QDir>
+#include "tformdatarecord.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     , serialPort(new QSerialPort(this))
     , txResetTimer(new QTimer(this))
     , rxResetTimer(new QTimer(this))
+    , saveDataTimer(new QTimer(this))
+    , reconnectTimer(new QTimer(this))
 
 {
     ui->setupUi(this);
@@ -85,6 +91,38 @@ void MainWindow::init()
     // 并且实际获得了焦点
     setFocus();
     preRunModeIndex = ui->rbtn0->isChecked() ? 0 : 1;
+    connect(saveDataTimer, &QTimer::timeout, this, &MainWindow::on_saveDataTimer_timeout);
+    connect(reconnectTimer, &QTimer::timeout, this, &MainWindow::on_reconnectTimer_timeout);
+    reconnectTimer->setInterval(5000);
+    menuBar()->setStyleSheet("QMenu { background-color: white; }"
+                             "QMenu::item { color: black; padding: 5px 20px; }"
+                             "QMenu::item:selected {color: black; border: 1px solid gray;}"
+                             "QMenu::item:hover {color: black; border: 1px solid gray;}");
+    initConfigFile();
+}
+
+void MainWindow::initConfigFile()
+{
+    // 检查配置文件是否存在
+    if (!QFile::exists(CONFIG_FILE_PATH)) {
+        QString configFilePath = CONFIG_FILE_PATH;
+        QSettings settings(configFilePath, QSettings::IniFormat);
+
+        // 设置默认值
+        settings.beginGroup(DATA_RECORD_CONFIG);
+        settings.setValue(DATA_RECORD_FILE_PATH, QDir::currentPath());
+        settings.setValue(DATA_RECORD_CYCLE, DEFAULT_DATA_RECORD_CYCLE);
+        settings.endGroup();
+    }
+
+    // 使用 QSettings 加载配置文件
+    QSettings settings(CONFIG_FILE_PATH, QSettings::IniFormat);
+    // 读取 DATA_RECORD_CONFIG 组中的参数
+    settings.beginGroup(DATA_RECORD_CONFIG);
+    dataRecordFilePath = settings.value(DATA_RECORD_FILE_PATH, QDir::currentPath()).toString();
+    dataRecordCycle = settings.value(DATA_RECORD_CYCLE, DEFAULT_DATA_RECORD_CYCLE).toInt();
+    settings.endGroup();
+    saveDataTimer->setInterval(dataRecordCycle * 1000);
 }
 
 void MainWindow::regPowInit()
@@ -166,6 +204,22 @@ void MainWindow::onSendTimerTimeout()
     if(waitMessageRemaingTime > 0)
     {
         waitMessageRemaingTime--;
+        //连续超时大于三次未回复就断开连接
+        if(waitMessageRemaingTime == 0)
+        {
+            timeoutTimes++;
+            if(timeoutTimes > 3)
+            {
+                timeoutTimes = 0;
+                disconnect();
+                //开启重连
+                if(reconnectFlag == 0)
+                {
+                    startReonnect();
+                }
+            }
+        }
+        return;
     }
     if(dataRefreshRemaingTime > 0)
     {
@@ -263,29 +317,18 @@ void MainWindow::on_connBtn_clicked()
             ui->cb_br->setEnabled(false);
             ui->connBtn->setText("断开连接");
             ui->connBtn->setStyleSheet(RED_BUTTON_STYLE);
+            sendTimer->start();
+            receiveTimer->start();
             connectStatusLabel->setText(connStatus.arg("连接中..."));
             connectStatusLabel->setStyleSheet("QLabel { background-color : blue; color : white; }");
+            portName = ui->comboBox_2->currentText();
+            baudRate = ui->cb_br->currentText().toInt();
         }
     }
     else if(ui->connBtn->text() == "断开连接")
     {
-        if(!serialPort->isOpen())
-        {
-            return;
-        }
-        serialPort->close();
-        connFlag = UNCONNECTED;
-        ui->comboBox_2->setEnabled(true);
-        ui->cb_br->setEnabled(true);
-        connectStatusLabel->setText(connStatus.arg("未连接"));
-        connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
-        ui->connBtn->setText("建立连接");
-        ui->connBtn->setStyleSheet(GREEN_BUTTON_STYLE);
-        ui->bms_warn_prot->setText("未连接");
-        ui->bms_warn_prot->setProperty("status", "disconnected");
-        ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
-        ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
-        ui->bms_warn_prot->update();
+        disconnect();
+        stopReconnect();
     }
 }
 
@@ -417,10 +460,18 @@ void MainWindow::refresh()
     {
         ui->pushButton_6->setText("停止");
         ui->pushButton_6->setStyleSheet(RED_BUTTON_STYLE);
+        if(!saveDataTimer->isActive())
+        {
+            saveDataTimer->start();
+        }
     }else
     {
         ui->pushButton_6->setText("启动");
         ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
+        if(saveDataTimer->isActive())
+        {
+            saveDataTimer->stop();
+        }
     }
     //运行模式
     if(inputRegs[19] == 0)
@@ -555,6 +606,134 @@ quint16 MainWindow::getMessageSize()
     return 0;
 }
 
+void MainWindow::updateSaveDataInterval(int second)
+{
+    saveDataTimer->setInterval(second * 1000);
+}
+
+void MainWindow::startReonnect()
+{
+    //刷新端口
+    refreshPort();
+    //开启定时重连
+    reconnectTimer->start();
+    reconnectFlag = 1;
+}
+
+void MainWindow::stopReconnect()
+{
+    //停止重连
+    if(reconnectTimer->isActive())
+    {
+        reconnectTimer->stop();
+    }
+    reconnectFlag = 0;
+}
+
+void MainWindow::disconnect()
+{
+    sendTimer->stop();
+    receiveTimer->stop();
+    if(serialPort->isOpen())
+    {
+        serialPort->close();
+    }
+    connFlag = UNCONNECTED;
+    ui->comboBox_2->setEnabled(true);
+    ui->cb_br->setEnabled(true);
+    connectStatusLabel->setText(connStatus.arg("未连接"));
+    connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
+    ui->connBtn->setText("建立连接");
+    ui->connBtn->setStyleSheet(GREEN_BUTTON_STYLE);
+    ui->bms_warn_prot->setText("未连接");
+    ui->bms_warn_prot->setProperty("status", "disconnected");
+    ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
+    ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
+    ui->bms_warn_prot->update();
+}
+
+bool MainWindow::ensureSaveDirectoryExists(QString serialNumberStr)
+{
+    QDir dir(QCoreApplication::applicationDirPath() + "/Save/" + serialNumberStr);
+    if (!dir.exists()) {
+        return dir.mkpath(".");
+    }
+    return true;
+}
+
+void MainWindow::initializeCSVFile(QTextStream &out)
+{
+    QStringList headers;
+    headers.append("时间");
+    headers.append("运行模式");
+    headers.append("告警保护事件");
+    headers.append("输入电压外侧(V)");
+    headers.append("输入电压内侧(V)");
+    headers.append("谐振腔电流(V)");
+    headers.append("输出电压(V)");
+    headers.append("设定输出电压(V)(恒压模式有效)");
+    headers.append("输出电流(A)");
+    headers.append("设定输出电流(A)(恒流模式有效)");
+    headers.append("输出功率(W)");
+    headers.append("底部散热器温度(℃)");
+    headers.append("电感温度(℃)");
+    headers.append("变压器温度(℃)");
+    headers.append("内腔温度(℃)");
+    headers.append("电压环数控值");
+    headers.append("电流环数控值");
+    out << headers.join("\t") << "\n";
+}
+
+void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
+{
+    QStringList data;
+    data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
+    if(inputRegs[19] == 0)
+        data << "恒压模式";
+    else if(inputRegs[19] == 1)
+        data << "恒流模式";
+    else
+        data << "手动模式";
+    //告警/保护
+    QString text = getEventText(inputRegs[12]);
+    if(text.isEmpty())
+    {
+        data << "无事件";
+    }else
+    {
+        data << getEventText(inputRegs[12]);
+    }
+    //输入电压外侧
+    data << QString::number(inputRegs[17] / 10, 'f', 1);
+    //输入电压内侧
+    data << QString::number(inputRegs[0] / 10, 'f', 1);
+    //谐振腔电流
+    data << QString::number(inputRegs[2] / 10, 'f', 1);
+    //输出电压
+    data << QString::number(inputRegs[3] / 10, 'f', 1);
+    //设定输出电压
+    data << QString::number(holdingRegs[1] / 10, 'f', 1);
+    //输出电流
+    data << QString::number(inputRegs[5] / 10, 'f', 1);
+    //设定输出电流
+    data << QString::number(holdingRegs[2] / 10, 'f', 1);
+    //输出功率
+    data << QString::number(inputRegs[3] * inputRegs[5] / 100);
+    //底部散热器温度
+    data << QString::number(inputRegs[6] / 10, 'f', 1);
+    //电感温度
+    data << QString::number(inputRegs[7] / 10, 'f', 1);
+    //变压器温度
+    data << QString::number(inputRegs[8] / 10, 'f', 1);
+    //内腔温度
+    data << QString::number(inputRegs[9] / 10, 'f', 1);
+    //电压环数控值
+    data << QString::number(inputRegs[13]);
+    //电流环数控值
+    data << QString::number(inputRegs[18]);
+    out << data.join("\t") << "\n";
+}
+
 void MainWindow::onReceiveTimerTimeout()
 {
     if(connFlag == UNCONNECTED)
@@ -633,6 +812,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     if(obj == tformDownload)
     {
         tformDownload = nullptr;
+    }
+    if(obj == tformDataRecord)
+    {
+        tformDataRecord = nullptr;
     }
 }
 
@@ -746,6 +929,63 @@ void MainWindow::on_rbtn0_clicked(bool checked)
     manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, 0);
 }
 
+void MainWindow::on_saveDataTimer_timeout()
+{
+    //只记录启动状态下的数据
+    if(connFlag == CONNECTED && inputRegs[1] == 1)
+    {
+        QDateTime currentTime = QDateTime::currentDateTime();
+        QString serialNumberStr = batSerNum;
+        QString fileName = QString("%1-%2-%3-%4")
+                               .arg(currentTime.date().year())
+                               .arg(currentTime.date().month(), 2, 10, QChar('0'))
+                               .arg(currentTime.date().day(), 2, 10, QChar('0'))
+                               .arg(serialNumberStr);
+        QString filePath = QString("%1/Save/%2")
+                               .arg(dataRecordFilePath)
+                               .arg(serialNumberStr);
+        QDir dir(filePath);
+        if (!dir.exists()) {
+            if(tform1 != nullptr)
+            {
+                tform1->displayInfo("未找到路径，已创建");
+            }
+            dir.mkpath(".");
+        }
+        filePath = QString("%1/Save/%2/%3.xls")
+                       .arg(dataRecordFilePath)
+                       .arg(serialNumberStr)
+                       .arg(fileName);
+        if(!ensureSaveDirectoryExists(serialNumberStr))
+        {
+            if(tform1 != nullptr)
+            {
+                tform1->displayInfo("无法创建保存目录");
+            }
+            return;
+        }
+        if(filePath != csvFile.fileName() || !csvFile.isOpen())
+        {
+            csvFile.setFileName(filePath);
+            if (!csvFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+                if(tform1 != nullptr)
+                {
+                    tform1->displayInfo("无法打开文件");
+                }
+                return;
+            }
+        }
+        QTextStream out(&csvFile);
+
+        if (csvFile.size() == 0) {
+            initializeCSVFile(out);
+        }
+        writeDataToCSV(out, currentTime);
+        csvFile.flush();
+
+    }
+}
+
 void MainWindow::on_rbtn1_clicked(bool checked)
 {
     if(preRunModeIndex == 1)
@@ -761,5 +1001,38 @@ void MainWindow::on_rbtn1_clicked(bool checked)
         return;
     }
     manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, 1);
+}
+
+
+void MainWindow::on_actionRefreshPort_triggered()
+{
+    refreshPort();
+}
+
+
+void MainWindow::on_actDataRecord_triggered()
+{
+    if(tformDataRecord == nullptr)
+    {
+        tformDataRecord = new TFormDataRecord(this);
+        tformDataRecord->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformDataRecord, &TFormConfig1::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformDataRecord->show();
+}
+
+void MainWindow::on_reconnectTimer_timeout()
+{
+    //确保是建立连接
+    if(connFlag == UNCONNECTED)
+    {
+        refreshPort();
+        QString searchText = portName;  // 要查找的字符串
+        int index = ui->comboBox_2->findText(searchText);
+        if (index != -1) {
+            ui->comboBox_2->setCurrentIndex(index);
+        }
+        on_connBtn_clicked();
+    }
 }
 

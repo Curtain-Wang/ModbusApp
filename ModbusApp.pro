@@ -16,6 +16,7 @@ SOURCES += \
     tform1.cpp \
     tform7.cpp \
     tformconfig1.cpp \
+    tformdatarecord.cpp \
     tformdownload.cpp
 
 HEADERS += \
@@ -25,6 +26,7 @@ HEADERS += \
     tform1.h \
     tform7.h \
     tformconfig1.h \
+    tformdatarecord.h \
     tformdownload.h
 
 FORMS += \
@@ -32,6 +34,7 @@ FORMS += \
     tform1.ui \
     tform7.ui \
     tformconfig1.ui \
+    tformdatarecord.ui \
     tformdownload.ui
 
 # Default rules for deployment.

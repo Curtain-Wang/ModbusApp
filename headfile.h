@@ -21,6 +21,12 @@
 #define DOWNLOAD_FILE_DIR "download_file_dir"
 #define RED_BUTTON_STYLE                "QPushButton { background-color: #EF5350; border: 2px solid #E53935; color: white; font-size: 22px; padding: 10px; border-radius: 10px; width: 100px; height: 50px; text-align: center; } QPushButton:hover { background-color: #e14a47; border: 2px solid #D32F2F; } QPushButton:pressed { background-color: #E53935; border: 2px solid #B71C1C; } QPushButton:checked { background-color: #E53935; border: 2px solid #B71C1C; color: #FFEBEE; box-shadow: 0 0 8px rgba(239, 83, 80, 0.6); font-weight: bold; }"
 #define GREEN_BUTTON_STYLE              "QPushButton { background-color: #66BB6A; border: 2px solid #43A047; color: white; font-size: 22px; padding: 10px; border-radius: 10px; width: 100px; height: 50px; text-align: center; } QPushButton:hover { background-color: #5AAE5E; border: 2px solid #388E3C; } QPushButton:pressed { background-color: #4CAF50; border: 2px solid #2C6E2E; } QPushButton:checked { background-color: #4CAF50; border: 2px solid #2E7D32; color: #E8F5E9; box-shadow: 0 0 8px rgba(76, 175, 80, 0.6); font-weight: bold; }"
+#define DATA_RECORD_CONFIG  "DATA_RECORD_CONFIG"
+#define DATA_RECORD_FILE_PATH  "data_record_file_path"
+#define DATA_RECORD_CYCLE  "data_record_cycle"
+#define DEFAULT_DATA_RECORD_CYCLE  60
+#define BASE_CONFIG  "BASE_CONFIG"
+
 typedef enum
 {
     READ_HOLDING_CMD = 0x03,
@@ -84,5 +90,12 @@ extern MainWindow* mainwindow;
 extern int DownloadFlag;
 extern QByteArray rxBuf;
 extern quint16 lastMSCommCount;
-
+extern QString dataRecordFilePath;
+extern quint32 dataRecordCycle;
+extern quint8 reconnectFlag;
+extern int baudRate;
+extern QString portName;
+//超时次数
+extern quint8 timeoutTimes;
+extern QString batSerNum;
 #endif // HEADFILE_H

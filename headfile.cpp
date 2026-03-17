@@ -22,3 +22,12 @@ MainWindow* mainwindow = nullptr;
 int DownloadFlag = 0;
 QByteArray rxBuf;
 quint16 lastMSCommCount = 0;
+quint32 dataRecordCycle = 0;
+QString dataRecordFilePath = "";
+//重连标记, 0未重连1正在重连
+quint8 reconnectFlag = 0;
+int baudRate = 0;
+QString portName = "";
+//超时次数
+quint8 timeoutTimes = 0;
+QString batSerNum = "LED-1";
