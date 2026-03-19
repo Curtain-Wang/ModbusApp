@@ -2009,7 +2009,7 @@ QLabel[status=&quot;disconnected&quot;] {
      <x>0</x>
      <y>0</y>
      <width>1418</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -2024,6 +2024,7 @@ QLabel[status=&quot;disconnected&quot;] {
     </property>
     <addaction name="actionRefreshPort"/>
     <addaction name="actDataRecord"/>
+    <addaction name="actSerialNum"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -2056,6 +2057,17 @@ QLabel[status=&quot;disconnected&quot;] {
    </property>
    <property name="toolTip">
     <string>数据记录</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actSerialNum">
+   <property name="text">
+    <string>序列号</string>
+   </property>
+   <property name="toolTip">
+    <string>序列号</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

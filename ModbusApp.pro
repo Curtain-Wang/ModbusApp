@@ -17,7 +17,8 @@ SOURCES += \
     tform7.cpp \
     tformconfig1.cpp \
     tformdatarecord.cpp \
-    tformdownload.cpp
+    tformdownload.cpp \
+    tformsernum.cpp
 
 HEADERS += \
     headfile.h \
@@ -27,7 +28,8 @@ HEADERS += \
     tform7.h \
     tformconfig1.h \
     tformdatarecord.h \
-    tformdownload.h
+    tformdownload.h \
+    tformsernum.h
 
 FORMS += \
     mainwindow.ui \
@@ -35,7 +37,8 @@ FORMS += \
     tform7.ui \
     tformconfig1.ui \
     tformdatarecord.ui \
-    tformdownload.ui
+    tformdownload.ui \
+    tformsernum.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

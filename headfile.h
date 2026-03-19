@@ -5,11 +5,11 @@
 #define INPUT_REG_START_ADDR    0
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
-#define TITLE   "LED电源-V1.0.2"
+#define TITLE   "LED电源-V1.0.2-%1"
 #define MODULE  0x01
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
-#define INPUT_REG_NUM       0x14
+#define INPUT_REG_NUM       30
 #define HOLDING_REG_NUM     21
 #define DATA_REFRESH_CYCLE  10
 #define NO_WARN_PROT_STR    "无保护事件"
@@ -25,6 +25,8 @@
 #define DATA_RECORD_FILE_PATH  "data_record_file_path"
 #define DATA_RECORD_CYCLE  "data_record_cycle"
 #define DEFAULT_DATA_RECORD_CYCLE  60
+#define BASE_CONFIG      "BASE_CONFIG"
+#define CONTINUOUS_RUN_TIME    "CONTINUOUS_RUN_TIME"
 #define BASE_CONFIG  "BASE_CONFIG"
 
 typedef enum
@@ -41,6 +43,7 @@ typedef enum
     UPDATE_CMD = 0x06,
     DOWNLOAD_DATA_CMD = 0x07,
     DOWNLOAD_COMPLETE_CHECK_CMD = 0x08,
+    SERIAL_NUM_CMD     = 0x09,
 }en_cmd2_t;
 
 typedef enum
@@ -77,6 +80,7 @@ extern quint8 holdingPow[REG_NUM];
 extern int connFlag;
 extern QString connStatus;
 extern QString versionStr;
+extern QString runTimeStr;
 extern int waitMessageRemaingTime;
 extern int dataRefreshRemaingTime;
 //手动标记，0自动 1手动 2双手动
@@ -98,4 +102,6 @@ extern QString portName;
 //超时次数
 extern quint8 timeoutTimes;
 extern QString batSerNum;
+extern quint64 lastRunSecond;
+extern quint64 runSecond;
 #endif // HEADFILE_H

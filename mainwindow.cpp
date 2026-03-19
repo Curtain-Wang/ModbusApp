@@ -14,6 +14,7 @@
 #include <QSettings>
 #include <QDir>
 #include "tformdatarecord.h"
+#include "tformsernum.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , connectStatusLabel(new QLabel(this))
     , versionLabel(new QLabel(this))
+    , runTimeLabel(new QLabel(this))
     , serialPort(new QSerialPort(this))
     , txResetTimer(new QTimer(this))
     , rxResetTimer(new QTimer(this))
@@ -60,6 +62,7 @@ void MainWindow::init()
 {
     mainwindow = this;
     refreshPort();
+    initConfigFile();
     //发送数据
     sendTimer = new QTimer(this);
     connect(sendTimer, &QTimer::timeout, this, &MainWindow::onSendTimerTimeout);
@@ -75,11 +78,17 @@ void MainWindow::init()
     connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
     ui->statusbar->addWidget(connectStatusLabel);
     connectStatusLabel->setText(connStatus.arg("未连接"));
-
+    //版本号
     versionLabel->setMidLineWidth(300);
     versionLabel->setText(versionStr.arg("未知").arg("未知").arg("未知").arg("未知"));
     ui->statusbar->addWidget(versionLabel);
-    setWindowTitle(TITLE);
+    //持续运行时间
+    runTimeLabel->setMidLineWidth(800);
+    runTimeLabel->setText(runTimeStr.arg(lastRunSecond / 3600).arg(lastRunSecond % 3600 / 60).arg(lastRunSecond % 60));
+    // 设置标签右对齐
+    runTimeLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    ui->statusbar->addPermanentWidget(runTimeLabel, 1);  // 第二个参数是伸缩因子
+    setWindowTitle(QString(TITLE).arg(batSerNum));
     regPowInit();
     //指示灯定时器相关
     txResetTimer->setSingleShot(true);
@@ -98,7 +107,6 @@ void MainWindow::init()
                              "QMenu::item { color: black; padding: 5px 20px; }"
                              "QMenu::item:selected {color: black; border: 1px solid gray;}"
                              "QMenu::item:hover {color: black; border: 1px solid gray;}");
-    initConfigFile();
 }
 
 void MainWindow::initConfigFile()
@@ -113,6 +121,9 @@ void MainWindow::initConfigFile()
         settings.setValue(DATA_RECORD_FILE_PATH, QDir::currentPath());
         settings.setValue(DATA_RECORD_CYCLE, DEFAULT_DATA_RECORD_CYCLE);
         settings.endGroup();
+        settings.beginGroup(BASE_CONFIG);
+        settings.setValue(CONTINUOUS_RUN_TIME, 0);
+        settings.endGroup();
     }
 
     // 使用 QSettings 加载配置文件
@@ -122,6 +133,8 @@ void MainWindow::initConfigFile()
     dataRecordFilePath = settings.value(DATA_RECORD_FILE_PATH, QDir::currentPath()).toString();
     dataRecordCycle = settings.value(DATA_RECORD_CYCLE, DEFAULT_DATA_RECORD_CYCLE).toInt();
     settings.endGroup();
+    settings.beginGroup(BASE_CONFIG);
+    lastRunSecond = settings.value(CONTINUOUS_RUN_TIME, 0).toInt();
     saveDataTimer->setInterval(dataRecordCycle * 1000);
 }
 
@@ -197,6 +210,7 @@ void MainWindow::on_connBtn_2_clicked()
 
 void MainWindow::onSendTimerTimeout()
 {
+    runTimeDeal();
     if(connFlag == UNCONNECTED)
     {
         return;
@@ -409,9 +423,16 @@ void MainWindow::dealMessage(quint8 *data)
         }
         refreshHolding();
     }
-    if((data[1] == MASTER_CMD || data[1] == SLAVE_CMD) && data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
+    if(data[1] == MASTER_CMD)
     {
-        tformDownload->downloadRespDeal();
+        if(data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
+        {
+            tformDownload->downloadRespDeal();
+        }
+        if(data[2] == SERIAL_NUM_CMD)
+        {
+            QMessageBox::warning(this, "提示", "写入成功!");
+        }
     }
 }
 
@@ -483,7 +504,13 @@ void MainWindow::refresh()
         ui->rbtn1->setChecked(true);
         preRunModeIndex = 1;
     }
-
+    batSerNum.clear();
+    for(quint8 i = 20; i < 30; i++)
+    {
+        QString strVal = QString("%1%2").arg(QChar(inputRegs[i] & 0xFF)).arg(QChar(inputRegs[i] >> 8));
+        batSerNum += strVal;
+    }
+    setWindowTitle(QString(TITLE).arg(batSerNum));
 }
 
 QString MainWindow::getEventText(quint16 value)
@@ -578,29 +605,27 @@ void MainWindow::diyCMDBuild(QByteArray data, quint16 len)
 quint16 MainWindow::getMessageSize()
 {
     int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
-    if(cmd == 3 || cmd == 4)
+    if(cmd == READ_HOLDING_CMD || cmd == READ_INPUT_CMD)
     {
         return receiveDataBuf[(receiveStartIndex + 2) % 500] + 5;
     }
-    if(cmd == 6)
+    if(cmd == WRITE_ONE_CMD)
     {
         return 8;
     }
-    if(cmd == 16)
-    {
-        return 16;
-    }
-    if(cmd == 0xF0 || cmd == 0xE0)
+    if(cmd == MASTER_CMD)
     {
         quint8 cmd2 = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 2) % 500]);
         switch(cmd2)
         {
-        case 0x06:
+        case UPDATE_CMD:
             return 5;
-        case 0x07:
+        case DOWNLOAD_DATA_CMD:
             return 6;
-        case 0x08:
+        case DOWNLOAD_COMPLETE_CHECK_CMD:
             return 12;
+        case SERIAL_NUM_CMD:
+            return 25;
         }
     }
     return 0;
@@ -632,7 +657,6 @@ void MainWindow::stopReconnect()
 
 void MainWindow::disconnect()
 {
-    sendTimer->stop();
     receiveTimer->stop();
     if(serialPort->isOpen())
     {
@@ -734,6 +758,27 @@ void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
     out << data.join("\t") << "\n";
 }
 
+void MainWindow::runTimeDeal()
+{
+    //未连接、未启动、有事件
+    if(connFlag == UNCONNECTED || inputRegs[1] == 0 || inputRegs[12] > 0)
+    {
+        if(runSecond != 0)
+        {
+            lastRunSecond = runSecond / 10;
+            QSettings settings(CONFIG_FILE_PATH, QSettings::IniFormat);
+            settings.beginGroup(BASE_CONFIG);
+            settings.setValue(CONTINUOUS_RUN_TIME, lastRunSecond);
+            settings.endGroup();
+        }
+        runSecond = 0;
+    }else
+    {
+        runSecond++;
+        runTimeLabel->setText(QString(runTimeStr).arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10));
+    }
+}
+
 void MainWindow::onReceiveTimerTimeout()
 {
     if(connFlag == UNCONNECTED)
@@ -817,6 +862,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     {
         tformDataRecord = nullptr;
     }
+    if(obj == tformSerNum)
+    {
+        tformSerNum = nullptr;
+    }
 }
 
 
@@ -854,6 +903,7 @@ void MainWindow::on_pushButton_6_clicked()
     if(ui->pushButton_6->text() == "启动")
     {
         mainwindow->manualWriteOneCMDBuild(HI_OPEN + HOLDING_REG_START, 1);
+        runSecond = 0;
     }else
     {
         mainwindow->manualWriteOneCMDBuild(HI_OPEN + HOLDING_REG_START, 0);
@@ -1016,7 +1066,7 @@ void MainWindow::on_actDataRecord_triggered()
     {
         tformDataRecord = new TFormDataRecord(this);
         tformDataRecord->setAttribute(Qt::WA_DeleteOnClose);
-        connect(tformDataRecord, &TFormConfig1::destroyed, this, &MainWindow::onTFormDestroyed);
+        connect(tformDataRecord, &TFormDataRecord::destroyed, this, &MainWindow::onTFormDestroyed);
     }
     tformDataRecord->show();
 }
@@ -1034,5 +1084,17 @@ void MainWindow::on_reconnectTimer_timeout()
         }
         on_connBtn_clicked();
     }
+}
+
+
+void MainWindow::on_actSerialNum_triggered()
+{
+    if(tformSerNum == nullptr)
+    {
+        tformSerNum = new TFormSerNum(this);
+        tformSerNum->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformSerNum, &TFormSerNum::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformSerNum->show();
 }
 

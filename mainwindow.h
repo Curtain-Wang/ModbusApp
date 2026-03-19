@@ -11,6 +11,7 @@ class TForm7;
 class TFormDownload;
 class QCloseEvent;
 class TFormDataRecord;
+class TFormSerNum;
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,7 @@ public:
     bool ensureSaveDirectoryExists(QString serialNumberStr);
     void initializeCSVFile(QTextStream &out);
     void writeDataToCSV(QTextStream &out, const QDateTime &currentTime);
+    void runTimeDeal();
 private slots:
     void on_connBtn_2_clicked();
     void onSendTimerTimeout();
@@ -67,6 +69,8 @@ private slots:
     void on_actionRefreshPort_triggered();
     void on_actDataRecord_triggered();
     void on_reconnectTimer_timeout();
+    void on_actSerialNum_triggered();
+
 private:
     Ui::MainWindow *ui;
     TForm1* tform1 = nullptr;
@@ -75,12 +79,14 @@ private:
     TFormConfig1* tformConfig1 = nullptr;
     TFormDownload* tformDownload = nullptr;
     TFormDataRecord* tformDataRecord = nullptr;
+    TFormSerNum* tformSerNum = nullptr;
     QTimer* sendTimer = nullptr;
     QTimer* receiveTimer = nullptr;
     QTimer* saveDataTimer = nullptr;
     QTimer* reconnectTimer = nullptr;
     QLabel* connectStatusLabel;
     QLabel* versionLabel;
+    QLabel* runTimeLabel;
     QTimer* txResetTimer = nullptr;
     QTimer* rxResetTimer = nullptr;
     quint8 preRunModeIndex;

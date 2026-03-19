@@ -9,6 +9,7 @@ quint8 holdingPow[REG_NUM];
 int connFlag = 0;
 QString connStatus = "连接状态：%1";
 QString versionStr = "版本：%1.%2";
+QString runTimeStr = "最近一次持续运行时间：%1时 %2分 %3秒";
 int waitMessageRemaingTime = 0;
 int dataRefreshRemaingTime = 0;
 //手动标记，0自动 1手动 2双手动
@@ -30,4 +31,6 @@ int baudRate = 0;
 QString portName = "";
 //超时次数
 quint8 timeoutTimes = 0;
-QString batSerNum = "LED-1";
+QString batSerNum = "未知";
+quint64 lastRunSecond = 0;
+quint64 runSecond = 0;
