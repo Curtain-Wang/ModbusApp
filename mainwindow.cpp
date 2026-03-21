@@ -507,6 +507,10 @@ void MainWindow::refresh()
     batSerNum.clear();
     for(quint8 i = 20; i < 30; i++)
     {
+        if(inputRegs[i] == -1)
+        {
+            inputRegs[i] = 0;
+        }
         QString strVal = QString("%1%2").arg(QChar(inputRegs[i] & 0xFF)).arg(QChar(inputRegs[i] >> 8));
         batSerNum += strVal;
     }
@@ -787,7 +791,7 @@ void MainWindow::onReceiveTimerTimeout()
     }
     cacheReceiveData();
     //当缓冲区的消息长度大于messageSize，那说明可能存在一条完整的响应
-    while (receiveEndIndex != receiveStartIndex) {
+    while ((receiveEndIndex + 500 - receiveStartIndex) % 500 >= 4) {
         int module = static_cast<uint8_t>(receiveDataBuf[receiveStartIndex]);
         int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
         //没有匹配到开始
