@@ -391,6 +391,7 @@ bool MainWindow::receiveDataCRCCheck(const QByteArray &data)
 void MainWindow::dealMessage(quint8 *data)
 {
     connFlag = CONNECTED;
+    timeoutTimes = 0;
     connectStatusLabel->setText(connStatus.arg("已连接"));
     connectStatusLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
     //查询命令

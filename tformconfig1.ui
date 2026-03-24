@@ -290,6 +290,11 @@ QComboBox::item:hover {
           <string>上位机手动模式</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>未知</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
@@ -474,6 +479,11 @@ QComboBox::item:hover {
         <item>
          <property name="text">
           <string>手动控制</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>未知</string>
          </property>
         </item>
        </widget>
@@ -1247,101 +1257,6 @@ QLineEdit:disabled {
      </layout>
     </widget>
    </item>
-   <item row="9" column="1">
-    <widget class="QGroupBox" name="groupBox_27">
-     <property name="title">
-      <string/>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_36" stretch="7,5,1">
-      <item>
-       <widget class="QLabel" name="label_68">
-        <property name="minimumSize">
-         <size>
-          <width>221</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>13</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>高湿保护阈值</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="MyLineEdit" name="h16">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-    /* 苹果风格的数据展示LineEdit */
-    border: 1px solid #D0D0D0;                  /* 浅灰色边框，模仿macOS的细边框 */
-    border-radius: 6px;                         /* 圆角，符合macOS设计 */
-    padding: 8px 12px;                         /* 内边距，提供舒适的阅读空间 */
-    background-color: #FFFFFF;                 /* 白色背景 */
-    color: #333333;                            /* 深灰色文字，提高可读性 */
-    font-family: &quot;SF Pro Text&quot;, &quot;Helvetica Neue&quot;, &quot;Lucida Grande&quot;, sans-serif; /* macOS系统字体栈 */
-    font-size: 14px;                           /* 默认字体大小 */
-    selection-background-color: #007AFF;       /* 选中文本高亮色 (macOS蓝色) */
-    selection-color: #FFFFFF;                  /* 选中文本颜色 (白色) */
-
-    /* 只读状态下的特殊样式 */
-    /* 注意：Qt中通常使用 setReadOnly(true) 来实现只读，但QSS可以定义其外观 */
-}
-
-/* 当LineEdit获得焦点时 (对于数据展示框，如果不需要焦点效果，可以省略或弱化) */
-QLineEdit:focus {
-    border: 1px solid #007AFF;                 /* 获得焦点时边框变为蓝色 */
-    /* 如果作为纯展示框，也可以移除焦点边框变化 */
-    /* border: 1px solid #D0D0D0; */
-}
-
-/* 禁用状态下的样式 (如果用于展示不可变数据) */
-QLineEdit:disabled {
-    background-color: #F5F5F7;                 /* macOS禁用元素背景色 */
-    color: #A0A0A0;                            /* 禁用文字颜色 */
-    border: 1px solid #E0E0E0;                 /* 禁用边框颜色 */
-}</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_69">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>13</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>%</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="6" column="1">
     <widget class="QGroupBox" name="groupBox_23">
      <property name="title">
@@ -1627,101 +1542,6 @@ QLineEdit:disabled {
      </layout>
     </widget>
    </item>
-   <item row="10" column="1">
-    <widget class="QGroupBox" name="groupBox_28">
-     <property name="title">
-      <string/>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_37" stretch="7,5,1">
-      <item>
-       <widget class="QLabel" name="label_70">
-        <property name="minimumSize">
-         <size>
-          <width>221</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>13</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>主从设置(主1，从0)</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="MyLineEdit" name="h18">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-    /* 苹果风格的数据展示LineEdit */
-    border: 1px solid #D0D0D0;                  /* 浅灰色边框，模仿macOS的细边框 */
-    border-radius: 6px;                         /* 圆角，符合macOS设计 */
-    padding: 8px 12px;                         /* 内边距，提供舒适的阅读空间 */
-    background-color: #FFFFFF;                 /* 白色背景 */
-    color: #333333;                            /* 深灰色文字，提高可读性 */
-    font-family: &quot;SF Pro Text&quot;, &quot;Helvetica Neue&quot;, &quot;Lucida Grande&quot;, sans-serif; /* macOS系统字体栈 */
-    font-size: 14px;                           /* 默认字体大小 */
-    selection-background-color: #007AFF;       /* 选中文本高亮色 (macOS蓝色) */
-    selection-color: #FFFFFF;                  /* 选中文本颜色 (白色) */
-
-    /* 只读状态下的特殊样式 */
-    /* 注意：Qt中通常使用 setReadOnly(true) 来实现只读，但QSS可以定义其外观 */
-}
-
-/* 当LineEdit获得焦点时 (对于数据展示框，如果不需要焦点效果，可以省略或弱化) */
-QLineEdit:focus {
-    border: 1px solid #007AFF;                 /* 获得焦点时边框变为蓝色 */
-    /* 如果作为纯展示框，也可以移除焦点边框变化 */
-    /* border: 1px solid #D0D0D0; */
-}
-
-/* 禁用状态下的样式 (如果用于展示不可变数据) */
-QLineEdit:disabled {
-    background-color: #F5F5F7;                 /* macOS禁用元素背景色 */
-    color: #A0A0A0;                            /* 禁用文字颜色 */
-    border: 1px solid #E0E0E0;                 /* 禁用边框颜色 */
-}</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_71">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>13</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="11" column="0">
     <widget class="QGroupBox" name="groupBox_29">
      <property name="title">
@@ -1817,7 +1637,102 @@ QLineEdit:disabled {
      </layout>
     </widget>
    </item>
-   <item row="11" column="1">
+   <item row="9" column="1">
+    <widget class="QGroupBox" name="groupBox_28">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_37" stretch="7,5,1">
+      <item>
+       <widget class="QLabel" name="label_70">
+        <property name="minimumSize">
+         <size>
+          <width>221</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>主从设置(主1，从0)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="MyLineEdit" name="h18">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    /* 苹果风格的数据展示LineEdit */
+    border: 1px solid #D0D0D0;                  /* 浅灰色边框，模仿macOS的细边框 */
+    border-radius: 6px;                         /* 圆角，符合macOS设计 */
+    padding: 8px 12px;                         /* 内边距，提供舒适的阅读空间 */
+    background-color: #FFFFFF;                 /* 白色背景 */
+    color: #333333;                            /* 深灰色文字，提高可读性 */
+    font-family: &quot;SF Pro Text&quot;, &quot;Helvetica Neue&quot;, &quot;Lucida Grande&quot;, sans-serif; /* macOS系统字体栈 */
+    font-size: 14px;                           /* 默认字体大小 */
+    selection-background-color: #007AFF;       /* 选中文本高亮色 (macOS蓝色) */
+    selection-color: #FFFFFF;                  /* 选中文本颜色 (白色) */
+
+    /* 只读状态下的特殊样式 */
+    /* 注意：Qt中通常使用 setReadOnly(true) 来实现只读，但QSS可以定义其外观 */
+}
+
+/* 当LineEdit获得焦点时 (对于数据展示框，如果不需要焦点效果，可以省略或弱化) */
+QLineEdit:focus {
+    border: 1px solid #007AFF;                 /* 获得焦点时边框变为蓝色 */
+    /* 如果作为纯展示框，也可以移除焦点边框变化 */
+    /* border: 1px solid #D0D0D0; */
+}
+
+/* 禁用状态下的样式 (如果用于展示不可变数据) */
+QLineEdit:disabled {
+    background-color: #F5F5F7;                 /* macOS禁用元素背景色 */
+    color: #A0A0A0;                            /* 禁用文字颜色 */
+    border: 1px solid #E0E0E0;                 /* 禁用边框颜色 */
+}</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_71">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="10" column="1">
     <widget class="QGroupBox" name="groupBox_30">
      <property name="title">
       <string/>
