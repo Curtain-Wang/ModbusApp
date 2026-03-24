@@ -544,6 +544,10 @@ QString MainWindow::getEventText(quint16 value)
     {
         text.append(" 湿度过高保护");
     }
+    if(((value >> 7) & 1) == 1)
+    {
+        text.append(" 参数配置故障");
+    }
     return text;
 }
 

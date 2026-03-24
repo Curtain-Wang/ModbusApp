@@ -25,16 +25,55 @@ void TForm7::on_lineEdit_returnPressed()
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
+    float fvalue = ui->lineEdit->text().toFloat();
+
+    if((lastEditAddr == HI_OutVolt || lastEditAddr == HI_OutLimitVolt) && (fvalue < 0 || fvalue > 400))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("输出电/限压不能超过400V"));
+        return;
+    }
+
+    if((lastEditAddr == HI_OutCur || lastEditAddr == HI_OutLimitCur || lastEditAddr == HI_FullLightCur) && (fvalue < 0 || fvalue > 30))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("输出电流、限流、满亮度电流值不能超过30A"));
+        return;
+    }
+
+    if((lastEditAddr == HI_OutOVPTS) && (fvalue < 0 || fvalue > 420))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("输出过压保护不能超过420V"));
+        return;
+    }
+
+    if((lastEditAddr == HI_InOVPTS) && (fvalue < 0 || fvalue > 1000))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("输入过压保护不能超过1000V"));
+        return;
+    }
+
+    if((lastEditAddr == HI_OutOCPTS) && (fvalue < 0 || fvalue > 35))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("输出过流保护不能超过35A"));
+        return;
+    }
+
+    if((lastEditAddr == HI_InOCPTS) && (fvalue < 0 || fvalue > 40))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("输入过流保护不能超过40A"));
+        return;
+    }
+
+    if((lastEditAddr == HI_OTTS) && (fvalue < 0 || fvalue > 160))
+    {
+        QMessageBox::warning(this, tr("警告"), tr("高温保护不能超过160℃"));
+        return;
+    }
+
     quint16 iValue= 0;
     if(lastEditAddr != HI_OutCur)
     {
         float fValue = ui->lineEdit->text().toFloat();
         iValue= (quint16)(fValue * qPow(10, holdingPow[lastEditAddr]) + 0.5);
-        //限流设置不能大于20.5A
-        if(lastEditAddr == HI_OutLimitCur && iValue > 205)
-        {
-            QMessageBox::warning(this, tr("警告"), tr("输出限流值最大不能超过20.5A"));
-        }
     }else
     {
         iValue = ui->lineEdit->text().toInt() * holdingRegs[4] / 100;
