@@ -33,7 +33,7 @@ void TForm7::on_lineEdit_returnPressed()
         return;
     }
 
-    if((lastEditAddr == HI_OutCur || lastEditAddr == HI_OutLimitCur || lastEditAddr == HI_FullLightCur) && (fvalue < 0 || fvalue > 30))
+    if((lastEditAddr == HI_OutLimitCur || lastEditAddr == HI_FullLightCur) && (fvalue < 0 || fvalue > 30))
     {
         QMessageBox::warning(this, tr("警告"), tr("输出电流、限流、满亮度电流值不能超过30A"));
         return;
