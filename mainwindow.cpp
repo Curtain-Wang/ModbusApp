@@ -51,11 +51,17 @@ void MainWindow::refreshPort()
     std::sort(portList.begin(), portList.end(), [](const QSerialPortInfo &a, const QSerialPortInfo &b) {
         return a.portName() < b.portName();
     });
-
+    quint8 index = 0;
     // 遍历可用串口，将串口名添加到 comboBox中
-    for (const QSerialPortInfo &portInfo : portList) {
-        ui->comboBox_2->addItem(portInfo.portName());
+    for(quint8 i = 0; i < portList.size(); i++)
+    {
+        ui->comboBox_2->addItem(portList[i].portName());
+        if(portList[i].portName() == portName)
+        {
+            index = i;
+        }
     }
+    ui->comboBox_2->setCurrentIndex(index);
 }
 
 void MainWindow::init()
