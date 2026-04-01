@@ -1000,7 +1000,7 @@ void MainWindow::on_saveDataTimer_timeout()
     if(connFlag == CONNECTED && inputRegs[1] == 1)
     {
         QDateTime currentTime = QDateTime::currentDateTime();
-        QString serialNumberStr = batSerNum;
+        QString serialNumberStr = batSerNum.remove(QChar('\0'));
         QString fileName = QString("%1-%2-%3-%4")
                                .arg(currentTime.date().year())
                                .arg(currentTime.date().month(), 2, 10, QChar('0'))
@@ -1009,13 +1009,15 @@ void MainWindow::on_saveDataTimer_timeout()
         QString filePath = QString("%1/Save/%2")
                                .arg(dataRecordFilePath)
                                .arg(serialNumberStr);
+
         QDir dir(filePath);
         if (!dir.exists()) {
-            if(tform1 != nullptr)
+            bool flag = dir.mkpath(".");
+            if(tform1 != nullptr && flag)
             {
                 tform1->displayInfo("未找到路径，已创建");
             }
-            dir.mkpath(".");
+
         }
         filePath = QString("%1/Save/%2/%3.xls")
                        .arg(dataRecordFilePath)
