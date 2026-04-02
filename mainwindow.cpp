@@ -743,29 +743,29 @@ void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
         data << getEventText(inputRegs[12]);
     }
     //输入电压外侧
-    data << QString::number(inputRegs[17] / 10, 'f', 1);
+    data << QString::number(inputRegs[17] / 10.0, 'f', 1);
     //输入电压内侧
-    data << QString::number(inputRegs[0] / 10, 'f', 1);
+    data << QString::number(inputRegs[0] / 10.0, 'f', 1);
     //谐振腔电流
-    data << QString::number(inputRegs[2] / 10, 'f', 1);
+    data << QString::number(inputRegs[2] / 10.0, 'f', 1);
     //输出电压
-    data << QString::number(inputRegs[3] / 10, 'f', 1);
+    data << QString::number(inputRegs[3] / 10.0, 'f', 1);
     //设定输出电压
-    data << QString::number(holdingRegs[1] / 10, 'f', 1);
+    data << QString::number(holdingRegs[1] / 10.0, 'f', 1);
     //输出电流
-    data << QString::number(inputRegs[5] / 10, 'f', 1);
+    data << QString::number(inputRegs[5] / 10.0, 'f', 1);
     //设定输出电流
-    data << QString::number(holdingRegs[2] / 10, 'f', 1);
+    data << QString::number(holdingRegs[2] / 10.0, 'f', 1);
     //输出功率
     data << QString::number(inputRegs[3] * inputRegs[5] / 100);
     //底部散热器温度
-    data << QString::number(inputRegs[6] / 10, 'f', 1);
+    data << QString::number(inputRegs[6] / 10.0, 'f', 1);
     //电感温度
-    data << QString::number(inputRegs[7] / 10, 'f', 1);
+    data << QString::number(inputRegs[7] / 10.0, 'f', 1);
     //变压器温度
-    data << QString::number(inputRegs[8] / 10, 'f', 1);
+    data << QString::number(inputRegs[8] / 10.0, 'f', 1);
     //内腔温度
-    data << QString::number(inputRegs[9] / 10, 'f', 1);
+    data << QString::number(inputRegs[9] / 10.0, 'f', 1);
     //电压环数控值
     data << QString::number(inputRegs[13]);
     //电流环数控值
