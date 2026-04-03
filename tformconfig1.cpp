@@ -49,9 +49,11 @@ void TFormConfig1::refresh()
     ui->c0->blockSignals(true);
     ui->c3->blockSignals(true);
     ui->c5->blockSignals(true);
+    ui->c16->blockSignals(true);
     ui->c0->setCurrentIndex(holdingRegs[0]);
     ui->c3->setCurrentIndex(holdingRegs[3]);
     ui->c5->setCurrentIndex(holdingRegs[5]);
+    ui->c16->setCurrentIndex(holdingRegs[16]);
     preRunModeIndex = ui->c0->currentIndex();
     preDimingModeIndex = ui->c3->currentIndex();
     preFanCtrlModeIndex = ui->c5->currentIndex();
@@ -59,6 +61,7 @@ void TFormConfig1::refresh()
     ui->c0->blockSignals(false);
     ui->c3->blockSignals(false);
     ui->c5->blockSignals(false);
+    ui->c16->blockSignals(false);
     //恒压限流不能调光
     if(holdingRegs[0] == 0)
     {
