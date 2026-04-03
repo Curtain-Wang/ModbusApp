@@ -55,6 +55,7 @@ void TFormConfig1::refresh()
     preRunModeIndex = ui->c0->currentIndex();
     preDimingModeIndex = ui->c3->currentIndex();
     preFanCtrlModeIndex = ui->c5->currentIndex();
+    preStartModeIndex = ui->c16->currentIndex();
     ui->c0->blockSignals(false);
     ui->c3->blockSignals(false);
     ui->c5->blockSignals(false);
@@ -126,5 +127,19 @@ void TFormConfig1::on_c5_currentIndexChanged(int index)
     ui->c5->setCurrentIndex(preFanCtrlModeIndex);
     ui->c5->blockSignals(false);
     mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR + 5, index);
+}
+
+
+void TFormConfig1::on_c16_currentIndexChanged(int index)
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    ui->c16->blockSignals(true);
+    ui->c16->setCurrentIndex(preStartModeIndex);
+    ui->c16->blockSignals(false);
+    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR + 16, index);
 }
 

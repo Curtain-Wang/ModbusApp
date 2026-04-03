@@ -24,12 +24,15 @@ private slots:
 
     void on_c5_currentIndexChanged(int index);
 
+    void on_c16_currentIndexChanged(int index);
+
 private:
     Ui::TFormConfig1 *ui;
     MainWindow* mainwindow;
     quint8 preRunModeIndex;
     quint8 preDimingModeIndex;
     quint8 preFanCtrlModeIndex;
+    quint8 preStartModeIndex;
 };
 
 #endif // TFORMCONFIG1_H
