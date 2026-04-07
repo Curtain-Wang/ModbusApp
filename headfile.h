@@ -25,9 +25,7 @@
 #define DATA_RECORD_FILE_PATH  "data_record_file_path"
 #define DATA_RECORD_CYCLE  "data_record_cycle"
 #define DEFAULT_DATA_RECORD_CYCLE  60
-#define BASE_CONFIG      "BASE_CONFIG"
 #define CONTINUOUS_RUN_TIME    "CONTINUOUS_RUN_TIME"
-#define BASE_CONFIG  "BASE_CONFIG"
 
 typedef enum
 {
