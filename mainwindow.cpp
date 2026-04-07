@@ -720,7 +720,7 @@ void MainWindow::initializeCSVFile(QTextStream &out)
     headers.append("内腔温度(℃)");
     headers.append("电压环数控值");
     headers.append("电流环数控值");
-    out << headers.join("\t") << "\n";
+    out << headers.join(",") << "\n";
 }
 
 void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
@@ -770,7 +770,7 @@ void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
     data << QString::number(inputRegs[13]);
     //电流环数控值
     data << QString::number(inputRegs[18]);
-    out << data.join("\t") << "\n";
+    out << data.join(",") << "\n";
 }
 
 void MainWindow::runTimeDeal()
@@ -1000,7 +1000,7 @@ void MainWindow::on_saveDataTimer_timeout()
     if(connFlag == CONNECTED && inputRegs[1] == 1)
     {
         QDateTime currentTime = QDateTime::currentDateTime();
-        QString serialNumberStr = batSerNum.remove(QChar('\0'));
+        QString serialNumberStr = batSerNum.remove(QChar('\0')).trimmed();
         QString fileName = QString("%1-%2-%3-%4")
                                .arg(currentTime.date().year())
                                .arg(currentTime.date().month(), 2, 10, QChar('0'))
@@ -1019,7 +1019,7 @@ void MainWindow::on_saveDataTimer_timeout()
             }
 
         }
-        filePath = QString("%1/Save/%2/%3.xls")
+        filePath = QString("%1/Save/%2/%3.csv")
                        .arg(dataRecordFilePath)
                        .arg(serialNumberStr)
                        .arg(fileName);
@@ -1045,6 +1045,8 @@ void MainWindow::on_saveDataTimer_timeout()
         QTextStream out(&csvFile);
 
         if (csvFile.size() == 0) {
+            // 添加 UTF-8 BOM
+            csvFile.write("\xEF\xBB\xBF");
             initializeCSVFile(out);
         }
         writeDataToCSV(out, currentTime);
