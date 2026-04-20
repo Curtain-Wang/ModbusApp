@@ -704,6 +704,7 @@ void MainWindow::initializeCSVFile(QTextStream &out)
 {
     QStringList headers;
     headers.append("时间");
+    headers.append("累计运行时间");
     headers.append("运行模式");
     headers.append("告警保护事件");
     headers.append("输入电压外侧(V)");
@@ -727,6 +728,7 @@ void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
 {
     QStringList data;
     data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
+    data << QString("1%时2%分3%秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
     if(inputRegs[19] == 0)
         data << "恒压模式";
     else if(inputRegs[19] == 1)
