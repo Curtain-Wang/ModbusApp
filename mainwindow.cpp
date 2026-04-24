@@ -555,6 +555,10 @@ QString MainWindow::getEventText(quint16 value)
     {
         text.append(" 参数配置故障");
     }
+    if(((value >> 8) & 1) == 1)
+    {
+        text.append(" 控制失效故障");
+    }
     return text;
 }
 
@@ -728,7 +732,7 @@ void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
 {
     QStringList data;
     data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
-    data << QString("1%时2%分3%秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
+    data << QString("%1时%2分%3秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
     if(inputRegs[19] == 0)
         data << "恒压模式";
     else if(inputRegs[19] == 1)
