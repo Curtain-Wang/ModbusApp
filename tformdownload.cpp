@@ -241,7 +241,7 @@ void TFormDownload::on_timeout()
             //超过重发次数了
             if(DownloadRepeatNum == 0)
             {
-                ui->plainTextEdit->appendPlainText("升级失败");
+                ui->plainTextEdit->appendPlainText("通讯超时!");
                 endDownload();
                 return;
             }
