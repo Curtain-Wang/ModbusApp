@@ -267,20 +267,86 @@ void MainWindow::sendGetRealTimeDataCMD()
 {
     QByteArray buf;
     buf.append(MODULE);
-    buf.append(READ_INPUT_CMD);
+
+
+    quint16 startAddr = 0;
+    quint16 num = 0;
+
+    switch(queryStep)
+    {
+    case INPUT_STEP_TEL:
+        buf.append(READ_INPUT_CMD);
+        startAddr = MODBUS_BLOCK_START_TEL;
+        num = MODBUS_BLOCK_SIZE_TEL;
+        break;
+    case INPUT_STEP_TEMP:
+        buf.append(READ_INPUT_CMD);
+        startAddr = MODBUS_BLOCK_START_TEMP;
+        num = MODBUS_BLOCK_SIZE_TEMP;
+        break;
+    case INPUT_STEP_STATUS:
+        buf.append(READ_INPUT_CMD);
+        startAddr = MODBUS_BLOCK_START_STAT;
+        num = MODBUS_BLOCK_SIZE_STAT;
+        break;
+    case INPUT_STEP_PARALLEL:
+        buf.append(READ_INPUT_CMD);
+        startAddr = MODBUS_BLOCK_START_PARALLEL;
+        num = MODBUS_BLOCK_SIZE_PARALLEL;
+        break;
+    case INPUT_STEP_PROD:
+        buf.append(READ_INPUT_CMD);
+        startAddr = MODBUS_BLOCK_START_PRODUCT;
+        num = MODBUS_BLOCK_SIZE_PRODUCT;
+        break;
+    case HOLDING_STEP_CHG_CFG:
+        buf.append(READ_HOLDING_CMD);
+        startAddr = MODBUS_BLOCK_START_CHARGE;
+        num = MODBUS_BLOCK_SIZE_CHARGE;
+        break;
+    case HOLDING_STEP_DSG_CFG:
+        buf.append(READ_HOLDING_CMD);
+        startAddr = MODBUS_BLOCK_START_DISCHARGE;
+        num = MODBUS_BLOCK_SIZE_DISCHARGE;
+        break;
+    case HOLDING_STEP_PROT_CFG:
+        buf.append(READ_HOLDING_CMD);
+        startAddr = MODBUS_BLOCK_START_PROTECT;
+        num = MODBUS_BLOCK_SIZE_PROTECT;
+        break;
+    case HOLDING_STEP_SYS_CTRL_CFG:
+        buf.append(READ_HOLDING_CMD);
+        startAddr = MODBUS_BLOCK_START_CTRL;
+        num = MODBUS_BLOCK_SIZE_CTRL;
+        break;
+    default:
+        queryStep = INPUT_STEP_TEL;
+        buf.append(READ_INPUT_CMD);
+        startAddr = MODBUS_BLOCK_START_TEL;
+        num = MODBUS_BLOCK_SIZE_TEL;
+        break;
+    }
 
     //起始地址
-    buf.append(static_cast<char>(INPUT_REG_START >> 8));
-    buf.append(static_cast<char>(INPUT_REG_START & 0xFF));
+    buf.append(static_cast<char>(startAddr >> 8));
+    buf.append(static_cast<char>(startAddr & 0xFF));
     //个数
-    buf.append(static_cast<char>(INPUT_REG_NUM >> 8));
-    buf.append(static_cast<char>(INPUT_REG_NUM & 0xFF));
+    buf.append(static_cast<char>(num >> 8));
+    buf.append(static_cast<char>(num & 0xFF));
+
+    if((tformConfig1 != nullptr && queryStep == HOLDING_STEP_SYS_CTRL_CFG)
+        || (tformConfig1 == nullptr && queryStep == INPUT_STEP_PROD))
+    {
+        dataRefreshRemaingTime = DATA_REFRESH_CYCLE;
+    }
+
     QByteArray crcArray = calculateCRCArray(buf, 6);
     //crC
     buf.append(crcArray[0]);
     buf.append(crcArray[1]);
     sendPortData(buf);
-    dataRefreshRemaingTime = DATA_REFRESH_CYCLE;
+    //设置等待时间
+    waitMessageRemaingTime = 20;
 }
 
 // 计算Modbus-RTU CRC16的方法，返回高低字节的QByteArray
@@ -401,22 +467,37 @@ void MainWindow::dealMessage(quint8 *data)
     connectStatusLabel->setText(connStatus.arg("已连接"));
     connectStatusLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
     //查询命令
-    if(data[1] == READ_INPUT_CMD)
+    if(data[1] == READ_INPUT_CMD || data[1] == READ_HOLDING_CMD)
     {
-        for(quint16 i = 0; i < data[2] / 2; i++)
-        {
-            inputRegs[i] = ((data[3 + i * 2] << 8) | data[4 + i * 2]);
+        // 根据 inputStep 选择对应的目标寄存器数组
+        quint16* targetArray = nullptr;
+        switch (queryStep) {
+        case INPUT_STEP_TEL:      targetArray = g_TelRegs;      break;
+        case INPUT_STEP_TEMP:     targetArray = g_TempTelRegs;  break;
+        case INPUT_STEP_STATUS:   targetArray = g_StatRegs;     break;
+        case INPUT_STEP_PARALLEL: targetArray = g_ParallelRegs; break;
+        case INPUT_STEP_PROD:     targetArray = g_ProductRegs;  break;
+            case INPUT_STEP_PROD:     targetArray = g_ProductRegs;  break;
+        default: return; // 无效步骤直接返回（根据实际需求调整）
         }
-        refreshInput();
-    }
-    if(data[1] == READ_HOLDING_CMD)
-    {
-        for(quint16 i = 0; i < data[2]; i++)
-        {
-            holdingRegs[i] =((data[3 + i * 2] << 8) | data[4 + i * 2]);
+
+        // 统一处理数据复制（避免重复循环逻辑）
+        const quint16 regCount = data[2] / 2; // 提前计算避免重复除法
+        for (quint16 i = 0; i < regCount; ++i) {
+            // 安全处理字节序：高位字节 << 8 | 低位字节
+            targetArray[i] = (static_cast<quint16>(data[3 + i * 2]) << 8)
+                             | data[4 + i * 2];
         }
-        refreshHolding();
+        if(tformConfig1 != nullptr)
+        {
+            queryStep = (queryStep + 1) % 9; //更新步骤
+        }else
+        {
+            queryStep = (queryStep + 1) % 5; //更新步骤
+        }
+
     }
+
     if(data[1] == WRITE_ONE_CMD)
     {
         quint16 addr = ((data[2] << 8) | data[3]);
@@ -632,21 +713,6 @@ quint16 MainWindow::getMessageSize()
     {
         return 8;
     }
-    if(cmd == MASTER_CMD)
-    {
-        quint8 cmd2 = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 2) % 500]);
-        switch(cmd2)
-        {
-        case UPDATE_CMD:
-            return 5;
-        case DOWNLOAD_DATA_CMD:
-            return 6;
-        case DOWNLOAD_COMPLETE_CHECK_CMD:
-            return 12;
-        case SERIAL_NUM_CMD:
-            return 25;
-        }
-    }
     return 0;
 }
 
@@ -812,7 +878,7 @@ void MainWindow::onReceiveTimerTimeout()
         int module = static_cast<uint8_t>(receiveDataBuf[receiveStartIndex]);
         int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
         //没有匹配到开始
-        if(module != MODULE || (cmd != 3 && cmd != 6 && cmd != 0x10 && cmd != 4 && cmd != 0xF0 && cmd != 0xE0))
+        if(module != MODULE || (cmd != READ_HOLDING_CMD && cmd != WRITE_ONE_CMD && cmd != READ_INPUT_CMD))
         {
             //更新开始点
             receiveStartIndex = (receiveStartIndex + 1) % 500;

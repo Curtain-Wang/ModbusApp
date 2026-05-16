@@ -27,11 +27,13 @@
 #define DEFAULT_DATA_RECORD_CYCLE  60
 #define CONTINUOUS_RUN_TIME    "CONTINUOUS_RUN_TIME"
 
+#define NUM_REGISTER 0xFF
 typedef enum
 {
     READ_HOLDING_CMD = 0x03,
     READ_INPUT_CMD = 0x04,
     WRITE_ONE_CMD = 0x06,
+    WRITE_MULTI_CMD = 0x10,
     MASTER_CMD = 0xF0,
     SLAVE_CMD = 0xE0,
 }en_cmd1_t;
@@ -66,6 +68,45 @@ typedef enum
     HI_OPEN,
     HI_MASTER,  //是否主机
 }en_modbus_holding_data_index_t;
+
+typedef enum
+{
+    INPUT_STEP_TEL,
+    INPUT_STEP_TEMP,
+    INPUT_STEP_STATUS,
+    INPUT_STEP_PARALLEL,
+    INPUT_STEP_PROD,
+    HOLDING_STEP_CHG_CFG,
+    HOLDING_STEP_DSG_CFG,
+    HOLDING_STEP_PROT_CFG,
+    HOLDING_STEP_SYS_CTRL_CFG
+}en_query_step_t;
+
+// 每类寄存器的起始地址（用于计算偏移）
+typedef enum {
+    MODBUS_BLOCK_START_TEL       = 0x3001,  // 遥测数据起始地址
+    MODBUS_BLOCK_START_TEMP      = 0x3101,  // 温度遥测起始地址
+    MODBUS_BLOCK_START_STAT      = 0x3201,  // 状态与告警起始地址
+    MODBUS_BLOCK_START_PARALLEL  = 0x3301,  // 并机状态起始地址
+    MODBUS_BLOCK_START_PRODUCT   = 0x3401,  // 产品标识起始地址
+    MODBUS_BLOCK_START_CHARGE    = 0x4001,  // 充电参数起始地址
+    MODBUS_BLOCK_START_DISCHARGE = 0x4101,  // 放电参数起始地址
+    MODBUS_BLOCK_START_PROTECT   = 0x4201,  // 保护参数起始地址
+    MODBUS_BLOCK_START_CTRL      = 0x4301,  // 控制指令起始地址
+} modbus_block_start_addr_t;
+
+// 每类寄存器的起始地址（用于计算偏移）
+typedef enum {
+    MODBUS_BLOCK_SIZE_TEL       = 8,  // 遥测寄存器数量
+    MODBUS_BLOCK_SIZE_TEMP      = 8,  // 温度遥测寄存器数量
+    MODBUS_BLOCK_SIZE_STAT      = 6,  // 状态与告警寄存器数量
+    MODBUS_BLOCK_SIZE_PARALLEL  = 6,  // 并机状态寄存器数量
+    MODBUS_BLOCK_SIZE_PRODUCT   = 5,  // 产品标识寄存器数量
+    MODBUS_BLOCK_SIZE_CHARGE    = 3,  // 充电参数寄存器数量
+    MODBUS_BLOCK_SIZE_DISCHARGE = 4,  // 放电参数寄存器数量
+    MODBUS_BLOCK_SIZE_PROTECT   = 10,  // 保护参数寄存器数量
+    MODBUS_BLOCK_SIZE_CTRL      = 1,  // 控制指令寄存器数量
+} modbus_block_size_addr_t;
 
 #define BR 9600
 class MainWindow;
@@ -102,4 +143,14 @@ extern quint8 timeoutTimes;
 extern QString batSerNum;
 extern quint64 lastRunSecond;
 extern quint64 runSecond;
+extern quint8 queryStep;
+extern uint16_t g_TelRegs[NUM_REGISTER];
+extern uint16_t g_TempTelRegs[NUM_REGISTER];
+extern uint16_t g_StatRegs[NUM_REGISTER];
+extern uint16_t g_ParallelRegs[NUM_REGISTER];
+extern uint16_t g_ProductRegs[NUM_REGISTER];
+extern uint16_t g_ChgCfgRegs[NUM_REGISTER];
+extern uint16_t g_DsgCfgRegs[NUM_REGISTER];
+extern uint16_t g_ProtectCfgRegs[NUM_REGISTER];
+extern uint16_t g_SysCtrlgRegs[NUM_REGISTER];
 #endif // HEADFILE_H

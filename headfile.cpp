@@ -1,11 +1,6 @@
 #include "headfile.h"
 #include <mainwindow.h>
 
-qint16 inputRegs[REG_NUM];
-qint16 holdingRegs[REG_NUM];
-quint8 inputPow[REG_NUM];
-quint8 holdingPow[REG_NUM];
-
 int connFlag = 0;
 QString connStatus = "连接状态：%1";
 QString versionStr = "版本：%1.%2";
@@ -34,3 +29,13 @@ quint8 timeoutTimes = 0;
 QString batSerNum = "未知";
 quint64 lastRunSecond = 0;
 quint64 runSecond = 0;
+quint8 queryStep = 0;
+uint16_t g_TelRegs[NUM_REGISTER];
+uint16_t g_TempTelRegs[NUM_REGISTER];
+uint16_t g_StatRegs[NUM_REGISTER];
+uint16_t g_ParallelRegs[NUM_REGISTER];
+uint16_t g_ProductRegs[NUM_REGISTER];
+uint16_t g_ChgCfgRegs[NUM_REGISTER];
+uint16_t g_DsgCfgRegs[NUM_REGISTER];
+uint16_t g_ProtectCfgRegs[NUM_REGISTER];
+uint16_t g_SysCtrlgRegs[NUM_REGISTER];
