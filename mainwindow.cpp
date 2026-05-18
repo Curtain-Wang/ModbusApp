@@ -631,6 +631,11 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
     if(((warn1 >> 5) & 1) == 1)   text.append("逆变侧过压告警、");
 
     if((warn2 & 1) == 1)   text.append("高温告警、");
+
+    if(text.size() > 0)
+    {
+        text.removeAt(text.size() - 1);
+    }
     return text;
 }
 
