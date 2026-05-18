@@ -12,7 +12,7 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
 {
     // 创建图表
     m_chart = new QChart();
-    m_chart->setTitle("实时电压/电流监控"); // 修改标题
+    m_chart->setTitle("逆变器侧实时电压/电流监控"); // 修改标题
 
     // 关键优化1: 禁用所有动画效果
     m_chart->setAnimationOptions(QChart::NoAnimation);
@@ -33,7 +33,7 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
     // 创建X轴（时间轴）
     m_axisX = new QDateTimeAxis();
     m_axisX->setFormat("mm:ss");
-    m_axisX->setTitleText("时间");
+    m_axisX->setTitleText("时间(分:秒)");
     m_axisX->setTickCount(m_timeWindow + 1); // 精确设置刻度数量
     m_axisX->setGridLineVisible(true);
     m_axisX->setMinorGridLineVisible(false);
