@@ -18,13 +18,6 @@ public:
     void init();
     void refresh();
 private slots:
-    void on_c0_currentIndexChanged(int index);
-
-    void on_c3_currentIndexChanged(int index);
-
-    void on_c5_currentIndexChanged(int index);
-
-    void on_c16_currentIndexChanged(int index);
 
 private:
     Ui::TFormConfig1 *ui;

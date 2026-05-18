@@ -28,7 +28,6 @@ public:
     void refreshPort();
     void init();
     void initConfigFile();
-    void regPowInit();
     void sendPortData(QByteArray data = nullptr);
     void sendSerialData(const QByteArray &data);
     void sendGetRealTimeDataCMD();
@@ -39,7 +38,7 @@ public:
     void refreshInput();
     void refreshHolding();
     void refresh();
-    QString getEventText(quint16 value);
+    QString getEventText(quint16 fault1, quint16 fault2, quint16 warn1, quint16 warn2);
     void readHoldingRegCMDBuild();
     void manualWriteOneCMDBuild(quint16 addr, quint16 value);
     void diyCMDBuild(QByteArray data, quint16 len);
@@ -63,9 +62,7 @@ private slots:
     void on_pushButton_6_clicked();
     void on_txResetTimer_timeout();
     void on_rxResetTimer_timeout();
-    void on_rbtn0_clicked(bool checked);
     void on_saveDataTimer_timeout();
-    void on_rbtn1_clicked(bool checked);
     void on_actionRefreshPort_triggered();
     void on_actDataRecord_triggered();
     void on_reconnectTimer_timeout();

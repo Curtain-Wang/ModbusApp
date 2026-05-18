@@ -111,10 +111,6 @@ typedef enum {
 #define BR 9600
 class MainWindow;
 
-extern qint16 inputRegs[REG_NUM];
-extern quint8 inputPow[REG_NUM];
-extern qint16 holdingRegs[REG_NUM];
-extern quint8 holdingPow[REG_NUM];
 //0未连接 1连接中 2已连接
 extern int connFlag;
 extern QString connStatus;
@@ -145,12 +141,22 @@ extern quint64 lastRunSecond;
 extern quint64 runSecond;
 extern quint8 queryStep;
 extern uint16_t g_TelRegs[NUM_REGISTER];
+extern uint8_t g_TelRegsPows[NUM_REGISTER];
 extern uint16_t g_TempTelRegs[NUM_REGISTER];
+extern uint8_t g_TempTelRegsPows[NUM_REGISTER];
 extern uint16_t g_StatRegs[NUM_REGISTER];
+extern uint8_t g_StatRegsPows[NUM_REGISTER];
 extern uint16_t g_ParallelRegs[NUM_REGISTER];
+extern uint8_t g_ParallelRegsPows[NUM_REGISTER];
 extern uint16_t g_ProductRegs[NUM_REGISTER];
+extern uint8_t g_ProductRegsPow[NUM_REGISTER];
 extern uint16_t g_ChgCfgRegs[NUM_REGISTER];
+extern uint8_t g_ChgCfgRegsPows[NUM_REGISTER];
 extern uint16_t g_DsgCfgRegs[NUM_REGISTER];
+extern uint8_t g_DsgCfgRegsPows[NUM_REGISTER];
 extern uint16_t g_ProtectCfgRegs[NUM_REGISTER];
+extern uint8_t g_ProtectCfgRegsPows[NUM_REGISTER];
 extern uint16_t g_SysCtrlgRegs[NUM_REGISTER];
+extern uint8_t g_SysCtrlgRegsPows[NUM_REGISTER];
+extern QString g_RunStatus[6];
 #endif // HEADFILE_H

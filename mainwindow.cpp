@@ -95,7 +95,6 @@ void MainWindow::init()
     runTimeLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     ui->statusbar->addPermanentWidget(runTimeLabel, 1);  // 第二个参数是伸缩因子
     setWindowTitle(QString(TITLE).arg(batSerNum));
-    regPowInit();
     //指示灯定时器相关
     txResetTimer->setSingleShot(true);
     connect(txResetTimer, &QTimer::timeout, this, &MainWindow::on_txResetTimer_timeout);
@@ -105,7 +104,7 @@ void MainWindow::init()
     setFocusPolicy(Qt::StrongFocus);
     // 并且实际获得了焦点
     setFocus();
-    preRunModeIndex = ui->rbtn0->isChecked() ? 0 : 1;
+
     connect(saveDataTimer, &QTimer::timeout, this, &MainWindow::on_saveDataTimer_timeout);
     connect(reconnectTimer, &QTimer::timeout, this, &MainWindow::on_reconnectTimer_timeout);
     reconnectTimer->setInterval(5000);
@@ -142,30 +141,6 @@ void MainWindow::initConfigFile()
     settings.beginGroup(BASE_CONFIG);
     lastRunSecond = settings.value(CONTINUOUS_RUN_TIME, 0).toInt();
     saveDataTimer->setInterval(dataRecordCycle * 1000);
-}
-
-void MainWindow::regPowInit()
-{
-    for(quint8 i = 0; i < 12; i++)
-    {
-        inputPow[i] = 1;
-    }
-    inputPow[12] = 0;
-    inputPow[13] = 0;
-    inputPow[17] = 1;
-
-    for(quint8 i = 0; i < REG_NUM; i++)
-    {
-        holdingPow[i] = 1;
-    }
-    holdingPow[0] = 0;
-    holdingPow[3] = 0;
-    holdingPow[5] = 0;
-    holdingPow[6] = 0;
-    holdingPow[17] = 0;
-    holdingPow[18] = 0;
-    holdingPow[19] = 0;
-    holdingPow[20] = 0;
 }
 
 void MainWindow::sendPortData(QByteArray data)
@@ -472,12 +447,33 @@ void MainWindow::dealMessage(quint8 *data)
         // 根据 inputStep 选择对应的目标寄存器数组
         quint16* targetArray = nullptr;
         switch (queryStep) {
-        case INPUT_STEP_TEL:      targetArray = g_TelRegs;      break;
-        case INPUT_STEP_TEMP:     targetArray = g_TempTelRegs;  break;
-        case INPUT_STEP_STATUS:   targetArray = g_StatRegs;     break;
-        case INPUT_STEP_PARALLEL: targetArray = g_ParallelRegs; break;
-        case INPUT_STEP_PROD:     targetArray = g_ProductRegs;  break;
-            case INPUT_STEP_PROD:     targetArray = g_ProductRegs;  break;
+        case INPUT_STEP_TEL:
+            targetArray = g_TelRegs;
+            break;
+        case INPUT_STEP_TEMP:
+            targetArray = g_TempTelRegs;
+            break;
+        case INPUT_STEP_STATUS:
+            targetArray = g_StatRegs;
+            break;
+        case INPUT_STEP_PARALLEL:
+            targetArray = g_ParallelRegs;
+            break;
+        case INPUT_STEP_PROD:
+            targetArray = g_ProductRegs;
+            break;
+        case HOLDING_STEP_CHG_CFG:
+            targetArray = g_ChgCfgRegs;
+            break;
+        case HOLDING_STEP_DSG_CFG:
+            targetArray = g_DsgCfgRegs;
+            break;
+        case HOLDING_STEP_PROT_CFG:
+            targetArray = g_ProtectCfgRegs;
+            break;
+        case HOLDING_STEP_SYS_CTRL_CFG:
+            targetArray = g_SysCtrlgRegs;
+            break;
         default: return; // 无效步骤直接返回（根据实际需求调整）
         }
 
@@ -488,38 +484,24 @@ void MainWindow::dealMessage(quint8 *data)
             targetArray[i] = (static_cast<quint16>(data[3 + i * 2]) << 8)
                              | data[4 + i * 2];
         }
+
+        if(queryStep < HOLDING_STEP_CHG_CFG)
+        {
+            refresh();
+        }else
+        {
+            if(tformConfig1 != nullptr)
+            {
+                tformConfig1->refresh();
+            }
+        }
+
         if(tformConfig1 != nullptr)
         {
             queryStep = (queryStep + 1) % 9; //更新步骤
         }else
         {
             queryStep = (queryStep + 1) % 5; //更新步骤
-        }
-
-    }
-
-    if(data[1] == WRITE_ONE_CMD)
-    {
-        quint16 addr = ((data[2] << 8) | data[3]);
-        //启动失败
-        if(addr == HI_OPEN + HOLDING_REG_START && data[4] == 0xFF)
-        {
-            QMessageBox::warning(this, "告警", "检测到当前输出端已有电压, 不能手动启动!");
-        }else
-        {
-            holdingRegs[addr - HOLDING_REG_START] = ((data[4] << 8) | data[5]);
-        }
-        refreshHolding();
-    }
-    if(data[1] == MASTER_CMD)
-    {
-        if(data[2] >= UPDATE_CMD && data[2] <= DOWNLOAD_COMPLETE_CHECK_CMD && tformDownload != nullptr)
-        {
-            tformDownload->downloadRespDeal();
-        }
-        if(data[2] == SERIAL_NUM_CMD)
-        {
-            QMessageBox::warning(this, "提示", "写入成功!");
         }
     }
 }
@@ -537,19 +519,27 @@ void MainWindow::refreshHolding()
 
 void MainWindow::refresh()
 {
-    ui->l0->setText(QString::number(static_cast<float>(inputRegs[0] * 1.0 / qPow(10, inputPow[0])), 'f', inputPow[0]));
-    ui->l17->setText(QString::number(static_cast<float>(inputRegs[17] * 1.0 / qPow(10, inputPow[17])), 'f', inputPow[17]));
-    ui->l3->setText(QString::number(static_cast<float>(inputRegs[3] * 1.0 / qPow(10, inputPow[3])), 'f', inputPow[3]));
-    ui->l5->setText(QString::number(static_cast<float>(inputRegs[5] * 1.0 / qPow(10, inputPow[5])), 'f', inputPow[5]));
-    ui->l6->setText(QString::number(static_cast<float>(inputRegs[6] * 1.0 / qPow(10, inputPow[6])), 'f', inputPow[6]));
-    ui->l7->setText(QString::number(static_cast<float>(inputRegs[7] * 1.0 / qPow(10, inputPow[7])), 'f', inputPow[7]));
-    ui->l8->setText(QString::number(static_cast<float>(inputRegs[8] * 1.0 / qPow(10, inputPow[8])), 'f', inputPow[8]));
-    ui->l9->setText(QString::number(static_cast<float>(inputRegs[9] * 1.0 / qPow(10, inputPow[9])), 'f', inputPow[9]));
-    ui->l2->setText(QString::number(static_cast<float>(inputRegs[2] * 1.0 / qPow(10, inputPow[2])), 'f', inputPow[2]));
-    ui->l18->setText(QString::number(inputRegs[18]));
-    ui->l13->setText(QString::number(inputRegs[13]));
-    ui->lPow->setText(QString::number(inputRegs[3] * inputRegs[5] / 100));
-    QString eventStr = getEventText(inputRegs[12]);
+    //遥测
+    ui->tel0->setText(QString::number(static_cast<float>(g_TelRegs[0] * 1.0 / qPow(10, g_TelRegsPows[0])), 'f', g_TelRegsPows[0]));
+    ui->tel1->setText(QString::number(static_cast<float>(g_TelRegs[1] * 1.0 / qPow(10, g_TelRegsPows[1])), 'f', g_TelRegsPows[1]));
+    ui->tel2->setText(QString::number(static_cast<float>(g_TelRegs[2] * 1.0 / qPow(10, g_TelRegsPows[2])), 'f', g_TelRegsPows[2]));
+    ui->tel3->setText(QString::number(static_cast<float>(g_TelRegs[3] * 1.0 / qPow(10, g_TelRegsPows[3])), 'f', g_TelRegsPows[3]));
+    ui->tel4->setText(QString::number(static_cast<float>(g_TelRegs[4] * 1.0 / qPow(10, g_TelRegsPows[4])), 'f', g_TelRegsPows[4]));
+    ui->tel5->setText(QString::number(static_cast<float>(g_TelRegs[5] * 1.0 / qPow(10, g_TelRegsPows[5])), 'f', g_TelRegsPows[5]));
+    ui->tel6->setText(QString::number(static_cast<float>(g_TelRegs[6] * 1.0 / qPow(10, g_TelRegsPows[6])), 'f', g_TelRegsPows[6]));
+    ui->tel7->setText(QString::number(static_cast<float>(g_TelRegs[7] * 1.0 / qPow(10, g_TelRegsPows[7])), 'f', g_TelRegsPows[7]));
+    //温度遥测
+    ui->temp0->setText(QString::number(static_cast<float>(g_TempTelRegs[0] * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]));
+    ui->temp1->setText(QString::number(static_cast<float>(g_TempTelRegs[1] * 1.0 / qPow(10, g_TempTelRegsPows[1])), 'f', g_TempTelRegsPows[1]));
+    ui->temp2->setText(QString::number(static_cast<float>(g_TempTelRegs[2] * 1.0 / qPow(10, g_TempTelRegsPows[2])), 'f', g_TempTelRegsPows[2]));
+    ui->temp3->setText(QString::number(static_cast<float>(g_TempTelRegs[3] * 1.0 / qPow(10, g_TempTelRegsPows[3])), 'f', g_TempTelRegsPows[3]));
+    ui->temp4->setText(QString::number(static_cast<float>(g_TempTelRegs[4] * 1.0 / qPow(10, g_TempTelRegsPows[4])), 'f', g_TempTelRegsPows[4]));
+    ui->temp5->setText(QString::number(static_cast<float>(g_TempTelRegs[5] * 1.0 / qPow(10, g_TempTelRegsPows[5])), 'f', g_TempTelRegsPows[5]));
+    ui->temp6->setText(QString::number(static_cast<float>(g_TempTelRegs[6] * 1.0 / qPow(10, g_TempTelRegsPows[6])), 'f', g_TempTelRegsPows[6]));
+    ui->temp7->setText(QString::number(static_cast<float>(g_TempTelRegs[7] * 1.0 / qPow(10, g_TempTelRegsPows[7])), 'f', g_TempTelRegsPows[7]));
+    ui->run_status->setText(g_RunStatus[g_StatRegs[4]]);
+
+    QString eventStr = getEventText(g_StatRegs[0], g_StatRegs[1], g_StatRegs[2], g_StatRegs[3]);
     if(eventStr.length() == 0)
     {
         ui->bms_warn_prot->setText(NO_WARN_PROT_STR);
@@ -562,84 +552,39 @@ void MainWindow::refresh()
     ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
     ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
     ui->bms_warn_prot->update();
-    QString version = versionStr.arg((inputRegs[14] >> 8), 2, 16, QLatin1Char('0')).arg((inputRegs[14] & 0xFF), 2, 16, QLatin1Char('0'));
-    versionLabel->setText(version);
-    //启停
-    if(inputRegs[1] == 1)
-    {
-        ui->pushButton_6->setText("停止");
-        ui->pushButton_6->setStyleSheet(RED_BUTTON_STYLE);
-        if(!saveDataTimer->isActive())
-        {
-            saveDataTimer->start();
-        }
-    }else
-    {
-        ui->pushButton_6->setText("启动");
-        ui->pushButton_6->setStyleSheet(GREEN_BUTTON_STYLE);
-        if(saveDataTimer->isActive())
-        {
-            saveDataTimer->stop();
-        }
-    }
-    //运行模式
-    if(inputRegs[19] == 0)
-    {
-        ui->rbtn0->setChecked(true);
-        preRunModeIndex = 0;
-    }else
-    {
-        ui->rbtn1->setChecked(true);
-        preRunModeIndex = 1;
-    }
-    batSerNum.clear();
-    for(quint8 i = 20; i < 30; i++)
-    {
-        if(inputRegs[i] == -1)
-        {
-            inputRegs[i] = 0;
-        }
-        QString strVal = QString("%1%2").arg(QChar(inputRegs[i] & 0xFF)).arg(QChar(inputRegs[i] >> 8));
-        batSerNum += strVal;
-    }
-    setWindowTitle(QString(TITLE).arg(batSerNum));
+
+    ui->parallel0->setText(QString::number(g_ParallelRegs[0]));
+    ui->parallel1->setText(QString::number(g_ParallelRegs[1]));
+    ui->parallel2->setText(QString::number(g_ParallelRegs[2]));
+    ui->parallel3->setText(QString::number(g_ParallelRegs[3]));
+    ui->parallel4->setText(QString::number(static_cast<float>(g_ParallelRegs[4] * 1.0 / qPow(10,g_ParallelRegsPows[4])), 'f', g_ParallelRegsPows[4]));
+    ui->parallel5->setText(QString::number(static_cast<float>(g_ParallelRegs[5] * 1.0 / qPow(10, g_ParallelRegsPows[5])), 'f', g_ParallelRegsPows[5]));
 }
 
-QString MainWindow::getEventText(quint16 value)
+QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, quint16 warn2)
 {
     QString text;
-    if((value & 1) == 1)
-    {
-        text.append(" 输出侧过压保护");
-    }
-    if(((value >> 1) & 1) == 1)
-    {
-        text.append(" 输出侧过流保护");
-    }
-    if(((value >> 2) & 1) == 1)
-    {
-        text.append(" 输入侧过压保护");
-    }
-    if(((value >> 3) & 1) == 1)
-    {
-        text.append(" 输入侧过流保护");
-    }
-    if(((value >> 4) & 1) == 1)
-    {
-        text.append(" 高温保护");
-    }
-    if(((value >> 5) & 1) == 1)
-    {
-        text.append(" 湿度过高保护");
-    }
-    if(((value >> 7) & 1) == 1)
-    {
-        text.append(" 参数配置故障");
-    }
-    if(((value >> 8) & 1) == 1)
-    {
-        text.append(" 控制失效故障");
-    }
+    if((fault1 & 1) == 1)   text.append("短路保护、");
+    if(((fault1 >> 1) & 1) == 1)   text.append("超温保护、");
+    if(((fault1 >> 2) & 1) == 1)   text.append("充电过流保护、");
+    if(((fault1 >> 3) & 1) == 1)   text.append("放电过流保护、");
+    if(((fault1 >> 4) & 1) == 1)   text.append("电池侧过压保护、");
+    if(((fault1 >> 5) & 1) == 1)   text.append("电池侧欠压保护、");
+    if(((fault1 >> 6) & 1) == 1)   text.append("逆变侧过压保护、");
+    if(((fault1 >> 7) & 1) == 1)   text.append("逆变侧欠压保护、");
+
+    if((fault2 & 1) == 1)   text.append("熔断器故障、");
+    if(((fault2 >> 1) & 1) == 1)   text.append("系统错误、");
+    if(((fault2 >> 2) & 1) == 1)   text.append("通信故障、");
+
+    if((warn1 & 1) == 1)   text.append("充电过流告警、");
+    if(((warn1 >> 1) & 1) == 1)   text.append("放电过流告警、");
+    if(((warn1 >> 2) & 1) == 1)   text.append("电池侧欠压告警、");
+    if(((warn1 >> 3) & 1) == 1)   text.append("电池侧过压告警、");
+    if(((warn1 >> 4) & 1) == 1)   text.append("逆变侧欠压告警、");
+    if(((warn1 >> 5) & 1) == 1)   text.append("逆变侧过压告警、");
+
+    if((warn2 & 1) == 1)   text.append("高温告警、");
     return text;
 }
 
@@ -796,59 +741,59 @@ void MainWindow::initializeCSVFile(QTextStream &out)
 
 void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
 {
-    QStringList data;
-    data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
-    data << QString("%1时%2分%3秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
-    if(inputRegs[19] == 0)
-        data << "恒压模式";
-    else if(inputRegs[19] == 1)
-        data << "恒流模式";
-    else
-        data << "手动模式";
-    //告警/保护
-    QString text = getEventText(inputRegs[12]);
-    if(text.isEmpty())
-    {
-        data << "无事件";
-    }else
-    {
-        data << getEventText(inputRegs[12]);
-    }
-    //输入电压外侧
-    data << QString::number(inputRegs[17] / 10.0, 'f', 1);
-    //输入电压内侧
-    data << QString::number(inputRegs[0] / 10.0, 'f', 1);
-    //谐振腔电流
-    data << QString::number(inputRegs[2] / 10.0, 'f', 1);
-    //输出电压
-    data << QString::number(inputRegs[3] / 10.0, 'f', 1);
-    //设定输出电压
-    data << QString::number(holdingRegs[1] / 10.0, 'f', 1);
-    //输出电流
-    data << QString::number(inputRegs[5] / 10.0, 'f', 1);
-    //设定输出电流
-    data << QString::number(holdingRegs[2] / 10.0, 'f', 1);
-    //输出功率
-    data << QString::number(inputRegs[3] * inputRegs[5] / 100);
-    //底部散热器温度
-    data << QString::number(inputRegs[6] / 10.0, 'f', 1);
-    //电感温度
-    data << QString::number(inputRegs[7] / 10.0, 'f', 1);
-    //变压器温度
-    data << QString::number(inputRegs[8] / 10.0, 'f', 1);
-    //内腔温度
-    data << QString::number(inputRegs[9] / 10.0, 'f', 1);
-    //电压环数控值
-    data << QString::number(inputRegs[13]);
-    //电流环数控值
-    data << QString::number(inputRegs[18]);
-    out << data.join(",") << "\n";
+    // QStringList data;
+    // data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
+    // data << QString("%1时%2分%3秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
+    // if(inputRegs[19] == 0)
+    //     data << "恒压模式";
+    // else if(inputRegs[19] == 1)
+    //     data << "恒流模式";
+    // else
+    //     data << "手动模式";
+    // //告警/保护
+    // QString text = getEventText(inputRegs[12]);
+    // if(text.isEmpty())
+    // {
+    //     data << "无事件";
+    // }else
+    // {
+    //     data << getEventText(inputRegs[12]);
+    // }
+    // //输入电压外侧
+    // data << QString::number(inputRegs[17] / 10.0, 'f', 1);
+    // //输入电压内侧
+    // data << QString::number(inputRegs[0] / 10.0, 'f', 1);
+    // //谐振腔电流
+    // data << QString::number(inputRegs[2] / 10.0, 'f', 1);
+    // //输出电压
+    // data << QString::number(inputRegs[3] / 10.0, 'f', 1);
+    // //设定输出电压
+    // data << QString::number(holdingRegs[1] / 10.0, 'f', 1);
+    // //输出电流
+    // data << QString::number(inputRegs[5] / 10.0, 'f', 1);
+    // //设定输出电流
+    // data << QString::number(holdingRegs[2] / 10.0, 'f', 1);
+    // //输出功率
+    // data << QString::number(inputRegs[3] * inputRegs[5] / 100);
+    // //底部散热器温度
+    // data << QString::number(inputRegs[6] / 10.0, 'f', 1);
+    // //电感温度
+    // data << QString::number(inputRegs[7] / 10.0, 'f', 1);
+    // //变压器温度
+    // data << QString::number(inputRegs[8] / 10.0, 'f', 1);
+    // //内腔温度
+    // data << QString::number(inputRegs[9] / 10.0, 'f', 1);
+    // //电压环数控值
+    // data << QString::number(inputRegs[13]);
+    // //电流环数控值
+    // data << QString::number(inputRegs[18]);
+    // out << data.join(",") << "\n";
 }
 
 void MainWindow::runTimeDeal()
 {
     //未连接、未启动、有事件
-    if(connFlag == UNCONNECTED || inputRegs[1] == 0 || inputRegs[12] > 0)
+    if(connFlag == UNCONNECTED)
     {
         if(runSecond != 0)
         {
@@ -1049,27 +994,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
-void MainWindow::on_rbtn0_clicked(bool checked)
-{
-    if(preRunModeIndex == 0)
-    {
-        return;
-    }
-    ui->rbtn1->blockSignals(true);
-    ui->rbtn1->setChecked(true);
-    ui->rbtn1->blockSignals(false);
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, 0);
-}
-
 void MainWindow::on_saveDataTimer_timeout()
 {
     //只记录启动状态下的数据
-    if(connFlag == CONNECTED && inputRegs[1] == 1)
+    if(connFlag == CONNECTED)
     {
         QDateTime currentTime = QDateTime::currentDateTime();
         QString serialNumberStr = batSerNum.remove(QChar('\0')).trimmed();
@@ -1126,24 +1054,6 @@ void MainWindow::on_saveDataTimer_timeout()
 
     }
 }
-
-void MainWindow::on_rbtn1_clicked(bool checked)
-{
-    if(preRunModeIndex == 1)
-    {
-        return;
-    }
-    ui->rbtn0->blockSignals(true);
-    ui->rbtn0->setChecked(true);
-    ui->rbtn0->blockSignals(false);
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, 1);
-}
-
 
 void MainWindow::on_actionRefreshPort_triggered()
 {

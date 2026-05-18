@@ -30,119 +30,23 @@ void TFormConfig1::init()
 
 void TFormConfig1::refresh()
 {
-    ui->h1->setText(QString::number(static_cast<float>(holdingRegs[1] * 1.0 / qPow(10, holdingPow[1])), 'f', holdingPow[1]));
-    ui->h2->setText(QString::number(holdingRegs[2] * 1.0 / holdingRegs[4] * 100));
-    ui->h4->setText(QString::number(static_cast<float>(holdingRegs[4] * 1.0 / qPow(10, holdingPow[4])), 'f', holdingPow[4]));
-    ui->h6->setText(QString::number(holdingRegs[6]));
-    ui->h7->setText(QString::number(static_cast<float>(holdingRegs[7] * 1.0 / qPow(10, holdingPow[7])), 'f', holdingPow[7]));
-    ui->h8->setText(QString::number(static_cast<float>(holdingRegs[8] * 1.0 / qPow(10, holdingPow[8])), 'f', holdingPow[8]));
-    ui->h9->setText(QString::number(static_cast<float>(holdingRegs[9] * 1.0 / qPow(10, holdingPow[9])), 'f', holdingPow[9]));
-    ui->h10->setText(QString::number(static_cast<float>(holdingRegs[10] * 1.0 / qPow(10, holdingPow[10])), 'f', holdingPow[10]));
-    ui->h11->setText(QString::number(static_cast<float>(holdingRegs[11] * 1.0 / qPow(10, holdingPow[11])), 'f', holdingPow[11]));
-    ui->h12->setText(QString::number(static_cast<float>(holdingRegs[12] * 1.0 / qPow(10, holdingPow[12])), 'f', holdingPow[12]));
-    ui->h13->setText(QString::number(static_cast<float>(holdingRegs[13] * 1.0 / qPow(10, holdingPow[13])), 'f', holdingPow[13]));
-    ui->h14->setText(QString::number(static_cast<float>(holdingRegs[14] * 1.0 / qPow(10, holdingPow[14])), 'f', holdingPow[14]));
-    ui->h15->setText(QString::number(static_cast<float>(holdingRegs[15] * 1.0 / qPow(10, holdingPow[15])), 'f', holdingPow[15]));
-    ui->h18->setText(QString::number(holdingRegs[18]));
-    ui->h19->setText(QString::number(holdingRegs[19]));
-    ui->h20->setText(QString::number(holdingRegs[20]));
-    ui->c0->blockSignals(true);
-    ui->c3->blockSignals(true);
-    ui->c5->blockSignals(true);
-    ui->c16->blockSignals(true);
-    ui->c0->setCurrentIndex(holdingRegs[0]);
-    ui->c3->setCurrentIndex(holdingRegs[3]);
-    ui->c5->setCurrentIndex(holdingRegs[5]);
-    ui->c16->setCurrentIndex(holdingRegs[16]);
-    preRunModeIndex = ui->c0->currentIndex();
-    preDimingModeIndex = ui->c3->currentIndex();
-    preFanCtrlModeIndex = ui->c5->currentIndex();
-    preStartModeIndex = ui->c16->currentIndex();
-    ui->c0->blockSignals(false);
-    ui->c3->blockSignals(false);
-    ui->c5->blockSignals(false);
-    ui->c16->blockSignals(false);
-    //恒压限流不能调光
-    if(holdingRegs[0] == 0)
-    {
-        ui->c3->setEnabled(false);
-        ui->h2->setEnabled(false);
-    }
-    //恒流限压可以调光
-    if(holdingRegs[0] == 1)
-    {
-        ui->c3->setEnabled(true);
-        //手动模式可以调光
-        if(holdingRegs[3] == 5)
-        {
-            ui->h2->setEnabled(true);
-        }else
-        {
-            ui->h2->setEnabled(false);
-        }
-    }
-    //风扇手动控制可以调功率
-    if(holdingRegs[5] == 1)
-    {
-        ui->h6->setEnabled(true);
-    }else
-    {
-        ui->h6->setEnabled(false);
-    }
+    ui->chg0->setText(QString::number(static_cast<float>(g_ChgCfgRegs[0] * 1.0 / qPow(10, g_ChgCfgRegsPows[0])), 'f', g_ChgCfgRegsPows[0]));
+    ui->chg1->setText(QString::number(static_cast<float>(g_ChgCfgRegs[1] * 1.0 / qPow(10, g_ChgCfgRegsPows[1])), 'f', g_ChgCfgRegsPows[1]));
+    ui->chg2->setText(QString::number(static_cast<float>(g_ChgCfgRegs[2] * 1.0 / qPow(10, g_ChgCfgRegsPows[2])), 'f', g_ChgCfgRegsPows[2]));
+
+    ui->dsg0->setText(QString::number(static_cast<float>(g_DsgCfgRegs[0] * 1.0 / qPow(10, g_DsgCfgRegsPows[0])), 'f', g_DsgCfgRegsPows[0]));
+    ui->dsg1->setText(QString::number(static_cast<float>(g_DsgCfgRegs[1] * 1.0 / qPow(10, g_DsgCfgRegsPows[1])), 'f', g_DsgCfgRegsPows[1]));
+    ui->dsg2->setText(QString::number(static_cast<float>(g_DsgCfgRegs[2] * 1.0 / qPow(10, g_DsgCfgRegsPows[2])), 'f', g_DsgCfgRegsPows[2]));
+    ui->dsg3->setText(QString::number(static_cast<float>(g_DsgCfgRegs[3] * 1.0 / qPow(10, g_DsgCfgRegsPows[3])), 'f', g_DsgCfgRegsPows[3]));
+
+    ui->prot0->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[0] * 1.0 / qPow(10, g_ProtectCfgRegsPows[0])), 'f', g_ProtectCfgRegsPows[0]));
+    ui->prot1->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[1] * 1.0 / qPow(10, g_ProtectCfgRegsPows[1])), 'f', g_ProtectCfgRegsPows[1]));
+    ui->prot2->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[2] * 1.0 / qPow(10, g_ProtectCfgRegsPows[2])), 'f', g_ProtectCfgRegsPows[2]));
+    ui->prot3->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[3] * 1.0 / qPow(10, g_ProtectCfgRegsPows[3])), 'f', g_ProtectCfgRegsPows[3]));
+    ui->prot4->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[4] * 1.0 / qPow(10, g_ProtectCfgRegsPows[4])), 'f', g_ProtectCfgRegsPows[4]));
+    ui->prot5->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[5] * 1.0 / qPow(10, g_ProtectCfgRegsPows[5])), 'f', g_ProtectCfgRegsPows[5]));
+    ui->prot6->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[6] * 1.0 / qPow(10, g_ProtectCfgRegsPows[6])), 'f', g_ProtectCfgRegsPows[6]));
+    ui->prot7->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[7] * 1.0 / qPow(10, g_ProtectCfgRegsPows[7])), 'f', g_ProtectCfgRegsPows[7]));
+    ui->prot8->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[8] * 1.0 / qPow(10, g_ProtectCfgRegsPows[8])), 'f', g_ProtectCfgRegsPows[8]));
+    ui->prot9->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[9] * 1.0 / qPow(10, g_ProtectCfgRegsPows[9])), 'f', g_ProtectCfgRegsPows[9]));
 }
-
-void TFormConfig1::on_c0_currentIndexChanged(int index)
-{
-    ui->c0->blockSignals(true);
-    ui->c0->setCurrentIndex(preRunModeIndex);
-    ui->c0->blockSignals(false);
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR, index);
-}
-
-
-void TFormConfig1::on_c3_currentIndexChanged(int index)
-{
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    ui->c3->blockSignals(true);
-    ui->c3->setCurrentIndex(preDimingModeIndex);
-    ui->c3->blockSignals(false);
-    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR + 3, index);
-}
-
-
-void TFormConfig1::on_c5_currentIndexChanged(int index)
-{
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    ui->c5->blockSignals(true);
-    ui->c5->setCurrentIndex(preFanCtrlModeIndex);
-    ui->c5->blockSignals(false);
-    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR + 5, index);
-}
-
-
-void TFormConfig1::on_c16_currentIndexChanged(int index)
-{
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    ui->c16->blockSignals(true);
-    ui->c16->setCurrentIndex(preStartModeIndex);
-    ui->c16->blockSignals(false);
-    mainwindow->manualWriteOneCMDBuild(HOLDING_REG_START_ADDR + 16, index);
-}
-
