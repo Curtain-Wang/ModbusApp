@@ -441,7 +441,11 @@ bool MainWindow::receiveDataCRCCheck(const QByteArray &data)
 
 void MainWindow::dealMessage(quint8 *data)
 {
-    connFlag = CONNECTED;
+    if(connFlag != CONNECTED)
+    {
+        connFlag = CONNECTED;
+        voltCurChart->start();
+    }
     timeoutTimes = 0;
     connectStatusLabel->setText(connStatus.arg("已连接"));
     connectStatusLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
@@ -563,6 +567,44 @@ void MainWindow::refresh()
     ui->parallel3->setText(QString::number(g_ParallelRegs[3]));
     ui->parallel4->setText(QString::number(static_cast<float>(g_ParallelRegs[4] * 1.0 / qPow(10,g_ParallelRegsPows[4])), 'f', g_ParallelRegsPows[4]));
     ui->parallel5->setText(QString::number(static_cast<float>(g_ParallelRegs[5] * 1.0 / qPow(10, g_ParallelRegsPows[5])), 'f', g_ParallelRegsPows[5]));
+
+    //B侧继电器
+    if((g_StatRegs[5] & 1) == 1)
+    {
+        ui->lab_br->setStyleSheet(
+            "QLabel {"
+            "    border-radius: 10px;"
+            "    background-color: #00F000;"
+            "}"
+            );
+    }else
+    {
+        ui->lab_br->setStyleSheet(
+            "QLabel {"
+            "    border-radius: 10px;"
+            "    background-color: #D3D3D3;"
+            "}"
+            );
+    }
+
+    //P侧继电器
+    if(((g_StatRegs[5] >> 1) & 1) == 1)
+    {
+        ui->lab_pr->setStyleSheet(
+            "QLabel {"
+            "    border-radius: 10px;"
+            "    background-color: #00F000;"
+            "}"
+            );
+    }else
+    {
+        ui->lab_pr->setStyleSheet(
+            "QLabel {"
+            "    border-radius: 10px;"
+            "    background-color: #D3D3D3;"
+            "}"
+            );
+    }
 }
 
 QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, quint16 warn2)
@@ -839,9 +881,6 @@ void MainWindow::voltCurChartInit()
     layout->setSpacing(0);
     layout->addWidget(voltCurChart);
     ui->chartContainer->setLayout(layout);
-
-    // 开始更新数据
-    voltCurChart->start();
 }
 
 void MainWindow::onReceiveTimerTimeout()

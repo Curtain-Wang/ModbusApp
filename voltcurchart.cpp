@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QDateTime>
 #include <QtMath>
+#include "headfile.h"
 
 VoltCurChart::VoltCurChart(QWidget *parent) :
     QWidget(parent),
@@ -89,16 +90,7 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
     // 创建定时器
     m_timer = new QTimer(this);
     m_timer->setInterval(1000);
-
-    // 关键优化6: 确保定时器在整秒开始
-    int initialDelay = 1000 - QDateTime::currentDateTime().time().msec();
-    m_timer->setSingleShot(true);
-    connect(m_timer, &QTimer::timeout, this, [this]() {
-        m_timer->setSingleShot(false);
-        m_timer->start(1000);
-        updateChart();
-    });
-    m_timer->start(initialDelay);
+    connect(m_timer, &QTimer::timeout, this, &VoltCurChart::updateChart);
 }
 
 VoltCurChart::~VoltCurChart()
@@ -287,22 +279,19 @@ void VoltCurChart::stop()
 
 void VoltCurChart::updateChart()
 {
+    if(connFlag != CONNECTED)
+    {
+        m_timer->stop();
+    }
+
     m_timer->setSingleShot(true);
 
-    // 模拟或获取电压数据
-    double noise = (rand() % 100 - 50) / 500.0;
-    m_lastVoltage += noise;
-    m_lastVoltage = qBound(0.0, m_lastVoltage, 5.0);
-
-    // 假设电流与电压成正比，但有一些波动
-    double currentNoise = (rand() % 50 - 25) / 1000.0;
-    m_lastCurrent = m_lastVoltage * 0.2 + currentNoise; // 0.2是假设的电阻倒数
-    m_lastCurrent = qBound(0.0, m_lastCurrent, 1.0);
-
     // 添加新数据点
-    addVoltagePoint(m_lastVoltage);
+    addVoltagePoint(g_TelRegs[2] / 100.0);
 
-    addCurrentPoint(m_lastCurrent);
+    addCurrentPoint(g_TelRegs[3] / 100.0);
 
     m_timer->setSingleShot(false);
+
+
 }
