@@ -18,7 +18,8 @@ SOURCES += \
     tformconfig1.cpp \
     tformdatarecord.cpp \
     tformdownload.cpp \
-    tformsernum.cpp
+    tformsernum.cpp \
+    voltcurchart.cpp
 
 HEADERS += \
     headfile.h \
@@ -29,7 +30,8 @@ HEADERS += \
     tformconfig1.h \
     tformdatarecord.h \
     tformdownload.h \
-    tformsernum.h
+    tformsernum.h \
+    voltcurchart.h
 
 FORMS += \
     mainwindow.ui \

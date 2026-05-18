@@ -12,6 +12,7 @@ class TFormDownload;
 class QCloseEvent;
 class TFormDataRecord;
 class TFormSerNum;
+class VoltCurChart;
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -51,6 +52,7 @@ public:
     void initializeCSVFile(QTextStream &out);
     void writeDataToCSV(QTextStream &out, const QDateTime &currentTime);
     void runTimeDeal();
+    void voltCurChartInit();
 private slots:
     void on_connBtn_2_clicked();
     void onSendTimerTimeout();
@@ -89,6 +91,7 @@ private:
     quint8 preRunModeIndex;
     //文件写入标签
     QFile csvFile;
+    VoltCurChart *voltCurChart = nullptr;
     // QWidget interface
 protected:
     void keyPressEvent(QKeyEvent *event);

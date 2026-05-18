@@ -15,6 +15,8 @@
 #include <QDir>
 #include "tformdatarecord.h"
 #include "tformsernum.h"
+#include <QtCharts>
+#include "voltcurchart.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -28,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     , rxResetTimer(new QTimer(this))
     , saveDataTimer(new QTimer(this))
     , reconnectTimer(new QTimer(this))
+    , voltCurChart(new VoltCurChart(this))
 
 {
     ui->setupUi(this);
@@ -112,6 +115,7 @@ void MainWindow::init()
                              "QMenu::item { color: black; padding: 5px 20px; }"
                              "QMenu::item:selected {color: black; border: 1px solid gray;}"
                              "QMenu::item:hover {color: black; border: 1px solid gray;}");
+    voltCurChartInit();
 }
 
 void MainWindow::initConfigFile()
@@ -809,6 +813,35 @@ void MainWindow::runTimeDeal()
         runSecond++;
         runTimeLabel->setText(QString(runTimeStr).arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10));
     }
+}
+
+void MainWindow::voltCurChartInit()
+{
+    // 设置为显示最近10秒的数据
+    voltCurChart->setTimeWindow(10);
+
+    voltCurChart->setVoltageRange(0, 5);
+    voltCurChart->setCurrentRange(0, 2);
+
+    // 清除容器中的现有布局（如果有的话）
+    if (ui->chartContainer->layout()) {
+        QLayoutItem *child;
+        while ((child = ui->chartContainer->layout()->takeAt(0)) != nullptr) {
+            delete child->widget();
+            delete child;
+        }
+        delete ui->chartContainer->layout();
+    }
+
+    // 创建新布局并将图表添加进去
+    QVBoxLayout *layout = new QVBoxLayout(ui->chartContainer);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    layout->addWidget(voltCurChart);
+    ui->chartContainer->setLayout(layout);
+
+    // 开始更新数据
+    voltCurChart->start();
 }
 
 void MainWindow::onReceiveTimerTimeout()
