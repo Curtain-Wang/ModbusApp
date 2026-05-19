@@ -61,7 +61,6 @@ private slots:
     void onTFormDestroyed(QObject *obj);
     void on_pushButton_4_clicked();
     void on_pushButton_8_clicked();
-    void on_pushButton_6_clicked();
     void on_txResetTimer_timeout();
     void on_rxResetTimer_timeout();
     void on_saveDataTimer_timeout();
@@ -69,6 +68,22 @@ private slots:
     void on_actDataRecord_triggered();
     void on_reconnectTimer_timeout();
     void on_actSerialNum_triggered();
+
+    void on_actClrFault_triggered();
+
+    void on_actForceChg_triggered();
+
+    void on_actHib_triggered();
+
+    void on_actIndDsg_triggered();
+
+    void on_actUniDsg_triggered();
+
+    void on_actChg_triggered();
+
+    void on_actStandby_triggered();
+
+    void on_actPowOff_triggered();
 
 private:
     Ui::MainWindow *ui;

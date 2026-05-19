@@ -1001,24 +1001,6 @@ void MainWindow::on_pushButton_8_clicked()
     tformDownload->show();
 }
 
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    if(connFlag != CONNECTED)
-    {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
-        return;
-    }
-    if(ui->pushButton_6->text() == "启动")
-    {
-        mainwindow->manualWriteOneCMDBuild(HI_OPEN + HOLDING_REG_START, 1);
-        runSecond = 0;
-    }else
-    {
-        mainwindow->manualWriteOneCMDBuild(HI_OPEN + HOLDING_REG_START, 0);
-    }
-}
-
 void MainWindow::on_txResetTimer_timeout()
 {
     //恢复灰色
@@ -1174,5 +1156,93 @@ void MainWindow::on_actSerialNum_triggered()
         connect(tformSerNum, &TFormSerNum::destroyed, this, &MainWindow::onTFormDestroyed);
     }
     tformSerNum->show();
+}
+
+
+void MainWindow::on_actClrFault_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, 1);
+}
+
+
+void MainWindow::on_actForceChg_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 1));
+}
+
+
+void MainWindow::on_actHib_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 2));
+}
+
+
+void MainWindow::on_actIndDsg_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 3));
+}
+
+
+void MainWindow::on_actUniDsg_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 4));
+}
+
+
+void MainWindow::on_actChg_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 5));
+}
+
+
+void MainWindow::on_actStandby_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 6));
+}
+
+
+void MainWindow::on_actPowOff_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 7));
 }
 

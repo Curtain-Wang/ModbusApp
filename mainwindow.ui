@@ -505,44 +505,6 @@ QPushButton:checked {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}</string>
-         </property>
-         <property name="text">
-          <string>启动</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="pushButton_4">
          <property name="minimumSize">
           <size>
@@ -837,7 +799,7 @@ QPushButton:checked {
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1732,7 +1694,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>MOSB温度</string>
+                 <string>B侧MOS温度</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1838,7 +1800,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>MOSP温度</string>
+                 <string>P侧MOS温度</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3338,8 +3300,22 @@ QLabel[status=&quot;disconnected&quot;] {
     <addaction name="actDataRecord"/>
     <addaction name="actSerialNum"/>
    </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>指令</string>
+    </property>
+    <addaction name="actClrFault"/>
+    <addaction name="actForceChg"/>
+    <addaction name="actHib"/>
+    <addaction name="actIndDsg"/>
+    <addaction name="actUniDsg"/>
+    <addaction name="actChg"/>
+    <addaction name="actStandby"/>
+    <addaction name="actPowOff"/>
+   </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
   </widget>
   <action name="actQuit">
    <property name="text">
@@ -3380,6 +3356,85 @@ QLabel[status=&quot;disconnected&quot;] {
    </property>
    <property name="toolTip">
     <string>序列号</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actClrFault">
+   <property name="text">
+    <string>清除故障</string>
+   </property>
+   <property name="toolTip">
+    <string>清除故障</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actForceChg">
+   <property name="text">
+    <string>强充使能</string>
+   </property>
+   <property name="toolTip">
+    <string>强充使能</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actHib">
+   <property name="text">
+    <string>休眠</string>
+   </property>
+   <property name="toolTip">
+    <string>休眠</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actIndDsg">
+   <property name="text">
+    <string>独立放电</string>
+   </property>
+   <property name="toolTip">
+    <string>独立放电</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actUniDsg">
+   <property name="text">
+    <string>均流放电</string>
+   </property>
+   <property name="toolTip">
+    <string>均流放电</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actChg">
+   <property name="text">
+    <string>充电</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actStandby">
+   <property name="text">
+    <string>待机</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actPowOff">
+   <property name="text">
+    <string>关机</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

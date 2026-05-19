@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1101</width>
-    <height>694</height>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,7 +50,7 @@
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="chg0">
+            <widget class="MyLineEdit" name="h16385">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -145,7 +145,7 @@ QLineEdit:disabled {
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="chg1">
+            <widget class="MyLineEdit" name="h16386">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -240,7 +240,7 @@ QLineEdit:disabled {
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="chg2">
+            <widget class="MyLineEdit" name="h16387">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -344,7 +344,7 @@ QLineEdit:disabled {
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="dsg1">
+            <widget class="MyLineEdit" name="h16642">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -439,7 +439,7 @@ QLineEdit:disabled {
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="dsg2">
+            <widget class="MyLineEdit" name="h16643">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -534,7 +534,7 @@ QLineEdit:disabled {
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="dsg3">
+            <widget class="MyLineEdit" name="h16644">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -629,7 +629,7 @@ QLineEdit:disabled {
             </widget>
            </item>
            <item>
-            <widget class="MyLineEdit" name="dsg0">
+            <widget class="MyLineEdit" name="h16641">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -760,7 +760,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot0">
+          <widget class="MyLineEdit" name="h16897">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -867,7 +867,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot1">
+          <widget class="MyLineEdit" name="h16898">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -974,7 +974,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot2">
+          <widget class="MyLineEdit" name="h16899">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1081,7 +1081,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot3">
+          <widget class="MyLineEdit" name="h16900">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1188,7 +1188,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot4">
+          <widget class="MyLineEdit" name="h16901">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1295,7 +1295,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot5">
+          <widget class="MyLineEdit" name="h16902">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1402,7 +1402,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot6">
+          <widget class="MyLineEdit" name="h16903">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1509,7 +1509,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot7">
+          <widget class="MyLineEdit" name="h16904">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1566,7 +1566,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>P</string>
+            <string>W</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1616,7 +1616,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot8">
+          <widget class="MyLineEdit" name="h16905">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1723,7 +1723,7 @@ QLineEdit:disabled {
           </widget>
          </item>
          <item>
-          <widget class="MyLineEdit" name="prot9">
+          <widget class="MyLineEdit" name="h16906">
            <property name="minimumSize">
             <size>
              <width>0</width>

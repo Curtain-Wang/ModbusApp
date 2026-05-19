@@ -30,23 +30,23 @@ void TFormConfig1::init()
 
 void TFormConfig1::refresh()
 {
-    ui->chg0->setText(QString::number(static_cast<float>(g_ChgCfgRegs[0] * 1.0 / qPow(10, g_ChgCfgRegsPows[0])), 'f', g_ChgCfgRegsPows[0]));
-    ui->chg1->setText(QString::number(static_cast<float>(g_ChgCfgRegs[1] * 1.0 / qPow(10, g_ChgCfgRegsPows[1])), 'f', g_ChgCfgRegsPows[1]));
-    ui->chg2->setText(QString::number(static_cast<float>(g_ChgCfgRegs[2] * 1.0 / qPow(10, g_ChgCfgRegsPows[2])), 'f', g_ChgCfgRegsPows[2]));
+    ui->h16385->setText(QString::number(static_cast<float>(g_ChgCfgRegs[0] * 1.0 / qPow(10, g_ChgCfgRegsPows[0])), 'f', g_ChgCfgRegsPows[0]));
+    ui->h16386->setText(QString::number(static_cast<float>(g_ChgCfgRegs[1] * 1.0 / qPow(10, g_ChgCfgRegsPows[1])), 'f', g_ChgCfgRegsPows[1]));
+    ui->h16387->setText(QString::number(static_cast<float>(g_ChgCfgRegs[2] * 1.0 / qPow(10, g_ChgCfgRegsPows[2])), 'f', g_ChgCfgRegsPows[2]));
 
-    ui->dsg0->setText(QString::number(static_cast<float>(g_DsgCfgRegs[0] * 1.0 / qPow(10, g_DsgCfgRegsPows[0])), 'f', g_DsgCfgRegsPows[0]));
-    ui->dsg1->setText(QString::number(static_cast<float>(g_DsgCfgRegs[1] * 1.0 / qPow(10, g_DsgCfgRegsPows[1])), 'f', g_DsgCfgRegsPows[1]));
-    ui->dsg2->setText(QString::number(static_cast<float>(g_DsgCfgRegs[2] * 1.0 / qPow(10, g_DsgCfgRegsPows[2])), 'f', g_DsgCfgRegsPows[2]));
-    ui->dsg3->setText(QString::number(static_cast<float>(g_DsgCfgRegs[3] * 1.0 / qPow(10, g_DsgCfgRegsPows[3])), 'f', g_DsgCfgRegsPows[3]));
+    ui->h16641->setText(QString::number(static_cast<float>(g_DsgCfgRegs[0] * 1.0 / qPow(10, g_DsgCfgRegsPows[0])), 'f', g_DsgCfgRegsPows[0]));
+    ui->h16642->setText(QString::number(static_cast<float>(g_DsgCfgRegs[1] * 1.0 / qPow(10, g_DsgCfgRegsPows[1])), 'f', g_DsgCfgRegsPows[1]));
+    ui->h16643->setText(QString::number(static_cast<float>(g_DsgCfgRegs[2] * 1.0 / qPow(10, g_DsgCfgRegsPows[2])), 'f', g_DsgCfgRegsPows[2]));
+    ui->h16644->setText(QString::number(static_cast<float>(g_DsgCfgRegs[3] * 1.0 / qPow(10, g_DsgCfgRegsPows[3])), 'f', g_DsgCfgRegsPows[3]));
 
-    ui->prot0->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[0] * 1.0 / qPow(10, g_ProtectCfgRegsPows[0])), 'f', g_ProtectCfgRegsPows[0]));
-    ui->prot1->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[1] * 1.0 / qPow(10, g_ProtectCfgRegsPows[1])), 'f', g_ProtectCfgRegsPows[1]));
-    ui->prot2->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[2] * 1.0 / qPow(10, g_ProtectCfgRegsPows[2])), 'f', g_ProtectCfgRegsPows[2]));
-    ui->prot3->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[3] * 1.0 / qPow(10, g_ProtectCfgRegsPows[3])), 'f', g_ProtectCfgRegsPows[3]));
-    ui->prot4->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[4] * 1.0 / qPow(10, g_ProtectCfgRegsPows[4])), 'f', g_ProtectCfgRegsPows[4]));
-    ui->prot5->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[5] * 1.0 / qPow(10, g_ProtectCfgRegsPows[5])), 'f', g_ProtectCfgRegsPows[5]));
-    ui->prot6->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[6] * 1.0 / qPow(10, g_ProtectCfgRegsPows[6])), 'f', g_ProtectCfgRegsPows[6]));
-    ui->prot7->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[7] * 1.0 / qPow(10, g_ProtectCfgRegsPows[7])), 'f', g_ProtectCfgRegsPows[7]));
-    ui->prot8->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[8] * 1.0 / qPow(10, g_ProtectCfgRegsPows[8])), 'f', g_ProtectCfgRegsPows[8]));
-    ui->prot9->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[9] * 1.0 / qPow(10, g_ProtectCfgRegsPows[9])), 'f', g_ProtectCfgRegsPows[9]));
+    ui->h16897->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[0] * 1.0 / qPow(10, g_ProtectCfgRegsPows[0])), 'f', g_ProtectCfgRegsPows[0]));
+    ui->h16898->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[1] * 1.0 / qPow(10, g_ProtectCfgRegsPows[1])), 'f', g_ProtectCfgRegsPows[1]));
+    ui->h16899->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[2] * 1.0 / qPow(10, g_ProtectCfgRegsPows[2])), 'f', g_ProtectCfgRegsPows[2]));
+    ui->h16900->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[3] * 1.0 / qPow(10, g_ProtectCfgRegsPows[3])), 'f', g_ProtectCfgRegsPows[3]));
+    ui->h16901->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[4] * 1.0 / qPow(10, g_ProtectCfgRegsPows[4])), 'f', g_ProtectCfgRegsPows[4]));
+    ui->h16902->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[5] * 1.0 / qPow(10, g_ProtectCfgRegsPows[5])), 'f', g_ProtectCfgRegsPows[5]));
+    ui->h16903->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[6] * 1.0 / qPow(10, g_ProtectCfgRegsPows[6])), 'f', g_ProtectCfgRegsPows[6]));
+    ui->h16904->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[7] * 1.0 / qPow(10, g_ProtectCfgRegsPows[7])), 'f', g_ProtectCfgRegsPows[7]));
+    ui->h16905->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[8] * 1.0 / qPow(10, g_ProtectCfgRegsPows[8])), 'f', g_ProtectCfgRegsPows[8]));
+    ui->h16906->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[9] * 1.0 / qPow(10, g_ProtectCfgRegsPows[9])), 'f', g_ProtectCfgRegsPows[9]));
 }
