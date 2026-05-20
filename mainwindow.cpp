@@ -705,15 +705,20 @@ void MainWindow::diyCMDBuild(QByteArray data, quint16 len)
 quint16 MainWindow::getMessageSize()
 {
     int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
+    quint16 len = 0;
     if(cmd == READ_HOLDING_CMD || cmd == READ_INPUT_CMD)
     {
-        return receiveDataBuf[(receiveStartIndex + 2) % 500] + 5;
+        len = receiveDataBuf[(receiveStartIndex + 2) % 500] + 5;
     }
     if(cmd == WRITE_ONE_CMD)
     {
-        return 8;
+        len = 8;
     }
-    return 0;
+    if(len > 260)
+    {
+        len = 0;
+    }
+    return len;
 }
 
 void MainWindow::updateSaveDataInterval(int second)

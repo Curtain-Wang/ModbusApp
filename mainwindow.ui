@@ -243,6 +243,11 @@ QComboBox::item:hover {
             </property>
             <item>
              <property name="text">
+              <string>38400</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
               <string>9600</string>
              </property>
             </item>
@@ -254,11 +259,6 @@ QComboBox::item:hover {
             <item>
              <property name="text">
               <string>19200</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>38400</string>
              </property>
             </item>
             <item>
