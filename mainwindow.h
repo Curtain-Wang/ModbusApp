@@ -107,6 +107,7 @@ private:
     //文件写入标签
     QFile csvFile;
     VoltCurChart *voltCurChart = nullptr;
+    VoltCurChart *voltCurChartB = nullptr;
     // QWidget interface
 protected:
     void keyPressEvent(QKeyEvent *event);

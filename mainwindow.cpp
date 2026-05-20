@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     , saveDataTimer(new QTimer(this))
     , reconnectTimer(new QTimer(this))
     , voltCurChart(new VoltCurChart(this))
+    , voltCurChartB(new VoltCurChart(this))
 
 {
     ui->setupUi(this);
@@ -314,7 +315,7 @@ void MainWindow::sendGetRealTimeDataCMD()
     buf.append(static_cast<char>(num & 0xFF));
 
     if((tformConfig1 != nullptr && queryStep == HOLDING_STEP_SYS_CTRL_CFG)
-        || (tformConfig1 == nullptr && queryStep == INPUT_STEP_PROD))
+        || (g_ConfigGetFlag && tformConfig1 == nullptr && queryStep == INPUT_STEP_PROD))
     {
         dataRefreshRemaingTime = DATA_REFRESH_CYCLE;
     }
@@ -445,6 +446,8 @@ void MainWindow::dealMessage(quint8 *data)
     {
         connFlag = CONNECTED;
         voltCurChart->start();
+        voltCurChartB->start();
+        g_ConfigGetFlag = 0;
     }
     timeoutTimes = 0;
     connectStatusLabel->setText(connStatus.arg("已连接"));
@@ -481,6 +484,7 @@ void MainWindow::dealMessage(quint8 *data)
             break;
         case HOLDING_STEP_SYS_CTRL_CFG:
             targetArray = g_SysCtrlgRegs;
+            g_ConfigGetFlag = 1;
             break;
         default: return; // 无效步骤直接返回（根据实际需求调整）
         }
@@ -504,7 +508,7 @@ void MainWindow::dealMessage(quint8 *data)
             }
         }
 
-        if(tformConfig1 != nullptr)
+        if(tformConfig1 != nullptr || g_ConfigGetFlag == 0)
         {
             queryStep = (queryStep + 1) % 9; //更新步骤
         }else
@@ -529,11 +533,11 @@ void MainWindow::refresh()
 {
     //遥测
     ui->tel0->setText(QString::number(static_cast<float>(g_TelRegs[0] * 1.0 / qPow(10, g_TelRegsPows[0])), 'f', g_TelRegsPows[0]));
-    ui->tel1->setText(QString::number(static_cast<float>(g_TelRegs[1] * 1.0 / qPow(10, g_TelRegsPows[1])), 'f', g_TelRegsPows[1]));
+    ui->tel1->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[1]) * 1.0 / qPow(10, g_TelRegsPows[1])), 'f', g_TelRegsPows[1]));
     ui->tel2->setText(QString::number(static_cast<float>(g_TelRegs[2] * 1.0 / qPow(10, g_TelRegsPows[2])), 'f', g_TelRegsPows[2]));
-    ui->tel3->setText(QString::number(static_cast<float>(g_TelRegs[3] * 1.0 / qPow(10, g_TelRegsPows[3])), 'f', g_TelRegsPows[3]));
-    ui->tel4->setText(QString::number(static_cast<float>(g_TelRegs[4] * 1.0 / qPow(10, g_TelRegsPows[4])), 'f', g_TelRegsPows[4]));
-    ui->tel5->setText(QString::number(static_cast<float>(g_TelRegs[5] * 1.0 / qPow(10, g_TelRegsPows[5])), 'f', g_TelRegsPows[5]));
+    ui->tel3->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[3]) * 1.0 / qPow(10, g_TelRegsPows[3])), 'f', g_TelRegsPows[3]));
+    ui->tel4->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[4]) * 1.0 / qPow(10, g_TelRegsPows[4])), 'f', g_TelRegsPows[4]));
+    ui->tel5->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[5]) * 1.0 / qPow(10, g_TelRegsPows[5])), 'f', g_TelRegsPows[5]));
     ui->tel6->setText(QString::number(static_cast<float>(g_TelRegs[6] * 1.0 / qPow(10, g_TelRegsPows[6])), 'f', g_TelRegsPows[6]));
     ui->tel7->setText(QString::number(static_cast<float>(g_TelRegs[7] * 1.0 / qPow(10, g_TelRegsPows[7])), 'f', g_TelRegsPows[7]));
     //温度遥测
@@ -867,8 +871,8 @@ void MainWindow::voltCurChartInit()
     // 设置为显示最近10秒的数据
     voltCurChart->setTimeWindow(10);
 
-    voltCurChart->setVoltageRange(0, 5);
-    voltCurChart->setCurrentRange(0, 2);
+    voltCurChart->setVoltageRange(0, 70);
+    voltCurChart->setCurrentRange(-5, 200);
 
     // 清除容器中的现有布局（如果有的话）
     if (ui->chartContainer->layout()) {
@@ -886,6 +890,28 @@ void MainWindow::voltCurChartInit()
     layout->setSpacing(0);
     layout->addWidget(voltCurChart);
     ui->chartContainer->setLayout(layout);
+
+    // 设置为显示最近10秒的数据
+    voltCurChartB->setTimeWindow(10);
+    voltCurChartB->setVoltageRange(0, 70);
+    voltCurChartB->setCurrentRange(0, 200);
+    voltCurChartB->swtichB();
+    // 清除容器中的现有布局（如果有的话）
+    if (ui->chartContainerB->layout()) {
+        QLayoutItem *child;
+        while ((child = ui->chartContainerB->layout()->takeAt(0)) != nullptr) {
+            delete child->widget();
+            delete child;
+        }
+        delete ui->chartContainerB->layout();
+    }
+
+    // 创建新布局并将图表添加进去
+    QVBoxLayout *layoutB = new QVBoxLayout(ui->chartContainerB);
+    layoutB->setContentsMargins(0, 0, 0, 0);
+    layoutB->setSpacing(0);
+    layoutB->addWidget(voltCurChartB);
+    ui->chartContainerB->setLayout(layoutB);
 }
 
 void MainWindow::onReceiveTimerTimeout()

@@ -7,12 +7,19 @@
 VoltCurChart::VoltCurChart(QWidget *parent) :
     QWidget(parent),
     m_timeWindow(10),
-    m_lastVoltage(2.5),
-    m_isRunning(false)
+    m_lastVoltage(2.5)
 {
     // 创建图表
     m_chart = new QChart();
-    m_chart->setTitle("逆变器侧实时电压/电流监控"); // 修改标题
+    m_chart->setTitle("P侧实时电压/电流监控"); // 修改标题
+
+    // >>>>>>>>>>>> 新增：设置标题字体大小 <<<<<<<<<<<
+    QFont titleFont = m_chart->titleFont();
+    titleFont.setPointSize(12); // 设置字体大小为16
+    m_chart->setTitleFont(titleFont);
+    // 设置图表的内边距，减少标题占用的空间
+    m_chart->setMargins(QMargins(0, 0, 0, 0)); // 移除所有内边距
+    // >>>>>>>>>>>> 结束新增 <<<<<<<<<<<
 
     // 关键优化1: 禁用所有动画效果
     m_chart->setAnimationOptions(QChart::NoAnimation);
@@ -58,13 +65,6 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
     m_axisCurrent->setLabelFormat("%.2f A");
     m_chart->addAxis(m_axisCurrent, Qt::AlignRight);
     m_currentSeries->attachAxis(m_axisCurrent);
-    // >>>>>>>>>>>> 结束新增 <<<<<<<<<<<
-
-    // 设置Y轴范围
-    setVoltageRange(0, 5);
-
-    // >>>>>>>>>>>> 新增：设置电流Y轴范围 <<<<<<<<<<<
-    setCurrentRange(0, 1);
     // >>>>>>>>>>>> 结束新增 <<<<<<<<<<<
 
     // 创建ChartView
@@ -263,18 +263,22 @@ void VoltCurChart::addVoltagePoint(double voltage)
 
 void VoltCurChart::start()
 {
-    if (!m_isRunning) {
-        m_isRunning = true;
+    if (!m_timer->isActive()) {
         m_timer->start();
     }
 }
 
 void VoltCurChart::stop()
 {
-    if (m_isRunning) {
-        m_isRunning = false;
+    if (m_timer->isActive()) {
         m_timer->stop();
     }
+}
+
+void VoltCurChart::swtichB()
+{
+    flag = 1;
+    m_chart->setTitle("B侧实时电压/电流监控"); // 修改标题
 }
 
 void VoltCurChart::updateChart()
@@ -286,10 +290,17 @@ void VoltCurChart::updateChart()
 
     m_timer->setSingleShot(true);
 
-    // 添加新数据点
-    addVoltagePoint(g_TelRegs[2] / 100.0);
+    if(flag == 0)
+    {
+        // 添加新数据点
+        addVoltagePoint(g_TelRegs[2] / 100.0);
+        addCurrentPoint(g_TelRegs[3] / 100.0);
+    }else
+    {
+        addVoltagePoint(g_TelRegs[0] / 100.0);
+        addCurrentPoint(g_TelRegs[1] / 100.0);
+    }
 
-    addCurrentPoint(g_TelRegs[3] / 100.0);
 
     m_timer->setSingleShot(false);
 

@@ -49,3 +49,4 @@ uint8_t g_ProtectCfgRegsPows[NUM_REGISTER] = {2, 2, 1, 0, 2, 2, 1, 0, 0, 0};
 uint16_t g_SysCtrlgRegs[NUM_REGISTER];
 uint8_t g_SysCtrlgRegsPows[NUM_REGISTER] = {0};
 QString g_RunStatus[6] = {"休眠", "待机", "独立放电", "均流放电", "充电", "故障"};
+uint8_t g_ConfigGetFlag = 0;

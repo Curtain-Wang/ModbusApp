@@ -26,6 +26,7 @@ void TFormConfig1::init()
     preRunModeIndex = 0;
     preDimingModeIndex = 0;
     preFanCtrlModeIndex = 0;
+    refresh();
 }
 
 void TFormConfig1::refresh()

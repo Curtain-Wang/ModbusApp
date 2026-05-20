@@ -30,6 +30,7 @@ public:
     // 开始/停止数据更新
     void start();
     void stop();
+    void swtichB();
 
 private slots:
     void updateChart();
@@ -61,7 +62,7 @@ private:
     // 用于模拟数据的内部变量
     double m_lastVoltage;
     double m_lastCurrent; // 电流值（新增）
-    bool m_isRunning;
+    int flag = 0;   //默认P侧
 };
 
 #endif // VOLTCURCHART_H
