@@ -636,9 +636,9 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
 
     if((warn2 & 1) == 1)   text.append("高温告警、");
 
-    if(text.size() > 0)
+    if(text.length() > 0)
     {
-        text.removeAt(text.size() - 1);
+        text.removeAt(text.length() - 1);
     }
     return text;
 }
@@ -877,7 +877,7 @@ void MainWindow::voltCurChartInit()
     voltCurChart->setTimeWindow(10);
 
     voltCurChart->setVoltageRange(0, 70);
-    voltCurChart->setCurrentRange(-5, 200);
+    voltCurChart->setCurrentRange(0, 200);
 
     // 清除容器中的现有布局（如果有的话）
     if (ui->chartContainer->layout()) {

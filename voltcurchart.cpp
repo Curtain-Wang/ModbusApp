@@ -294,11 +294,11 @@ void VoltCurChart::updateChart()
     {
         // 添加新数据点
         addVoltagePoint(g_TelRegs[2] / 100.0);
-        addCurrentPoint(g_TelRegs[3] / 100.0);
+        addCurrentPoint(static_cast<qint16>(g_TelRegs[3]) / 100.0);
     }else
     {
         addVoltagePoint(g_TelRegs[0] / 100.0);
-        addCurrentPoint(g_TelRegs[1] / 100.0);
+        addCurrentPoint(static_cast<qint16>(g_TelRegs[1]) / 100.0);
     }
 
 
