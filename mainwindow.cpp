@@ -549,7 +549,8 @@ void MainWindow::refresh()
     ui->temp5->setText(QString::number(static_cast<float>(g_TempTelRegs[5] * 1.0 / qPow(10, g_TempTelRegsPows[5])), 'f', g_TempTelRegsPows[5]));
     ui->temp6->setText(QString::number(static_cast<float>(g_TempTelRegs[6] * 1.0 / qPow(10, g_TempTelRegsPows[6])), 'f', g_TempTelRegsPows[6]));
     ui->temp7->setText(QString::number(static_cast<float>(g_TempTelRegs[7] * 1.0 / qPow(10, g_TempTelRegsPows[7])), 'f', g_TempTelRegsPows[7]));
-    ui->run_status->setText(g_RunStatus[g_StatRegs[4]]);
+    if(g_StatRegs[4] < 6)
+        ui->run_status->setText(g_RunStatus[g_StatRegs[4]]);
 
     QString eventStr = getEventText(g_StatRegs[0], g_StatRegs[1], g_StatRegs[2], g_StatRegs[3]);
     if(eventStr.length() == 0)
