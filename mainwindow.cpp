@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete connectStatusLabel;
 }
 
 void MainWindow::refreshPort()
@@ -90,7 +91,7 @@ void MainWindow::init()
     connectStatusLabel->setText(connStatus.arg("未连接"));
     //版本号
     versionLabel->setMidLineWidth(300);
-    versionLabel->setText(versionStr.arg("未知").arg("未知").arg("未知").arg("未知"));
+    versionLabel->setText(versionStr.arg("未知"));
     ui->statusbar->addWidget(versionLabel);
     //持续运行时间
     runTimeLabel->setMidLineWidth(800);
@@ -573,6 +574,8 @@ void MainWindow::refresh()
     ui->parallel4->setText(QString::number(static_cast<float>(g_ParallelRegs[4] * 1.0 / qPow(10,g_ParallelRegsPows[4])), 'f', g_ParallelRegsPows[4]));
     ui->parallel5->setText(QString::number(static_cast<float>(g_ParallelRegs[5] * 1.0 / qPow(10, g_ParallelRegsPows[5])), 'f', g_ParallelRegsPows[5]));
 
+    versionLabel->setText(versionStr.arg(QString::number((g_ProductRegs[4] >> 8), 16)).arg((g_ProductRegs[4] & 0xFF), 16));
+
     //B侧继电器
     if((g_StatRegs[5] & 1) == 1)
     {
@@ -783,78 +786,90 @@ void MainWindow::initializeCSVFile(QTextStream &out)
     headers.append("累计运行时间");
     headers.append("运行模式");
     headers.append("告警保护事件");
-    headers.append("输入电压外侧(V)");
-    headers.append("输入电压内侧(V)");
-    headers.append("谐振腔电流(V)");
-    headers.append("输出电压(V)");
-    headers.append("设定输出电压(V)(恒压模式有效)");
-    headers.append("输出电流(A)");
-    headers.append("设定输出电流(A)(恒流模式有效)");
-    headers.append("输出功率(W)");
-    headers.append("底部散热器温度(℃)");
-    headers.append("电感温度(℃)");
-    headers.append("变压器温度(℃)");
-    headers.append("内腔温度(℃)");
-    headers.append("电压环数控值");
-    headers.append("电流环数控值");
+    headers.append("电池侧外侧电压(V)");
+    headers.append("电池侧内侧电压(V)");
+    headers.append("电池侧电流(A)");
+    headers.append("电池侧功率(W)");
+    headers.append("逆变侧外侧电压(V)");
+    headers.append("逆变侧内侧电压(V)");
+    headers.append("逆变侧电流(A)");
+    headers.append("逆变侧功率(W)");
+    headers.append("B侧MOS温度(℃)");
+    headers.append("P侧MOS温度(℃)");
+    headers.append("环境温度(℃)");
+    headers.append("散热器温度(℃)");
+    headers.append("功率电感1温度(℃)");
+    headers.append("功率电感2温度(℃)");
+    headers.append("功率电感3温度(℃)");
+    headers.append("功率电感4温度(℃)");
     out << headers.join(",") << "\n";
 }
 
 void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
 {
-    // QStringList data;
-    // data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
-    // data << QString("%1时%2分%3秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
-    // if(inputRegs[19] == 0)
-    //     data << "恒压模式";
-    // else if(inputRegs[19] == 1)
-    //     data << "恒流模式";
-    // else
-    //     data << "手动模式";
-    // //告警/保护
-    // QString text = getEventText(inputRegs[12]);
-    // if(text.isEmpty())
-    // {
-    //     data << "无事件";
-    // }else
-    // {
-    //     data << getEventText(inputRegs[12]);
-    // }
-    // //输入电压外侧
-    // data << QString::number(inputRegs[17] / 10.0, 'f', 1);
-    // //输入电压内侧
-    // data << QString::number(inputRegs[0] / 10.0, 'f', 1);
-    // //谐振腔电流
-    // data << QString::number(inputRegs[2] / 10.0, 'f', 1);
-    // //输出电压
-    // data << QString::number(inputRegs[3] / 10.0, 'f', 1);
-    // //设定输出电压
-    // data << QString::number(holdingRegs[1] / 10.0, 'f', 1);
-    // //输出电流
-    // data << QString::number(inputRegs[5] / 10.0, 'f', 1);
-    // //设定输出电流
-    // data << QString::number(holdingRegs[2] / 10.0, 'f', 1);
-    // //输出功率
-    // data << QString::number(inputRegs[3] * inputRegs[5] / 100);
-    // //底部散热器温度
-    // data << QString::number(inputRegs[6] / 10.0, 'f', 1);
-    // //电感温度
-    // data << QString::number(inputRegs[7] / 10.0, 'f', 1);
-    // //变压器温度
-    // data << QString::number(inputRegs[8] / 10.0, 'f', 1);
-    // //内腔温度
-    // data << QString::number(inputRegs[9] / 10.0, 'f', 1);
-    // //电压环数控值
-    // data << QString::number(inputRegs[13]);
-    // //电流环数控值
-    // data << QString::number(inputRegs[18]);
-    // out << data.join(",") << "\n";
+    QStringList data;
+    data << currentTime.toString("yyyy-MM-dd hh:mm:ss");
+    data << QString("%1时%2分%3秒").arg(runSecond / 36000).arg(runSecond % 36000 / 600).arg(runSecond % 600 / 10);
+    if(g_StatRegs[4] < 6)
+    {
+        data << g_RunStatus[g_StatRegs[4]];
+    }
+    else
+    {
+        data << "-";
+    }
+    //告警/保护
+    QString eventStr = getEventText(g_StatRegs[0], g_StatRegs[1], g_StatRegs[2], g_StatRegs[3]);
+
+    if(eventStr.isEmpty())
+    {
+        data << "无事件";
+    }else
+    {
+        data << eventStr;
+    }
+
+    //电池侧外侧电压(V)
+    data << QString::number(static_cast<float>(g_TelRegs[0] * 1.0 / qPow(10, g_TelRegsPows[0])), 'f', g_TelRegsPows[0]);
+    //电池侧内侧电压(V)
+    data << QString::number(static_cast<float>(g_TelRegs[6] * 1.0 / qPow(10, g_TelRegsPows[6])), 'f', g_TelRegsPows[6]);
+    //电池侧电流
+    data << QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[1]) * 1.0 / qPow(10, g_TelRegsPows[1])), 'f', g_TelRegsPows[1]);
+    //电池侧功率
+    data << QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[4]) * 1.0 / qPow(10, g_TelRegsPows[4])), 'f', g_TelRegsPows[4]);
+    //逆变侧外侧电压
+    data << QString::number(static_cast<float>(g_TelRegs[2] * 1.0 / qPow(10, g_TelRegsPows[2])), 'f', g_TelRegsPows[2]);
+    //逆变侧内侧电压
+    data << QString::number(static_cast<float>(g_TelRegs[7] * 1.0 / qPow(10, g_TelRegsPows[7])), 'f', g_TelRegsPows[7]);
+    //逆变侧电流(A)
+    data << QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[3]) * 1.0 / qPow(10, g_TelRegsPows[3])), 'f', g_TelRegsPows[3]);
+    //逆变侧功率(W)
+    data << QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[5]) * 1.0 / qPow(10, g_TelRegsPows[5])), 'f', g_TelRegsPows[5]);
+    //B侧MOS温度(℃)
+    data << QString::number(static_cast<float>(g_TempTelRegs[0] * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]);
+    //P侧MOS温度(℃)
+    data << QString::number(static_cast<float>(g_TempTelRegs[1] * 1.0 / qPow(10, g_TempTelRegsPows[1])), 'f', g_TempTelRegsPows[1]);
+    //环境温度
+    data << QString::number(static_cast<float>(g_TempTelRegs[2] * 1.0 / qPow(10, g_TempTelRegsPows[2])), 'f', g_TempTelRegsPows[2]);
+    //散热器温度
+    data << QString::number(static_cast<float>(g_TempTelRegs[3] * 1.0 / qPow(10, g_TempTelRegsPows[3])), 'f', g_TempTelRegsPows[3]);
+    //功率电感1温度(℃)
+    data << QString::number(static_cast<float>(g_TempTelRegs[4] * 1.0 / qPow(10, g_TempTelRegsPows[4])), 'f', g_TempTelRegsPows[4]);
+    //功率电感2温度(℃)
+    data << QString::number(static_cast<float>(g_TempTelRegs[5] * 1.0 / qPow(10, g_TempTelRegsPows[5])), 'f', g_TempTelRegsPows[5]);
+    //功率电感3温度
+    data << QString::number(static_cast<float>(g_TempTelRegs[6] * 1.0 / qPow(10, g_TempTelRegsPows[6])), 'f', g_TempTelRegsPows[6]);
+    //功率电感4温度
+    data << QString::number(static_cast<float>(g_TempTelRegs[7] * 1.0 / qPow(10, g_TempTelRegsPows[7])), 'f', g_TempTelRegsPows[7]);
+    out << data.join(",") << "\n";
 }
 
 void MainWindow::runTimeDeal()
 {
     //未连接、未启动、有事件
-    if(connFlag == UNCONNECTED)
+    if(connFlag == UNCONNECTED
+        || g_StatRegs[4] == 2 || g_StatRegs[4] == 3 || g_StatRegs[4] == 4
+        || g_StatRegs[0] >0 || g_StatRegs[1] > 0)
     {
         if(runSecond != 0)
         {
