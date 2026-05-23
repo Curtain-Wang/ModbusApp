@@ -15,6 +15,7 @@ SOURCES += \
     mylineedit.cpp \
     tform1.cpp \
     tform7.cpp \
+    tformcali.cpp \
     tformconfig1.cpp \
     tformdatarecord.cpp \
     tformdownload.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     mylineedit.h \
     tform1.h \
     tform7.h \
+    tformcali.h \
     tformconfig1.h \
     tformdatarecord.h \
     tformdownload.h \
@@ -37,6 +39,7 @@ FORMS += \
     mainwindow.ui \
     tform1.ui \
     tform7.ui \
+    tformcali.ui \
     tformconfig1.ui \
     tformdatarecord.ui \
     tformdownload.ui \

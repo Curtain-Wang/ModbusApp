@@ -17,6 +17,7 @@
 #include "tformsernum.h"
 #include <QtCharts>
 #include "voltcurchart.h"
+#include "tformcali.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -507,9 +508,13 @@ void MainWindow::dealMessage(quint8 *data)
             {
                 tformConfig1->refresh();
             }
+            if(tformCali != nullptr)
+            {
+                tformCali->refresh();
+            }
         }
 
-        if(tformConfig1 != nullptr || g_ConfigGetFlag == 0)
+        if(tformConfig1 != nullptr || g_ConfigGetFlag == 0 || tformCali != nullptr)
         {
             queryStep = (queryStep + 1) % 9; //更新步骤
         }else
@@ -1022,6 +1027,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     {
         tformSerNum = nullptr;
     }
+    if(obj == tformCali)
+    {
+        tformCali = nullptr;
+    }
 }
 
 
@@ -1291,5 +1300,17 @@ void MainWindow::on_actPowOff_triggered()
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 7));
+}
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    if(tformCali == nullptr)
+    {
+        tformCali = new TFormCali(this);
+        tformCali->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformCali, &TFormCali::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformCali->show();
 }
 

@@ -13,6 +13,7 @@ class QCloseEvent;
 class TFormDataRecord;
 class TFormSerNum;
 class VoltCurChart;
+class TFormCali;
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -85,12 +86,15 @@ private slots:
 
     void on_actPowOff_triggered();
 
+    void on_pushButton_9_clicked();
+
 private:
     Ui::MainWindow *ui;
     TForm1* tform1 = nullptr;
     TForm7* tform7 = nullptr;
     QSerialPort* serialPort;
     TFormConfig1* tformConfig1 = nullptr;
+    TFormCali* tformCali = nullptr;
     TFormDownload* tformDownload = nullptr;
     TFormDataRecord* tformDataRecord = nullptr;
     TFormSerNum* tformSerNum = nullptr;
