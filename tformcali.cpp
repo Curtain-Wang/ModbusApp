@@ -86,28 +86,28 @@ void TFormCali::on_pushButton_7_clicked()
 
 void TFormCali::on_pushButton_8_clicked()
 {
-    qint16 tt = ui->lineEdit_8->text().toDouble() * 100;
+    qint16 tt = ui->lineEdit_8->text().toDouble() * 10;
     mainwindow->manualWriteOneCMDBuild(0x4309, tt);
 }
 
 
 void TFormCali::on_pushButton_9_clicked()
 {
-    qint16 tt = ui->lineEdit_9->text().toDouble() * 100;
+    qint16 tt = ui->lineEdit_9->text().toDouble() * 10;
     mainwindow->manualWriteOneCMDBuild(0x430A, tt);
 }
 
 
 void TFormCali::on_pushButton_10_clicked()
 {
-    qint16 tt = ui->lineEdit_10->text().toDouble() * 100;
+    qint16 tt = ui->lineEdit_10->text().toDouble() * 10;
     mainwindow->manualWriteOneCMDBuild(0x430B, tt);
 }
 
 
 void TFormCali::on_pushButton_11_clicked()
 {
-    qint16 tt = ui->lineEdit_11->text().toDouble() * 100;
+    qint16 tt = ui->lineEdit_11->text().toDouble() * 10;
     mainwindow->manualWriteOneCMDBuild(0x430C, tt);
 }
 
