@@ -32,7 +32,7 @@ void TFormConfig1::init()
 void TFormConfig1::refresh()
 {
     ui->h16385->setText(QString::number(static_cast<float>(g_ChgCfgRegs[0] * 1.0 / qPow(10, g_ChgCfgRegsPows[0])), 'f', g_ChgCfgRegsPows[0]));
-    ui->h16386->setText(QString::number(static_cast<float>(g_ChgCfgRegs[1] * 1.0 / qPow(10, g_ChgCfgRegsPows[1])), 'f', g_ChgCfgRegsPows[1]));
+    ui->h16386->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ChgCfgRegs[1]) * 1.0 / qPow(10, g_ChgCfgRegsPows[1])), 'f', g_ChgCfgRegsPows[1]));
     ui->h16387->setText(QString::number(static_cast<float>(g_ChgCfgRegs[2] * 1.0 / qPow(10, g_ChgCfgRegsPows[2])), 'f', g_ChgCfgRegsPows[2]));
 
     ui->h16641->setText(QString::number(static_cast<float>(g_DsgCfgRegs[0] * 1.0 / qPow(10, g_DsgCfgRegsPows[0])), 'f', g_DsgCfgRegsPows[0]));

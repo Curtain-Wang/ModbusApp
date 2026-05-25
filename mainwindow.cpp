@@ -547,14 +547,14 @@ void MainWindow::refresh()
     ui->tel6->setText(QString::number(static_cast<float>(g_TelRegs[6] * 1.0 / qPow(10, g_TelRegsPows[6])), 'f', g_TelRegsPows[6]));
     ui->tel7->setText(QString::number(static_cast<float>(g_TelRegs[7] * 1.0 / qPow(10, g_TelRegsPows[7])), 'f', g_TelRegsPows[7]));
     //温度遥测
-    ui->temp0->setText(QString::number(static_cast<float>(g_TempTelRegs[0] * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]));
-    ui->temp1->setText(QString::number(static_cast<float>(g_TempTelRegs[1] * 1.0 / qPow(10, g_TempTelRegsPows[1])), 'f', g_TempTelRegsPows[1]));
-    ui->temp2->setText(QString::number(static_cast<float>(g_TempTelRegs[2] * 1.0 / qPow(10, g_TempTelRegsPows[2])), 'f', g_TempTelRegsPows[2]));
-    ui->temp3->setText(QString::number(static_cast<float>(g_TempTelRegs[3] * 1.0 / qPow(10, g_TempTelRegsPows[3])), 'f', g_TempTelRegsPows[3]));
-    ui->temp4->setText(QString::number(static_cast<float>(g_TempTelRegs[4] * 1.0 / qPow(10, g_TempTelRegsPows[4])), 'f', g_TempTelRegsPows[4]));
-    ui->temp5->setText(QString::number(static_cast<float>(g_TempTelRegs[5] * 1.0 / qPow(10, g_TempTelRegsPows[5])), 'f', g_TempTelRegsPows[5]));
-    ui->temp6->setText(QString::number(static_cast<float>(g_TempTelRegs[6] * 1.0 / qPow(10, g_TempTelRegsPows[6])), 'f', g_TempTelRegsPows[6]));
-    ui->temp7->setText(QString::number(static_cast<float>(g_TempTelRegs[7] * 1.0 / qPow(10, g_TempTelRegsPows[7])), 'f', g_TempTelRegsPows[7]));
+    ui->temp0->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[0]) * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]));
+    ui->temp1->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[1]) * 1.0 / qPow(10, g_TempTelRegsPows[1])), 'f', g_TempTelRegsPows[1]));
+    ui->temp2->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[2]) * 1.0 / qPow(10, g_TempTelRegsPows[2])), 'f', g_TempTelRegsPows[2]));
+    ui->temp3->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[3]) * 1.0 / qPow(10, g_TempTelRegsPows[3])), 'f', g_TempTelRegsPows[3]));
+    ui->temp4->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[4]) * 1.0 / qPow(10, g_TempTelRegsPows[4])), 'f', g_TempTelRegsPows[4]));
+    ui->temp5->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[5]) * 1.0 / qPow(10, g_TempTelRegsPows[5])), 'f', g_TempTelRegsPows[5]));
+    ui->temp6->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[6]) * 1.0 / qPow(10, g_TempTelRegsPows[6])), 'f', g_TempTelRegsPows[6]));
+    ui->temp7->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[7]) * 1.0 / qPow(10, g_TempTelRegsPows[7])), 'f', g_TempTelRegsPows[7]));
     if(g_StatRegs[4] < 6)
         ui->run_status->setText(g_RunStatus[g_StatRegs[4]]);
 
