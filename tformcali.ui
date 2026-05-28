@@ -1596,9 +1596,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys14">
+         <widget class="MyLineEdit" name="h17167">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -1632,6 +1632,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1670,9 +1673,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys21">
+         <widget class="MyLineEdit" name="h17174">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -1706,6 +1709,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1744,9 +1750,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys13">
+         <widget class="MyLineEdit" name="h17166">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -1780,6 +1786,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1818,9 +1827,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys17">
+         <widget class="MyLineEdit" name="h17170">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -1854,6 +1863,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1892,9 +1904,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys12">
+         <widget class="MyLineEdit" name="h17165">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -1928,6 +1940,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -1966,9 +1981,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys20">
+         <widget class="MyLineEdit" name="h17173">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -2002,6 +2017,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -2040,9 +2058,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys18">
+         <widget class="MyLineEdit" name="h17171">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -2076,6 +2094,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -2114,9 +2135,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys15">
+         <widget class="MyLineEdit" name="h17168">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -2150,6 +2171,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -2188,9 +2212,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys19">
+         <widget class="MyLineEdit" name="h17172">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -2224,6 +2248,9 @@ QLineEdit:disabled {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -2262,9 +2289,9 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="sys16">
+         <widget class="MyLineEdit" name="h17169">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimumSize">
            <size>
@@ -2299,6 +2326,9 @@ QLineEdit:disabled {
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -2308,6 +2338,13 @@ QLineEdit:disabled {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>mylineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -21,16 +21,16 @@ TFormCali::~TFormCali()
 
 void TFormCali::refresh()
 {
-    ui->sys12->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[12]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[12])), 'f', g_SysCtrlgRegsPows[12]));
-    ui->sys13->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[13]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[13])), 'f', g_SysCtrlgRegsPows[13]));
-    ui->sys14->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[14]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[14])), 'f', g_SysCtrlgRegsPows[14]));
-    ui->sys15->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[15]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[15])), 'f', g_SysCtrlgRegsPows[15]));
-    ui->sys16->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[16]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[16])), 'f', g_SysCtrlgRegsPows[16]));
-    ui->sys17->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[17]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[17])), 'f', g_SysCtrlgRegsPows[17]));
-    ui->sys18->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[18]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[18])), 'f', g_SysCtrlgRegsPows[18]));
-    ui->sys19->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[19]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[19])), 'f', g_SysCtrlgRegsPows[19]));
-    ui->sys20->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[20]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[20])), 'f', g_SysCtrlgRegsPows[20]));
-    ui->sys21->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[21]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[21])), 'f', g_SysCtrlgRegsPows[21]));
+    ui->h17165->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[12]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[12])), 'f', g_SysCtrlgRegsPows[12]));
+    ui->h17166->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[13]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[13])), 'f', g_SysCtrlgRegsPows[13]));
+    ui->h17167->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[14]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[14])), 'f', g_SysCtrlgRegsPows[14]));
+    ui->h17168->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[15]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[15])), 'f', g_SysCtrlgRegsPows[15]));
+    ui->h17169->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[16]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[16])), 'f', g_SysCtrlgRegsPows[16]));
+    ui->h17170->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[17]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[17])), 'f', g_SysCtrlgRegsPows[17]));
+    ui->h17171->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[18]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[18])), 'f', g_SysCtrlgRegsPows[18]));
+    ui->h17172->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[19]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[19])), 'f', g_SysCtrlgRegsPows[19]));
+    ui->h17173->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[20]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[20])), 'f', g_SysCtrlgRegsPows[20]));
+    ui->h17174->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[21]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[21])), 'f', g_SysCtrlgRegsPows[21]));
 }
 
 void TFormCali::on_pushButton_2_clicked()

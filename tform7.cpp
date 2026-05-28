@@ -25,24 +25,25 @@ void TForm7::on_lineEdit_returnPressed()
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    quint16 value = ui->lineEdit->text().toInt();
+    float fValue = ui->lineEdit->text().toFloat();
     quint16 blockStart = ((lastEditAddr & 0xFF00) | 1);
     switch(blockStart)
     {
     case MODBUS_BLOCK_START_CHARGE:
-        value = value * qPow(10, g_ChgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CHARGE]);
+        fValue = fValue * qPow(10, g_ChgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CHARGE]);
         break;
     case MODBUS_BLOCK_START_DISCHARGE:
-        value = value * qPow(10, g_DsgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_DISCHARGE]);
+        fValue = fValue * qPow(10, g_DsgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_DISCHARGE]);
         break;
     case MODBUS_BLOCK_START_PROTECT:
-        value = value * qPow(10, g_ProtectCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_PROTECT]);
+        fValue = fValue * qPow(10, g_ProtectCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_PROTECT]);
         break;
     case MODBUS_BLOCK_START_CTRL:
-        value = value * qPow(10, g_SysCtrlgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CTRL]);
+        fValue = fValue * qPow(10, g_SysCtrlgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CTRL]);
         break;
     default:
         return;
     }
+    quint16 value = fValue;
     mainwindow->manualWriteOneCMDBuild(lastEditAddr, value);
 }
