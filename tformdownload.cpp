@@ -63,67 +63,68 @@ void TFormDownload::sendData()
         return;
     }
 
-    if (DownloadFlag == 2) {  // 下载开启通知
+    if (DownloadFlag == 2) {  // 握手
         buf[0] = MODULE;
-        if(upgradeFlag == MASTER) //主机升级命令
-        {
-            buf[1] = 0xF0;
-        }else if(upgradeFlag == SLAVE)
-        {
-            buf[1] = 0xE0;
-        }
-        buf[2] = 0x06;
-        for(quint16 i = 3; i < 198; i++)
-        {
-            buf[i] = 0xaa;
-        }
-        mainwindow->diyCMDBuild(buf, 198);
+        buf[1] = 0xAA;
+        buf[2] = 0x00;
+        buf[3] = 0x01;
+        mainwindow->diyCMDBuild(buf, 4);
         DownloadTXFlag = 0;
         DownloadTime = 300;
         downloadlen = 0;
         return;
     }
 
-    //下载数据
+    //擦除
     if(DownloadFlag == 3)
     {
         buf[0] = MODULE;
-        if(upgradeFlag == MASTER) //主机升级命令
+        buf[1] = 0xAA;
+        buf[2] = 0x00;
+        buf[3] = 0x02;
+        mainwindow->diyCMDBuild(buf, 4);
+        DownloadTXFlag = 0;
+        DownloadTime = 1000;
+        downloadlen = 0;
+    }
+
+    //写块
+    if(DownloadFlag == 4)
+    {
+        buf[0] = MODULE;
+        buf[1] = 0xAA;
+        buf[2] = 0x00;
+        buf[3] = 0x03;
+        buf[4] = (pageAddr >> 8);
+        buf[5] = (pageAddr & 0xFF);
+        quint8 copyLen = 0;
+        if(fileLen >= (pageAddr + 1) * 128)
         {
-            buf[1] = 0xF0;
-        }else if(upgradeFlag == SLAVE)
+            copyLen = 128;
+        }else
         {
-            buf[1] = 0xE0;
+            copyLen = fileLen - pageAddr * 128;
         }
-        buf[2] = 0x07;
-        buf[3] = pageAddr;
-        int copyLen = fileLen >= (pageAddr + 1) * 512 ? 512 : (fileLen - pageAddr * 512);
-        memcpy(&buf[4], fileBuf.constData() + (512 * pageAddr), copyLen);
-        mainwindow->diyCMDBuild(buf, 516);
+        buf[6] = (copyLen >> 8);
+        buf[7] = (copyLen & 0xFF);
+        for(quint8 i = 0; i < copyLen; i++)
+        {
+            buf[8 + i] = fileBuf[128 * pageAddr + i];
+        }
+        mainwindow->diyCMDBuild(buf, 8 + copyLen);
         DownloadTXFlag = 0;
         DownloadTime = 300;
         downloadlen = 0;
     }
 
-    //总校验和比对
-    if(DownloadFlag == 4)
+    //完成
+    if(DownloadFlag == 5)
     {
         buf[0] = MODULE;
-        if(upgradeFlag == MASTER) //主机升级命令
-        {
-            buf[1] = 0xF0;
-        }else if(upgradeFlag == SLAVE)
-        {
-            buf[1] = 0xE0;
-        }
-        buf[2] = 0x08;
-        buf[3] = (fileCRC & 0xFF);
-        buf[4] = (fileCRC >> 8);
-        buf[5] = (swId & 0xFF);
-        buf[6] = (swId >> 8);
-        buf[7] = (downVer & 0xFF);
-        buf[8] = (downVer >> 8);
-        mainwindow->diyCMDBuild(buf, 9);
+        buf[1] = 0xAA;
+        buf[2] = 0x00;
+        buf[3] = 0x04;
+        mainwindow->diyCMDBuild(buf, 4);
         DownloadTXFlag = 0;
         DownloadTime = 300;
         downloadlen = 0;
@@ -135,71 +136,69 @@ void TFormDownload::downloadRespDeal()
     quint8 cmd2 = rxBuf[2];
     switch(cmd2)
     {
-    case UPDATE_CMD://升级命令回复
-        timer->stop();
-        DownloadFlag = 3;
-        if(pageAddr > 0)
+    case SHAKE_HANDS_CMD:
+        if(rxBuf[4] == 6)
         {
-            pageAddr = 0;
-            reDownloadFlag = true;
+            timer->stop();
+            DownloadFlag = 3;
+            if(pageAddr > 0)
+            {
+                pageAddr = 0;
+                reDownloadFlag = true;
+            }
+            ui->progressBar->setValue(5);
+            ui->plainTextEdit->appendPlainText("握手成功!");
+            DownloadTime = 0;
+            DownloadTXFlag = 1;
+            DownloadRepeatNum = 3;
+            timer->start();
         }
-        ui->progressBar->setValue(10);
-        DownloadTime = 0;
-        DownloadTXFlag = 1;
-        DownloadRepeatNum = 3;
-        timer->start();
         break;
-    case DOWNLOAD_DATA_CMD://数据下载处理
+    case ERASURE_CMD:
+        if(rxBuf[4] == 6)
+        {
+            timer->stop();
+            DownloadFlag = 4;
+            ui->progressBar->setValue(10);
+            ui->plainTextEdit->appendPlainText("擦除成功!");
+            DownloadTime = 0;
+            DownloadTXFlag = 1;
+            DownloadRepeatNum = 3;
+            timer->start();
+        }
+        break;
+    case WRITE_BLOCK_CMD://数据下载处理
     {
         pageAddr++;
-        int totalPage = (fileLen + 511) / 512;
+        int totalPage = (fileLen + 127) / 128;
         int progress = pageAddr * 80 / totalPage + 10;
         if(progress > ui->progressBar->value())
         {
             ui->progressBar->setValue(progress);
         }
         //说明已经下载完成
-        if(pageAddr * 512 >= fileLen)
+        if(pageAddr * 128 >= fileLen)
         {
-            ui->plainTextEdit->appendPlainText("数据下载完成, 开始CRC校验");
-            DownloadFlag = 4;
+            ui->plainTextEdit->appendPlainText("数据下载完成!");
+            DownloadFlag = 5;
         }else
         {
             //继续下载
-            DownloadFlag = 3;
+            DownloadFlag = 4;
         }
         DownloadTime = 0;
         DownloadTXFlag = 1;
         DownloadRepeatNum = 3;
         break;
     }
-    case DOWNLOAD_COMPLETE_CHECK_CMD:
-        if(rxBuf[3] == 0)
+    case FINISH_CMD:
+        if(rxBuf[4] == 6)
         {
             ui->progressBar->setValue(100);
-            ui->plainTextEdit->appendPlainText(QString("已升级到%1%2版本").arg((downVer >> 8), 2, 16, QLatin1Char('0')).arg((downVer & 0xFF), 2, 16, QLatin1Char('0')));
             QMessageBox::information(this, "提示", "升级成功!");
         }else
         {
             ui->plainTextEdit->appendPlainText("升级失败");
-            quint16 recCrc;
-            memcpy(&recCrc, rxBuf.constData() + 4, sizeof(recCrc));
-            quint16 recSwId;
-            memcpy(&recSwId, rxBuf.constData() + 6, sizeof(recSwId));
-            quint16 ver;
-            memcpy(&ver, rxBuf.constData() + 8, sizeof(ver));
-            if(recCrc != fileCRC)
-            {
-                ui->plainTextEdit->appendPlainText("crc校验失败");
-            }
-            if(swId != recSwId)
-            {
-                ui->plainTextEdit->appendPlainText("软件标识不匹配");
-            }
-            if(ver != downVer)
-            {
-                ui->plainTextEdit->appendPlainText("版本号不匹配");
-            }
             QMessageBox::information(this, "提示", "升级失败!");
         }
         endDownload();
@@ -278,28 +277,6 @@ void TFormDownload::on_pushButton_clicked()
     }
     fileBuf = file.readAll();
     file.close();
-    fileCRC = 0;
-    for(quint32 i = 0; i < fileLen; i++)
-    {
-        fileCRC += static_cast<quint8>(fileBuf[i]);
-    }
-    memcpy(&downVer, fileBuf.constData() + 0x12f8, sizeof(downVer));
-    memcpy(&swId, fileBuf.constData() + 0x12fa, sizeof(swId));
-    //输出板升级
-    if(OUTPUT_SWID == swId)
-    {
-        upgradeFlag = MASTER;
-        ui->plainTextEdit->appendPlainText(QString("当前升级文件为%1，版本号为%2").arg("输出板程序").arg(downVer, 4, 16, QLatin1Char('0')));
-    }else if(INPUT_SWID == swId)//输入板升级
-    {
-        upgradeFlag = SLAVE;
-        ui->plainTextEdit->appendPlainText(QString("当前升级文件为%1，版本号为%2").arg("输入板程序").arg(downVer, 4, 16, QLatin1Char('0')));
-    }else
-    {
-        QMessageBox::information(this, "错误", "非升级文件!");
-        ui->master_btn->setEnabled(false);
-        return;
-    }
     ui->master_btn->setEnabled(true);
     ui->pushButton->setEnabled(false);
 }

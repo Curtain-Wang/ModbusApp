@@ -34,16 +34,15 @@ typedef enum
     READ_INPUT_CMD = 0x04,
     WRITE_ONE_CMD = 0x06,
     WRITE_MULTI_CMD = 0x10,
-    MASTER_CMD = 0xF0,
-    SLAVE_CMD = 0xE0,
+    DOWNLOAD_CMD = 0xAA,
 }en_cmd1_t;
 
 typedef enum
 {
-    UPDATE_CMD = 0x06,
-    DOWNLOAD_DATA_CMD = 0x07,
-    DOWNLOAD_COMPLETE_CHECK_CMD = 0x08,
-    SERIAL_NUM_CMD     = 0x09,
+    SHAKE_HANDS_CMD = 0x01,
+    ERASURE_CMD = 0x02,
+    WRITE_BLOCK_CMD = 0x03,
+    FINISH_CMD     = 0x04,
 }en_cmd2_t;
 
 typedef enum

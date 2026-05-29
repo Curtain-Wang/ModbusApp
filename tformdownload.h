@@ -39,7 +39,7 @@ private:
     bool confirmed = false;
     //升级标志,1, 2从机
     quint8 upgradeFlag;
-    quint16 pageAddr;
+    quint16 pageAddr = 0;
     quint16 DownloadTime;
     quint8 DownloadRepeatNum;
     quint8 DownloadTXFlag;

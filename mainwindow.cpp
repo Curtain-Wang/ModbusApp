@@ -522,6 +522,11 @@ void MainWindow::dealMessage(quint8 *data)
             queryStep = (queryStep + 1) % 5; //更新步骤
         }
     }
+    //下载命令
+    if(data[1] == DOWNLOAD_CMD && tformDownload != nullptr)
+    {
+        tformDownload->downloadRespDeal();
+    }
 }
 
 void MainWindow::refreshInput()
@@ -714,6 +719,7 @@ void MainWindow::diyCMDBuild(QByteArray data, quint16 len)
 quint16 MainWindow::getMessageSize()
 {
     int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
+    int cmd2 = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 3) % 500]);
     quint16 len = 0;
     if(cmd == READ_HOLDING_CMD || cmd == READ_INPUT_CMD)
     {
@@ -722,6 +728,17 @@ quint16 MainWindow::getMessageSize()
     if(cmd == WRITE_ONE_CMD)
     {
         len = 8;
+    }
+    if(cmd == DOWNLOAD_CMD)
+    {
+        if(cmd2 == SHAKE_HANDS_CMD || cmd2 == ERASURE_CMD || cmd2 == FINISH_CMD)
+        {
+            len = 7;
+        }
+        if(cmd2 == WRITE_BLOCK_CMD)
+        {
+            len = 9;
+        }
     }
     if(len > 260)
     {
@@ -952,7 +969,7 @@ void MainWindow::onReceiveTimerTimeout()
         int module = static_cast<uint8_t>(receiveDataBuf[receiveStartIndex]);
         int cmd = static_cast<uint8_t>(receiveDataBuf[(receiveStartIndex + 1) % 500]);
         //没有匹配到开始
-        if(module != MODULE || (cmd != READ_HOLDING_CMD && cmd != WRITE_ONE_CMD && cmd != READ_INPUT_CMD))
+        if(module != MODULE || (cmd != READ_HOLDING_CMD && cmd != WRITE_ONE_CMD && cmd != READ_INPUT_CMD && cmd != DOWNLOAD_CMD))
         {
             //更新开始点
             receiveStartIndex = (receiveStartIndex + 1) % 500;
