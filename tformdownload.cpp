@@ -133,7 +133,7 @@ void TFormDownload::sendData()
 
 void TFormDownload::downloadRespDeal()
 {
-    quint8 cmd2 = rxBuf[2];
+    quint8 cmd2 = rxBuf[3];
     switch(cmd2)
     {
     case SHAKE_HANDS_CMD:

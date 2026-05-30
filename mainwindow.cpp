@@ -636,6 +636,7 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
     if(((fault1 >> 5) & 1) == 1)   text.append("电池侧欠压保护、");
     if(((fault1 >> 6) & 1) == 1)   text.append("逆变侧过压保护、");
     if(((fault1 >> 7) & 1) == 1)   text.append("逆变侧欠压保护、");
+    if(((fault1 >> 8) & 1) == 1)   text.append("CMP保护、");
 
     if((fault2 & 1) == 1)   text.append("熔断器故障、");
     if(((fault2 >> 1) & 1) == 1)   text.append("系统错误、");
