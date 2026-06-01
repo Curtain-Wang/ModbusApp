@@ -243,7 +243,7 @@ QComboBox::item:hover {
             </property>
             <item>
              <property name="text">
-              <string>38400</string>
+              <string>115200</string>
              </property>
             </item>
             <item>
@@ -263,7 +263,7 @@ QComboBox::item:hover {
             </item>
             <item>
              <property name="text">
-              <string>115200</string>
+              <string>38400</string>
              </property>
             </item>
             <item>
