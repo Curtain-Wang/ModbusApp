@@ -2812,7 +2812,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string> </string>
+                 <string>VERR</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2820,7 +2820,7 @@ QGroupBox  {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="ierr_2">
+               <widget class="QLineEdit" name="verr">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -2918,7 +2918,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string> </string>
+                 <string/>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

@@ -31,7 +31,7 @@ quint64 lastRunSecond = 0;
 quint64 runSecond = 0;
 quint8 queryStep = 0;
 uint16_t g_TelRegs[NUM_REGISTER];
-uint8_t g_TelRegsPows[NUM_REGISTER] = {2, 1, 2, 1, 0, 0, 2, 2, 2, 2};
+uint8_t g_TelRegsPows[NUM_REGISTER] = {2, 1, 2, 1, 0, 0, 2, 2, 2, 2, 2};
 uint16_t g_TempTelRegs[NUM_REGISTER];
 uint8_t g_TempTelRegsPows[NUM_REGISTER] = {1, 1, 1, 1, 1, 1, 1, 1};
 uint16_t g_StatRegs[NUM_REGISTER];

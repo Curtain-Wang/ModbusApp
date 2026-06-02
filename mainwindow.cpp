@@ -553,6 +553,7 @@ void MainWindow::refresh()
     ui->tel7->setText(QString::number(static_cast<float>(g_TelRegs[7] * 1.0 / qPow(10, g_TelRegsPows[7])), 'f', g_TelRegsPows[7]));
     ui->lev->setText(QString::number(static_cast<float>(g_TelRegs[8] * 1.0 / qPow(10, g_TelRegsPows[8])), 'f', g_TelRegsPows[8]));
     ui->ierr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[9]) * 1.0 / qPow(10, g_TelRegsPows[9])), 'f', g_TelRegsPows[9]));
+    ui->verr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[10]) * 1.0 / qPow(10, g_TelRegsPows[10])), 'f', g_TelRegsPows[10]));
 
     //温度遥测
     ui->temp0->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[0]) * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]));
