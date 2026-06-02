@@ -96,7 +96,7 @@ typedef enum {
 
 // 每类寄存器的起始地址（用于计算偏移）
 typedef enum {
-    MODBUS_BLOCK_SIZE_TEL       = 8,  // 遥测寄存器数量
+    MODBUS_BLOCK_SIZE_TEL       = 10,  // 遥测寄存器数量
     MODBUS_BLOCK_SIZE_TEMP      = 8,  // 温度遥测寄存器数量
     MODBUS_BLOCK_SIZE_STAT      = 6,  // 状态与告警寄存器数量
     MODBUS_BLOCK_SIZE_PARALLEL  = 6,  // 并机状态寄存器数量
@@ -104,7 +104,7 @@ typedef enum {
     MODBUS_BLOCK_SIZE_CHARGE    = 3,  // 充电参数寄存器数量
     MODBUS_BLOCK_SIZE_DISCHARGE = 4,  // 放电参数寄存器数量
     MODBUS_BLOCK_SIZE_PROTECT   = 10,  // 保护参数寄存器数量
-    MODBUS_BLOCK_SIZE_CTRL      = 22,  // 控制指令寄存器数量
+    MODBUS_BLOCK_SIZE_CTRL      = 28,  // 控制指令寄存器数量
 } modbus_block_size_addr_t;
 
 #define BR 9600

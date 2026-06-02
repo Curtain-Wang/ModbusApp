@@ -33,7 +33,7 @@ void TFormConfig1::refresh()
 {
     ui->h16385->setText(QString::number(static_cast<float>(g_ChgCfgRegs[0] * 1.0 / qPow(10, g_ChgCfgRegsPows[0])), 'f', g_ChgCfgRegsPows[0]));
     ui->h16386->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ChgCfgRegs[1]) * 1.0 / qPow(10, g_ChgCfgRegsPows[1])), 'f', g_ChgCfgRegsPows[1]));
-    ui->h16387->setText(QString::number(static_cast<float>(g_ChgCfgRegs[2] * 1.0 / qPow(10, g_ChgCfgRegsPows[2])), 'f', g_ChgCfgRegsPows[2]));
+    ui->h16387->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ChgCfgRegs[2]) * 1.0 / qPow(10, g_ChgCfgRegsPows[2])), 'f', g_ChgCfgRegsPows[2]));
 
     ui->h16641->setText(QString::number(static_cast<float>(g_DsgCfgRegs[0] * 1.0 / qPow(10, g_DsgCfgRegsPows[0])), 'f', g_DsgCfgRegsPows[0]));
     ui->h16642->setText(QString::number(static_cast<float>(g_DsgCfgRegs[1] * 1.0 / qPow(10, g_DsgCfgRegsPows[1])), 'f', g_DsgCfgRegsPows[1]));
@@ -53,5 +53,12 @@ void TFormConfig1::refresh()
 
     ui->h17154->setText(QString::number(g_SysCtrlgRegs[1]));
     ui->h17155->setText(QString::number(g_SysCtrlgRegs[2]));
+    ui->h17175->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[22] * 1.0 / qPow(10, g_SysCtrlgRegsPows[22])), 'f', g_SysCtrlgRegsPows[22]));
+    ui->h17176->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[23] * 1.0 / qPow(10, g_SysCtrlgRegsPows[23])), 'f', g_SysCtrlgRegsPows[23]));
+    ui->h17177->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[24] * 1.0 / qPow(10, g_SysCtrlgRegsPows[24])), 'f', g_SysCtrlgRegsPows[24]));
+    ui->h17178->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[25] * 1.0 / qPow(10, g_SysCtrlgRegsPows[25])), 'f', g_SysCtrlgRegsPows[25]));
+    ui->h17179->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[26] * 1.0 / qPow(10, g_SysCtrlgRegsPows[26])), 'f', g_SysCtrlgRegsPows[26]));
+    ui->h17180->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[27] * 1.0 / qPow(10, g_SysCtrlgRegsPows[27])), 'f', g_SysCtrlgRegsPows[27]));
+
 
 }
