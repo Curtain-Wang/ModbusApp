@@ -2918,7 +2918,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string/>
+                 <string>IREF</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2926,7 +2926,7 @@ QGroupBox  {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="ierr_3">
+               <widget class="QLineEdit" name="iref">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>

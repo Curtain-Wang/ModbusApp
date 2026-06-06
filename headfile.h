@@ -96,7 +96,7 @@ typedef enum {
 
 // 每类寄存器的起始地址（用于计算偏移）
 typedef enum {
-    MODBUS_BLOCK_SIZE_TEL       = 11,  // 遥测寄存器数量
+    MODBUS_BLOCK_SIZE_TEL       = 12,  // 遥测寄存器数量
     MODBUS_BLOCK_SIZE_TEMP      = 8,  // 温度遥测寄存器数量
     MODBUS_BLOCK_SIZE_STAT      = 6,  // 状态与告警寄存器数量
     MODBUS_BLOCK_SIZE_PARALLEL  = 6,  // 并机状态寄存器数量

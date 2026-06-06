@@ -554,7 +554,7 @@ void MainWindow::refresh()
     ui->lev->setText(QString::number(static_cast<float>(g_TelRegs[8] * 1.0 / qPow(10, g_TelRegsPows[8])), 'f', g_TelRegsPows[8]));
     ui->ierr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[9]) * 1.0 / qPow(10, g_TelRegsPows[9])), 'f', g_TelRegsPows[9]));
     ui->verr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[10]) * 1.0 / qPow(10, g_TelRegsPows[10])), 'f', g_TelRegsPows[10]));
-
+    ui->iref->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[11]) * 1.0 / qPow(10, g_TelRegsPows[11])), 'f', g_TelRegsPows[11]));
     //温度遥测
     ui->temp0->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[0]) * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]));
     ui->temp1->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[1]) * 1.0 / qPow(10, g_TempTelRegsPows[1])), 'f', g_TempTelRegsPows[1]));
@@ -641,6 +641,8 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
     if(((fault1 >> 6) & 1) == 1)   text.append("逆变侧过压保护、");
     if(((fault1 >> 7) & 1) == 1)   text.append("逆变侧欠压保护、");
     if(((fault1 >> 8) & 1) == 1)   text.append("CMP保护、");
+    if(((fault1 >> 9) & 1) == 1)   text.append("B侧内外压差不平衡、");
+    if(((fault1 >> 10) & 1) == 1)   text.append("P侧内外压差不平衡、");
 
     if((fault2 & 1) == 1)   text.append("熔断器故障、");
     if(((fault2 >> 1) & 1) == 1)   text.append("系统错误、");
