@@ -169,26 +169,32 @@ void TFormDownload::downloadRespDeal()
         break;
     case WRITE_BLOCK_CMD://数据下载处理
     {
-        pageAddr++;
-        int totalPage = (fileLen + 127) / 128;
-        int progress = pageAddr * 80 / totalPage + 10;
-        if(progress > ui->progressBar->value())
+        if(rxBuf[6] == 6)
         {
-            ui->progressBar->setValue(progress);
-        }
-        //说明已经下载完成
-        if(pageAddr * 128 >= fileLen)
-        {
-            ui->plainTextEdit->appendPlainText("数据下载完成!");
-            DownloadFlag = 5;
+            pageAddr++;
+            int totalPage = (fileLen + 127) / 128;
+            int progress = pageAddr * 80 / totalPage + 10;
+            if(progress > ui->progressBar->value())
+            {
+                ui->progressBar->setValue(progress);
+            }
+            //说明已经下载完成
+            if(pageAddr * 128 >= fileLen)
+            {
+                ui->plainTextEdit->appendPlainText("数据下载完成!");
+                DownloadFlag = 5;
+            }else
+            {
+                //继续下载
+                DownloadFlag = 4;
+            }
+            DownloadTime = 0;
+            DownloadTXFlag = 1;
+            DownloadRepeatNum = 3;
         }else
         {
-            //继续下载
             DownloadFlag = 4;
         }
-        DownloadTime = 0;
-        DownloadTXFlag = 1;
-        DownloadRepeatNum = 3;
         break;
     }
     case FINISH_CMD:
