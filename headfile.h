@@ -5,7 +5,7 @@
 #define INPUT_REG_START_ADDR    0
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
-#define TITLE   "DPS4K2-V0.0.0"
+#define TITLE   "DPS4K2-V0.0.0-%1"
 #define MODULE  0x01
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
@@ -104,7 +104,7 @@ typedef enum {
     MODBUS_BLOCK_SIZE_CHARGE    = 3,  // 充电参数寄存器数量
     MODBUS_BLOCK_SIZE_DISCHARGE = 4,  // 放电参数寄存器数量
     MODBUS_BLOCK_SIZE_PROTECT   = 10,  // 保护参数寄存器数量
-    MODBUS_BLOCK_SIZE_CTRL      = 28,  // 控制指令寄存器数量
+    MODBUS_BLOCK_SIZE_CTRL      = 30,  // 控制指令寄存器数量
 } modbus_block_size_addr_t;
 
 #define BR 9600

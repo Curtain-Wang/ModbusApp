@@ -14,7 +14,6 @@ class TFormSerNum : public QWidget
 public:
     explicit TFormSerNum(QWidget *parent = nullptr);
     ~TFormSerNum();
-    void displaySerialNumber();
 private slots:
     void on_pushButton_7_clicked();
 

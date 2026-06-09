@@ -590,6 +590,8 @@ void MainWindow::refresh()
 
     versionLabel->setText(versionStr.arg(QString::number((g_ProductRegs[4] >> 8), 16)).arg((g_ProductRegs[4] & 0xFF), 16));
 
+    setWindowTitle(QString(TITLE).arg(g_SysCtrlgRegs[28] + (g_SysCtrlgRegs[29] << 16)));
+
     //B侧继电器
     if((g_StatRegs[5] & 1) == 1)
     {
