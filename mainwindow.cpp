@@ -91,8 +91,7 @@ void MainWindow::init()
     ui->statusbar->addWidget(connectStatusLabel);
     connectStatusLabel->setText(connStatus.arg("未连接"));
     //版本号
-    versionLabel->setMidLineWidth(300);
-    versionLabel->setText(versionStr.arg("未知"));
+    versionLabel->setMidLineWidth(100);
     ui->statusbar->addWidget(versionLabel);
     //持续运行时间
     runTimeLabel->setMidLineWidth(800);
@@ -584,12 +583,10 @@ void MainWindow::refresh()
     ui->parallel0->setText(QString::number(g_ParallelRegs[0]));
     ui->parallel1->setText(QString::number(g_ParallelRegs[1]));
     ui->parallel2->setText(QString::number(g_ParallelRegs[2]));
-    ui->parallel3->setText(QString::number(g_ParallelRegs[3]));
-    ui->parallel4->setText(QString::number(static_cast<float>(g_ParallelRegs[4] * 1.0 / qPow(10,g_ParallelRegsPows[4])), 'f', g_ParallelRegsPows[4]));
-    ui->parallel5->setText(QString::number(static_cast<float>(g_ParallelRegs[5] * 1.0 / qPow(10, g_ParallelRegsPows[5])), 'f', g_ParallelRegsPows[5]));
-
-    versionLabel->setText(versionStr.arg(QString::number((g_ProductRegs[4] >> 8), 16)).arg((g_ProductRegs[4] & 0xFF), 16));
-
+    ui->parallel3->setText(g_ParallelRegs[3] == 1 ? "主" : "从");
+    ui->parallel4->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ParallelRegs[4]) * 1.0 / qPow(10,g_ParallelRegsPows[4])), 'f', g_ParallelRegsPows[4]));
+    ui->parallel5->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ParallelRegs[5]) * 1.0 / qPow(10, g_ParallelRegsPows[5])), 'f', g_ParallelRegsPows[5]));
+    versionLabel->setText(versionStr.arg(getSoftVersion(g_ProductRegs[4])));
     setWindowTitle(QString(TITLE).arg(g_SysCtrlgRegs[28] + (g_SysCtrlgRegs[29] << 16)));
 
     //B侧继电器
@@ -664,6 +661,23 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
         text.removeAt(text.length() - 1);
     }
     return text;
+}
+
+QString MainWindow::getSoftVersion(quint16 sftVer)
+{
+    // 转换为16进制字符串
+    QString hexStr = QString::number(sftVer, 16);  // 转换为16进制字符串 "112"
+
+    // 确保16进制字符串的长度为3位（补零）
+    while (hexStr.length() < 3) {
+        hexStr = "0" + hexStr;
+    }
+
+    // 提取版本号的高位和低位部分
+    QString major = hexStr.mid(0, 1);  // 高位部分，取前1个字符
+    QString minor = hexStr.mid(1, 2);  // 低位部分，取后2个字符
+
+    return QString("V%1.%2").arg(major).arg(minor);
 }
 
 void MainWindow::readHoldingRegCMDBuild()

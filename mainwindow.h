@@ -54,6 +54,7 @@ public:
     void writeDataToCSV(QTextStream &out, const QDateTime &currentTime);
     void runTimeDeal();
     void voltCurChartInit();
+    QString getSoftVersion(quint16 sftVer);
 private slots:
     void on_connBtn_2_clicked();
     void onSendTimerTimeout();

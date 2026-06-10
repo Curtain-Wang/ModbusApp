@@ -3,7 +3,7 @@
 
 int connFlag = 0;
 QString connStatus = "连接状态：%1";
-QString versionStr = "版本：%1.%2";
+QString versionStr = "版本：%1";
 QString runTimeStr = "最近一次持续运行时间：%1时 %2分 %3秒";
 int waitMessageRemaingTime = 0;
 int dataRefreshRemaingTime = 0;
