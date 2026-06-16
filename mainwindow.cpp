@@ -99,7 +99,7 @@ void MainWindow::init()
     // 设置标签右对齐
     runTimeLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     ui->statusbar->addPermanentWidget(runTimeLabel, 1);  // 第二个参数是伸缩因子
-    setWindowTitle(QString(TITLE).arg(batSerNum));
+    setWindowTitle(QString(TITLE).arg(serNum));
     //指示灯定时器相关
     txResetTimer->setSingleShot(true);
     connect(txResetTimer, &QTimer::timeout, this, &MainWindow::on_txResetTimer_timeout);
@@ -111,6 +111,8 @@ void MainWindow::init()
     setFocus();
 
     connect(saveDataTimer, &QTimer::timeout, this, &MainWindow::on_saveDataTimer_timeout);
+    saveDataTimer->setInterval(dataRecordCycle * 1000);
+    saveDataTimer->start();
     connect(reconnectTimer, &QTimer::timeout, this, &MainWindow::on_reconnectTimer_timeout);
     reconnectTimer->setInterval(5000);
     menuBar()->setStyleSheet("QMenu { background-color: white; }"
@@ -146,7 +148,6 @@ void MainWindow::initConfigFile()
     settings.endGroup();
     settings.beginGroup(BASE_CONFIG);
     lastRunSecond = settings.value(CONTINUOUS_RUN_TIME, 0).toInt();
-    saveDataTimer->setInterval(dataRecordCycle * 1000);
 }
 
 void MainWindow::sendPortData(QByteArray data)
@@ -587,7 +588,8 @@ void MainWindow::refresh()
     ui->parallel4->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ParallelRegs[4]) * 1.0 / qPow(10,g_ParallelRegsPows[4])), 'f', g_ParallelRegsPows[4]));
     ui->parallel5->setText(QString::number(static_cast<float>(static_cast<qint16>(g_ParallelRegs[5]) * 1.0 / qPow(10, g_ParallelRegsPows[5])), 'f', g_ParallelRegsPows[5]));
     versionLabel->setText(versionStr.arg(getSoftVersion(g_ProductRegs[4])));
-    setWindowTitle(QString(TITLE).arg(g_SysCtrlgRegs[28] + (g_SysCtrlgRegs[29] << 16)));
+    serNum = QString::number(g_SysCtrlgRegs[28] + (g_SysCtrlgRegs[29] << 16));
+    setWindowTitle(QString(TITLE).arg(serNum));
 
     //B侧继电器
     if((g_StatRegs[5] & 1) == 1)
@@ -650,6 +652,9 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
     if(((fault2 >> 4) & 1) == 1)   text.append("CMP B侧过流保护、");
     if(((fault2 >> 5) & 1) == 1)   text.append("CMP P侧过压保护、");
     if(((fault2 >> 6) & 1) == 1)   text.append("CMP B侧过压保护、");
+    if(((fault2 >> 7) & 1) == 1)   text.append("超温保护、");
+
+
 
     if((warn1 & 1) == 1)   text.append("充电过流告警、");
     if(((warn1 >> 1) & 1) == 1)   text.append("放电过流告警、");
@@ -916,8 +921,8 @@ void MainWindow::writeDataToCSV(QTextStream &out, const QDateTime &currentTime)
 void MainWindow::runTimeDeal()
 {
     //未连接、未启动、有事件
-    if(connFlag == UNCONNECTED
-        || g_StatRegs[4] == 2 || g_StatRegs[4] == 3 || g_StatRegs[4] == 4
+    if(connFlag != CONNECTED
+        || (g_StatRegs[4] != 2 && g_StatRegs[4] != 3 && g_StatRegs[4] != 4)
         || g_StatRegs[0] >0 || g_StatRegs[1] > 0)
     {
         if(runSecond != 0)
@@ -1159,7 +1164,7 @@ void MainWindow::on_saveDataTimer_timeout()
     if(connFlag == CONNECTED)
     {
         QDateTime currentTime = QDateTime::currentDateTime();
-        QString serialNumberStr = batSerNum.remove(QChar('\0')).trimmed();
+        QString serialNumberStr = serNum.remove(QChar('\0')).trimmed();
         QString fileName = QString("%1-%2-%3-%4")
                                .arg(currentTime.date().year())
                                .arg(currentTime.date().month(), 2, 10, QChar('0'))

@@ -103,7 +103,7 @@ typedef enum {
     MODBUS_BLOCK_SIZE_PRODUCT   = 6,  // 产品标识寄存器数量
     MODBUS_BLOCK_SIZE_CHARGE    = 3,  // 充电参数寄存器数量
     MODBUS_BLOCK_SIZE_DISCHARGE = 4,  // 放电参数寄存器数量
-    MODBUS_BLOCK_SIZE_PROTECT   = 10,  // 保护参数寄存器数量
+    MODBUS_BLOCK_SIZE_PROTECT   = 11,  // 保护参数寄存器数量
     MODBUS_BLOCK_SIZE_CTRL      = 30,  // 控制指令寄存器数量
 } modbus_block_size_addr_t;
 
@@ -135,7 +135,7 @@ extern int baudRate;
 extern QString portName;
 //超时次数
 extern quint8 timeoutTimes;
-extern QString batSerNum;
+extern QString serNum;
 extern quint64 lastRunSecond;
 extern quint64 runSecond;
 extern quint8 queryStep;
