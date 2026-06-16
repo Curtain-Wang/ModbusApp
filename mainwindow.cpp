@@ -1246,6 +1246,9 @@ void MainWindow::on_reconnectTimer_timeout()
         int index = ui->comboBox_2->findText(searchText);
         if (index != -1) {
             ui->comboBox_2->setCurrentIndex(index);
+        }else
+        {
+            return;//没找到目标串口直接返回
         }
         on_connBtn_clicked();
     }
