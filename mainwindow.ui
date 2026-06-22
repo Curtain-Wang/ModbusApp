@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1433</width>
+    <width>1432</width>
     <height>952</height>
    </rect>
   </property>
@@ -2996,6 +2996,112 @@ QLineEdit:disabled {
              </layout>
             </widget>
            </item>
+           <item row="5" column="0">
+            <widget class="QGroupBox" name="groupBox_32">
+             <property name="styleSheet">
+              <string notr="true">/* 内部GroupBox：虚线边框 */
+QGroupBox  {
+    border: 1px dashed #BBBBBB;
+    border-radius: 3px;
+    margin-top: 1ex;
+}</string>
+             </property>
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_42" stretch="7,5,1">
+              <item>
+               <widget class="QLabel" name="label_74">
+                <property name="minimumSize">
+                 <size>
+                  <width>119</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>13</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>强充剩余时间</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="fchg_rem_time">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit {
+    /* 苹果风格的数据展示LineEdit */
+    border: 1px solid #D0D0D0;                  /* 浅灰色边框，模仿macOS的细边框 */
+    border-radius: 6px;                         /* 圆角，符合macOS设计 */
+    padding: 8px 12px;                         /* 内边距，提供舒适的阅读空间 */
+    background-color: #FFFFFF;                 /* 白色背景 */
+    color: #333333;                            /* 深灰色文字，提高可读性 */
+    font-family: &quot;SF Pro Text&quot;, &quot;Helvetica Neue&quot;, &quot;Lucida Grande&quot;, sans-serif; /* macOS系统字体栈 */
+    font-size: 14px;                           /* 默认字体大小 */
+    selection-background-color: #007AFF;       /* 选中文本高亮色 (macOS蓝色) */
+    selection-color: #FFFFFF;                  /* 选中文本颜色 (白色) */
+
+    /* 只读状态下的特殊样式 */
+    /* 注意：Qt中通常使用 setReadOnly(true) 来实现只读，但QSS可以定义其外观 */
+}
+
+/* 当LineEdit获得焦点时 (对于数据展示框，如果不需要焦点效果，可以省略或弱化) */
+QLineEdit:focus {
+    border: 1px solid #007AFF;                 /* 获得焦点时边框变为蓝色 */
+    /* 如果作为纯展示框，也可以移除焦点边框变化 */
+    /* border: 1px solid #D0D0D0; */
+}
+
+/* 禁用状态下的样式 (如果用于展示不可变数据) */
+QLineEdit:disabled {
+    background-color: #F5F5F7;                 /* macOS禁用元素背景色 */
+    color: #333333;                            /* 禁用文字颜色 */
+    border: 1px solid #E0E0E0;                 /* 禁用边框颜色 */
+}</string>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_75">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>13</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>秒</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -3737,7 +3843,7 @@ QLineEdit:disabled {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">/* 告警区域 - 无告警时 */
+         <string notr="true">/* 正常状态 - 无告警、无保护 */
 QLabel[status=&quot;normal&quot;] {
     background-color: #E8F5E9;           /* 柔和的淡绿 */
     border: 1px solid #A5D6A7;           /* 清新的绿边 */
@@ -3747,8 +3853,9 @@ QLabel[status=&quot;normal&quot;] {
     font-weight: normal;                 /* 无需强调，去掉 bold */
     margin: 10px 12px;
 }
-/* 告警区域 - 告警时 */
-QLabel[status=&quot;warn&quot;] {
+
+/* 保护状态 - 触发保护机制 */
+QLabel[status=&quot;prot&quot;] {
     background-color: #FFE5E5;
     border: 1px solid #FF4D4F;
     color: #D8000C;
@@ -3757,7 +3864,19 @@ QLabel[status=&quot;warn&quot;] {
     font-weight: bold;
     margin: 10px 12px;
 }
-/* 告警区域 - 未连接（无数据） */
+
+/* 告警状态 - 出现告警 */
+QLabel[status=&quot;alarm&quot;] {
+    background-color: #FFF8E1;           /* 柔和的米黄 */
+    border: 1px solid #FFC107;           /* 明亮的橙黄色边框 */
+    color: #FF8F00;                      /* 深橙色字体，醒目但不刺眼 */
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-weight: bold;
+    margin: 10px 12px;
+}
+
+/* 未连接状态 - 无数据传输 */
 QLabel[status=&quot;disconnected&quot;] {
     background-color: #F2F2F7;           /* Apple 系统背景灰 */
     border: 1px solid #D1D1D6;           /* Apple 系统分隔线灰 */
@@ -3793,7 +3912,7 @@ QLabel[status=&quot;disconnected&quot;] {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1433</width>
+     <width>1432</width>
      <height>21</height>
     </rect>
    </property>

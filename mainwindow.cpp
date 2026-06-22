@@ -555,6 +555,7 @@ void MainWindow::refresh()
     ui->ierr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[9]) * 1.0 / qPow(10, g_TelRegsPows[9])), 'f', g_TelRegsPows[9]));
     ui->verr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[10]) * 1.0 / qPow(10, g_TelRegsPows[10])), 'f', g_TelRegsPows[10]));
     ui->iref->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[11]) * 1.0 / qPow(10, g_TelRegsPows[11])), 'f', g_TelRegsPows[11]));
+    ui->fchg_rem_time->setText(QString::number(static_cast<float>(g_TelRegs[12] * 1.0 / qPow(10, g_TelRegsPows[12])), 'f', g_TelRegsPows[12]));
     //温度遥测
     ui->temp0->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[0]) * 1.0 / qPow(10, g_TempTelRegsPows[0])), 'f', g_TempTelRegsPows[0]));
     ui->temp1->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[1]) * 1.0 / qPow(10, g_TempTelRegsPows[1])), 'f', g_TempTelRegsPows[1]));
@@ -568,15 +569,20 @@ void MainWindow::refresh()
         ui->run_status->setText(g_RunStatus[g_StatRegs[4]]);
 
     QString eventStr = getEventText(g_StatRegs[0], g_StatRegs[1], g_StatRegs[2], g_StatRegs[3]);
-    if(eventStr.length() == 0)
+    if(g_StatRegs[0] + g_StatRegs[1] + g_StatRegs[2] + g_StatRegs[3] == 0)
     {
         ui->bms_warn_prot->setText(NO_WARN_PROT_STR);
         ui->bms_warn_prot->setProperty("status", "normal");
+    }else if(g_StatRegs[0] + g_StatRegs[1] > 0)
+    {
+        ui->bms_warn_prot->setText(eventStr);
+        ui->bms_warn_prot->setProperty("status", "prot");
     }else
     {
         ui->bms_warn_prot->setText(eventStr);
-        ui->bms_warn_prot->setProperty("status", "warn");
+        ui->bms_warn_prot->setProperty("status", "alarm");
     }
+
     ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
     ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
     ui->bms_warn_prot->update();
