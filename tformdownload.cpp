@@ -25,7 +25,7 @@ TFormDownload::~TFormDownload()
 
 void TFormDownload::init()
 {
-    timer->setInterval(0);
+    timer->setInterval(10);
     DownloadFlag = 1;
     pageAddr = 0;
     ui->progressBar->setValue(0);
@@ -48,6 +48,7 @@ void TFormDownload::endDownload()
     pageAddr = 0;
     ui->pushButton->setEnabled(true);
     timer->stop();
+    DownloadTime = 0;
     confirmed = false;
     DownloadTXFlag = 0;
     fileLen = 0;
@@ -198,16 +199,17 @@ void TFormDownload::downloadRespDeal()
         break;
     }
     case FINISH_CMD:
+        endDownload();
         if(rxBuf[4] == 6)
         {
             ui->progressBar->setValue(100);
+
             QMessageBox::information(this, "提示", "升级成功!");
         }else
         {
             ui->plainTextEdit->appendPlainText("升级失败");
             QMessageBox::information(this, "提示", "升级失败!");
         }
-        endDownload();
         break;
     }
 }
