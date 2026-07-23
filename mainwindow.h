@@ -43,6 +43,7 @@ public:
     QString getEventText(quint16 fault1, quint16 fault2, quint16 warn1, quint16 warn2);
     void readHoldingRegCMDBuild();
     void manualWriteOneCMDBuild(quint16 addr, quint16 value);
+    void manualWriteTwoRegBuild(quint16 addr, quint16 value1, quint16 value2);
     void diyCMDBuild(QByteArray data, quint16 len);
     quint16 getMessageSize();
     void updateSaveDataInterval(int second);

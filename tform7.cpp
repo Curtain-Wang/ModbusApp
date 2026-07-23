@@ -25,25 +25,35 @@ void TForm7::on_lineEdit_returnPressed()
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    float fValue = ui->lineEdit->text().toFloat();
-    quint16 blockStart = ((lastEditAddr & 0xFF00) | 1);
-    switch(blockStart)
+    double fValue = ui->lineEdit->text().toDouble();
+    if(lastEditAddr >= 17175 && lastEditAddr <= 17180)
     {
-    case MODBUS_BLOCK_START_CHARGE:
-        fValue = fValue * qPow(10, g_ChgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CHARGE]);
-        break;
-    case MODBUS_BLOCK_START_DISCHARGE:
-        fValue = fValue * qPow(10, g_DsgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_DISCHARGE]);
-        break;
-    case MODBUS_BLOCK_START_PROTECT:
-        fValue = fValue * qPow(10, g_ProtectCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_PROTECT]);
-        break;
-    case MODBUS_BLOCK_START_CTRL:
-        fValue = fValue * qPow(10, g_SysCtrlgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CTRL]);
-        break;
-    default:
-        return;
+        quint32 val = (fValue * 1000000 + 0.5);
+        mainwindow->manualWriteTwoRegBuild(17183 + (lastEditAddr - 17175) * 2, (val >> 16), (val & 0xFFFF));
+    }else
+    {
+        quint16 blockStart = ((lastEditAddr & 0xFF00) | 1);
+        switch(blockStart)
+        {
+        case MODBUS_BLOCK_START_CHARGE:
+            fValue = fValue * qPow(10, g_ChgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CHARGE]);
+            break;
+        case MODBUS_BLOCK_START_DISCHARGE:
+            fValue = fValue * qPow(10, g_DsgCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_DISCHARGE]);
+            break;
+        case MODBUS_BLOCK_START_PROTECT:
+            fValue = fValue * qPow(10, g_ProtectCfgRegsPows[lastEditAddr - MODBUS_BLOCK_START_PROTECT]);
+            break;
+        case MODBUS_BLOCK_START_CTRL:
+            fValue = fValue * qPow(10, g_SysCtrlgRegsPows[lastEditAddr - MODBUS_BLOCK_START_CTRL]);
+            break;
+        default:
+            return;
+        }
+
+        quint16 value = fValue;
+        mainwindow->manualWriteOneCMDBuild(lastEditAddr, value);
     }
-    quint16 value = fValue;
-    mainwindow->manualWriteOneCMDBuild(lastEditAddr, value);
+
+
 }

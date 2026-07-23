@@ -55,12 +55,11 @@ void TFormConfig1::refresh()
 
     ui->h17154->setText(QString::number(g_SysCtrlgRegs[1]));
     ui->h17155->setText(QString::number(g_SysCtrlgRegs[2]));
-    ui->h17175->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[22] * 1.0 / qPow(10, g_SysCtrlgRegsPows[22])), 'f', g_SysCtrlgRegsPows[22]));
-    ui->h17176->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[23] * 1.0 / qPow(10, g_SysCtrlgRegsPows[23])), 'f', g_SysCtrlgRegsPows[23]));
-    ui->h17177->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[24] * 1.0 / qPow(10, g_SysCtrlgRegsPows[24])), 'f', g_SysCtrlgRegsPows[24]));
-    ui->h17178->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[25] * 1.0 / qPow(10, g_SysCtrlgRegsPows[25])), 'f', g_SysCtrlgRegsPows[25]));
-    ui->h17179->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[26] * 1.0 / qPow(10, g_SysCtrlgRegsPows[26])), 'f', g_SysCtrlgRegsPows[26]));
-    ui->h17180->setText(QString::number(static_cast<float>(g_SysCtrlgRegs[27] * 1.0 / qPow(10, g_SysCtrlgRegsPows[27])), 'f', g_SysCtrlgRegsPows[27]));
 
-
+    ui->h17175->setText(QString::number(static_cast<float>((g_SysCtrlgRegs[30] << 16) + g_SysCtrlgRegs[31]) / 1000000.0, 'f', 6));
+    ui->h17176->setText(QString::number(static_cast<float>((g_SysCtrlgRegs[32] << 16) + g_SysCtrlgRegs[33]) / 1000000.0, 'f', 6));
+    ui->h17177->setText(QString::number(static_cast<float>((g_SysCtrlgRegs[34] << 16) + g_SysCtrlgRegs[35]) / 1000000.0, 'f', 6));
+    ui->h17178->setText(QString::number(static_cast<float>((g_SysCtrlgRegs[36] << 16) + g_SysCtrlgRegs[37]) / 1000000.0, 'f', 6));
+    ui->h17179->setText(QString::number(static_cast<float>((g_SysCtrlgRegs[38] << 16) + g_SysCtrlgRegs[39]) / 1000000.0, 'f', 6));
+    ui->h17180->setText(QString::number(static_cast<float>((g_SysCtrlgRegs[40] << 16) + g_SysCtrlgRegs[41]) / 1000000.0, 'f', 6));
 }

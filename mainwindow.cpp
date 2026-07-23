@@ -406,7 +406,8 @@ void MainWindow::cacheReceiveData()
     {
         QByteArray data = serialPort->readAll();
         for (auto byte : data) {
-            receiveDataBuf[receiveEndIndex] = byte;
+            char c = static_cast<char>(byte);
+            receiveDataBuf.replace(receiveEndIndex, 1, &c, 1);
             receiveEndIndex = (receiveEndIndex + 1) % 500;
         }
         if(data.size() > 0)
@@ -573,7 +574,7 @@ void MainWindow::refresh()
     {
         ui->bms_warn_prot->setText(NO_WARN_PROT_STR);
         ui->bms_warn_prot->setProperty("status", "normal");
-    }else if(g_StatRegs[0] + g_StatRegs[1] > 0)
+    }else if(g_StatRegs[1] > 0 || (g_StatRegs[0] & 0x75F) > 0)
     {
         ui->bms_warn_prot->setText(eventStr);
         ui->bms_warn_prot->setProperty("status", "prot");
@@ -658,7 +659,7 @@ QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, 
     if(((fault2 >> 4) & 1) == 1)   text.append("CMP B侧过流保护、");
     if(((fault2 >> 5) & 1) == 1)   text.append("CMP P侧过压保护、");
     if(((fault2 >> 6) & 1) == 1)   text.append("CMP B侧过压保护、");
-    if(((fault2 >> 7) & 1) == 1)   text.append("超温保护、");
+    if(((fault2 >> 7) & 1) == 1)   text.append("保护锁定、");
 
 
 
@@ -731,6 +732,31 @@ void MainWindow::manualWriteOneCMDBuild(quint16 addr, quint16 value)
     manualSendDataBuf.append(value >> 8);
     manualSendDataBuf.append(value & 0xFF);
     QByteArray crcArray = calculateCRCArray(manualSendDataBuf, 6);
+    manualSendDataBuf.append(crcArray[0]);
+    manualSendDataBuf.append(crcArray[1]);
+    manualFlag = 1;
+}
+
+void MainWindow::manualWriteTwoRegBuild(quint16 addr, quint16 value1, quint16 value2)
+{
+    if(manualFlag == 1)
+    {
+        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
+        return;
+    }
+    manualSendDataBuf.clear();
+    manualSendDataBuf.append(MODULE);
+    manualSendDataBuf.append(WRITE_MULTI_CMD);
+    manualSendDataBuf.append(addr >> 8);
+    manualSendDataBuf.append(addr & 0xFF);
+    manualSendDataBuf.append(static_cast<char>(0));
+    manualSendDataBuf.append(2);
+    manualSendDataBuf.append(4);
+    manualSendDataBuf.append(value1 >> 8);
+    manualSendDataBuf.append(value1 & 0xFF);
+    manualSendDataBuf.append(value2 >> 8);
+    manualSendDataBuf.append(value2 & 0xFF);
+    QByteArray crcArray = calculateCRCArray(manualSendDataBuf, 11);
     manualSendDataBuf.append(crcArray[0]);
     manualSendDataBuf.append(crcArray[1]);
     manualFlag = 1;
