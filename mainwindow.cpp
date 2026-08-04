@@ -684,14 +684,16 @@ QString MainWindow::getSoftVersion(quint16 sftVer)
     // 转换为16进制字符串
     QString hexStr = QString::number(sftVer, 16);  // 转换为16进制字符串 "112"
 
-    // 确保16进制字符串的长度为3位（补零）
-    while (hexStr.length() < 3) {
+    //补齐四个字符
+    quint8 size = 4 - hexStr.length();
+    for(quint8 i = 0; i < size; i++)
+    {
         hexStr = "0" + hexStr;
     }
 
     // 提取版本号的高位和低位部分
-    QString major = hexStr.mid(0, 1);  // 高位部分，取前1个字符
-    QString minor = hexStr.mid(1, 2);  // 低位部分，取后2个字符
+    QString major = hexStr.mid(0, 2);
+    QString minor = hexStr.mid(2, 2);
 
     return QString("V%1.%2").arg(major).arg(minor);
 }
