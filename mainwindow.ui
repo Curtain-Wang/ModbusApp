@@ -2600,7 +2600,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>LEV</string>
+                 <string>PH</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2608,7 +2608,7 @@ QGroupBox  {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lev">
+               <widget class="QLineEdit" name="ph">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -2706,7 +2706,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>IERR</string>
+                 <string>BH</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2714,7 +2714,7 @@ QGroupBox  {
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="ierr">
+               <widget class="QLineEdit" name="bh">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>

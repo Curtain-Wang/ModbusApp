@@ -2119,7 +2119,7 @@ QLineEdit:disabled {
          <item>
           <widget class="MyLineEdit" name="h17175">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="minimumSize">
             <size>
@@ -2217,7 +2217,7 @@ QLineEdit:disabled {
          <item>
           <widget class="MyLineEdit" name="h17176">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="minimumSize">
             <size>
@@ -2315,7 +2315,7 @@ QLineEdit:disabled {
          <item>
           <widget class="MyLineEdit" name="h17177">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="minimumSize">
             <size>
@@ -2413,7 +2413,7 @@ QLineEdit:disabled {
          <item>
           <widget class="MyLineEdit" name="h17178">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="minimumSize">
             <size>
@@ -2511,7 +2511,7 @@ QLineEdit:disabled {
          <item>
           <widget class="MyLineEdit" name="h17179">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="minimumSize">
             <size>
@@ -2609,7 +2609,7 @@ QLineEdit:disabled {
          <item>
           <widget class="MyLineEdit" name="h17180">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="minimumSize">
             <size>

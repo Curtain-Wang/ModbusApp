@@ -552,8 +552,8 @@ void MainWindow::refresh()
     ui->tel5->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[5]) * 1.0 / qPow(10, g_TelRegsPows[5])), 'f', g_TelRegsPows[5]));
     ui->tel6->setText(QString::number(static_cast<float>(g_TelRegs[6] * 1.0 / qPow(10, g_TelRegsPows[6])), 'f', g_TelRegsPows[6]));
     ui->tel7->setText(QString::number(static_cast<float>(g_TelRegs[7] * 1.0 / qPow(10, g_TelRegsPows[7])), 'f', g_TelRegsPows[7]));
-    ui->lev->setText(QString::number(static_cast<float>(g_TelRegs[8] * 1.0 / qPow(10, g_TelRegsPows[8])), 'f', g_TelRegsPows[8]));
-    ui->ierr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[9]) * 1.0 / qPow(10, g_TelRegsPows[9])), 'f', g_TelRegsPows[9]));
+    ui->ph->setText(QString::number(static_cast<float>(g_TelRegs[8] * 1.0 / qPow(10, g_TelRegsPows[8])), 'f', g_TelRegsPows[8]));
+    ui->bh->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[9]) * 1.0 / qPow(10, g_TelRegsPows[9])), 'f', g_TelRegsPows[9]));
     ui->verr->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[10]) * 1.0 / qPow(10, g_TelRegsPows[10])), 'f', g_TelRegsPows[10]));
     ui->iref->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TelRegs[11]) * 1.0 / qPow(10, g_TelRegsPows[11])), 'f', g_TelRegsPows[11]));
     ui->fchg_rem_time->setText(QString::number(static_cast<float>(g_TelRegs[12] * 1.0 / qPow(10, g_TelRegsPows[12])), 'f', g_TelRegsPows[12]));
