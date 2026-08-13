@@ -3929,6 +3929,7 @@ QLabel[status=&quot;disconnected&quot;] {
     <addaction name="actionRefreshPort"/>
     <addaction name="actDataRecord"/>
     <addaction name="actSerialNum"/>
+    <addaction name="actionCDTest"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -4065,6 +4066,17 @@ QLabel[status=&quot;disconnected&quot;] {
   <action name="actPowOff">
    <property name="text">
     <string>关机</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionCDTest">
+   <property name="text">
+    <string>充放电调试</string>
+   </property>
+   <property name="toolTip">
+    <string>充放电调试</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

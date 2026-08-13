@@ -16,6 +16,7 @@ SOURCES += \
     tform1.cpp \
     tform7.cpp \
     tformcali.cpp \
+    tformcdtest.cpp \
     tformconfig1.cpp \
     tformdatarecord.cpp \
     tformdownload.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     tform1.h \
     tform7.h \
     tformcali.h \
+    tformcdtest.h \
     tformconfig1.h \
     tformdatarecord.h \
     tformdownload.h \
@@ -40,6 +42,7 @@ FORMS += \
     tform1.ui \
     tform7.ui \
     tformcali.ui \
+    tformcdtest.ui \
     tformconfig1.ui \
     tformdatarecord.ui \
     tformdownload.ui \

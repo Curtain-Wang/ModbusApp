@@ -18,6 +18,7 @@
 #include <QtCharts>
 #include "voltcurchart.h"
 #include "tformcali.h"
+#include "tformcdtest.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -1116,6 +1117,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     {
         tformCali = nullptr;
     }
+    if(obj == tformCDTest)
+    {
+        tformCDTest = nullptr;
+    }
 }
 
 
@@ -1400,5 +1405,17 @@ void MainWindow::on_pushButton_9_clicked()
         connect(tformCali, &TFormCali::destroyed, this, &MainWindow::onTFormDestroyed);
     }
     tformCali->show();
+}
+
+
+void MainWindow::on_actionCDTest_triggered()
+{
+    if(tformCDTest == nullptr)
+    {
+        tformCDTest = new TFormCDTest(this);
+        tformCDTest->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformCDTest, &TFormCDTest::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformCDTest->show();
 }
 
