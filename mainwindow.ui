@@ -2706,7 +2706,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>BH</string>
+                 <string>电感1电流值</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2812,7 +2812,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>VERR</string>
+                 <string>电感2电流值</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2918,7 +2918,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>IREF</string>
+                 <string>电感3电流值</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
