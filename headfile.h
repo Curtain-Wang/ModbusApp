@@ -5,7 +5,7 @@
 #define INPUT_REG_START_ADDR    0
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
-#define TITLE   "PPS10K-V0.0.5-%1"
+#define TITLE   "PPS10K-V0.0.6-%1"
 #define MODULE  0x01
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
