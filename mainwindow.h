@@ -93,6 +93,8 @@ private slots:
 
     void on_actionCDTest_triggered();
 
+    void on_actParallelChg_triggered();
+
 private:
     Ui::MainWindow *ui;
     TForm1* tform1 = nullptr;

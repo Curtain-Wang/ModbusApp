@@ -3936,13 +3936,11 @@ QLabel[status=&quot;disconnected&quot;] {
      <string>指令</string>
     </property>
     <addaction name="actClrFault"/>
-    <addaction name="actForceChg"/>
-    <addaction name="actHib"/>
     <addaction name="actIndDsg"/>
     <addaction name="actUniDsg"/>
     <addaction name="actChg"/>
     <addaction name="actStandby"/>
-    <addaction name="actPowOff"/>
+    <addaction name="actParallelChg"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -4077,6 +4075,17 @@ QLabel[status=&quot;disconnected&quot;] {
    </property>
    <property name="toolTip">
     <string>充放电调试</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actParallelChg">
+   <property name="text">
+    <string>均流充电</string>
+   </property>
+   <property name="toolTip">
+    <string>均流充电</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

@@ -1419,3 +1419,14 @@ void MainWindow::on_actionCDTest_triggered()
     tformCDTest->show();
 }
 
+
+void MainWindow::on_actParallelChg_triggered()
+{
+    if(connFlag != CONNECTED)
+    {
+        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        return;
+    }
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 8));
+}
+
