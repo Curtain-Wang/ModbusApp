@@ -26,10 +26,10 @@ void TForm7::on_lineEdit_returnPressed()
         return;
     }
     double fValue = ui->lineEdit->text().toDouble();
-    if(lastEditAddr >= 17175 && lastEditAddr <= 17180)
+    if(lastEditAddr >= 17183 && lastEditAddr <= 17193)
     {
         quint32 val = (fValue * 1000000 + 0.5);
-        mainwindow->manualWriteTwoRegBuild(17183 + (lastEditAddr - 17175) * 2, (val >> 16), (val & 0xFFFF));
+        mainwindow->manualWriteTwoRegBuild(lastEditAddr, (val >> 16), (val & 0xFFFF));
     }else
     {
         quint16 blockStart = ((lastEditAddr & 0xFF00) | 1);

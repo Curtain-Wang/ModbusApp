@@ -49,6 +49,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::refreshPort()
 {
+    ui->cb_addr->setCurrentIndex(1);
     //清空combox中已经有的串口名
     ui->comboBox_2->clear();
     // 获取系统中所有可用串口
@@ -1428,5 +1429,11 @@ void MainWindow::on_actParallelChg_triggered()
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 8));
+}
+
+
+void MainWindow::on_cb_addr_currentIndexChanged(int index)
+{
+    MODULE = index;
 }
 

@@ -6,7 +6,6 @@
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
 #define TITLE   "PPS10K-V0.0.6-%1"
-#define MODULE  0x01
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
 #define INPUT_REG_NUM       30
@@ -104,7 +103,7 @@ typedef enum {
     MODBUS_BLOCK_SIZE_CHARGE    = 3,  // 充电参数寄存器数量
     MODBUS_BLOCK_SIZE_DISCHARGE = 4,  // 放电参数寄存器数量
     MODBUS_BLOCK_SIZE_PROTECT   = 11,  // 保护参数寄存器数量
-    MODBUS_BLOCK_SIZE_CTRL      = 42,  // 控制指令寄存器数量
+    MODBUS_BLOCK_SIZE_CTRL      = 43,  // 控制指令寄存器数量
 } modbus_block_size_addr_t;
 
 #define BR 9600
@@ -159,4 +158,5 @@ extern uint16_t g_SysCtrlgRegs[NUM_REGISTER];
 extern uint8_t g_SysCtrlgRegsPows[NUM_REGISTER];
 extern QString g_RunStatus[6];
 extern uint8_t g_ConfigGetFlag;
+extern uint8_t MODULE;
 #endif // HEADFILE_H

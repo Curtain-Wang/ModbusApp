@@ -95,6 +95,8 @@ private slots:
 
     void on_actParallelChg_triggered();
 
+    void on_cb_addr_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     TForm1* tform1 = nullptr;
