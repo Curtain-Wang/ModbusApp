@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1432</width>
+    <width>1598</width>
     <height>952</height>
    </rect>
   </property>
@@ -17,8 +17,8 @@
    <string notr="true">background-color: white;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox_34">
       <property name="minimumSize">
        <size>
@@ -38,8 +38,8 @@
       <property name="title">
        <string/>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox_35">
          <property name="minimumSize">
           <size>
@@ -145,7 +145,7 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="0" column="1">
         <widget class="QGroupBox" name="groupBox_36">
          <property name="minimumSize">
           <size>
@@ -276,7 +276,7 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="0" column="2">
         <widget class="QGroupBox" name="groupBox_37">
          <property name="minimumSize">
           <size>
@@ -1657,7 +1657,123 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="0" column="3">
+        <widget class="QGroupBox" name="groupBox_38">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox {
+    border: none
+}
+</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_44">
+          <item>
+           <widget class="QLabel" name="label_77">
+            <property name="maximumSize">
+             <size>
+              <width>55</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Microsoft YaHei</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    font-size: 15px; /* 字体大小 */
+    font-weight: bold; /* 加粗 */
+    text-align: center; /* 文本居中 */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>停止位</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cb_stopbit">
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Microsoft YaHei</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    border: 1px solid #cccccc; /* 边框 */
+    border-radius: 5px;
+    background-color: white;  /* 设置下拉框背景为白色 */
+}
+QComboBox::drop-down {
+    border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
+    width: 30px;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
+}
+</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1.5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="4">
         <widget class="QGroupBox" name="groupBox_18">
          <property name="minimumSize">
           <size>
@@ -1779,7 +1895,7 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="0" column="5">
         <widget class="QPushButton" name="connBtn">
          <property name="minimumSize">
           <size>
@@ -1832,7 +1948,7 @@ QPushButton:checked {
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="6">
         <widget class="QPushButton" name="connBtn_2">
          <property name="minimumSize">
           <size>
@@ -1885,7 +2001,7 @@ QPushButton:checked {
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="7">
         <widget class="QPushButton" name="pushButton_4">
          <property name="minimumSize">
           <size>
@@ -1938,7 +2054,7 @@ QPushButton:checked {
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="8">
         <widget class="QPushButton" name="pushButton_9">
          <property name="minimumSize">
           <size>
@@ -1991,7 +2107,7 @@ QPushButton:checked {
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="9">
         <widget class="QPushButton" name="pushButton_8">
          <property name="minimumSize">
           <size>
@@ -2047,7 +2163,7 @@ QPushButton:checked {
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="1" column="0">
      <widget class="QGroupBox" name="groupBox_5">
       <property name="title">
        <string/>
@@ -2230,7 +2346,7 @@ QPushButton:checked {
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="2" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
@@ -5173,7 +5289,7 @@ QLineEdit:disabled {
       </widget>
      </widget>
     </item>
-    <item>
+    <item row="3" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
       <item>
        <widget class="QTabWidget" name="tabwidget2">
@@ -5293,7 +5409,7 @@ QLabel[status=&quot;disconnected&quot;] {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1432</width>
+     <width>1598</width>
      <height>21</height>
     </rect>
    </property>

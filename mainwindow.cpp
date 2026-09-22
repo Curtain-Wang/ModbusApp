@@ -367,7 +367,18 @@ void MainWindow::on_connBtn_clicked()
         serialPort->setBaudRate(ui->cb_br->currentText().toInt());
         serialPort->setPortName(ui->comboBox_2->currentText());
         serialPort->setDataBits(QSerialPort::Data8);
-        serialPort->setStopBits(QSerialPort::OneStop);
+
+        if(ui->cb_stopbit->currentIndex() == 0)
+        {
+            serialPort->setStopBits(QSerialPort::OneStop);
+        }else if(ui->cb_stopbit->currentIndex() == 1)
+        {
+            serialPort->setStopBits(QSerialPort::OneAndHalfStop);
+        }else
+        {
+            serialPort->setStopBits(QSerialPort::TwoStop);
+        }
+
         serialPort->setParity(QSerialPort::NoParity);
         //连接失败
         if(!serialPort->open(QIODevice::ReadWrite))
@@ -568,7 +579,7 @@ void MainWindow::refresh()
     ui->temp5->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[5]) * 1.0 / qPow(10, g_TempTelRegsPows[5])), 'f', g_TempTelRegsPows[5]));
     ui->temp6->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[6]) * 1.0 / qPow(10, g_TempTelRegsPows[6])), 'f', g_TempTelRegsPows[6]));
     ui->temp7->setText(QString::number(static_cast<float>(static_cast<qint16>(g_TempTelRegs[7]) * 1.0 / qPow(10, g_TempTelRegsPows[7])), 'f', g_TempTelRegsPows[7]));
-    if(g_StatRegs[4] < 6)
+    if(g_StatRegs[4] < 7)
         ui->run_status->setText(g_RunStatus[g_StatRegs[4]]);
 
     QString eventStr = getEventText(g_StatRegs[0], g_StatRegs[1], g_StatRegs[2], g_StatRegs[3]);

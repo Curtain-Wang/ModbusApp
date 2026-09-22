@@ -5,7 +5,7 @@
 #define INPUT_REG_START_ADDR    0
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
-#define TITLE   "PPS10K-V0.0.7-%1"
+#define TITLE   "OPS10K-V0.0.8-%1"
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
 #define INPUT_REG_NUM       30
@@ -156,7 +156,7 @@ extern uint16_t g_ProtectCfgRegs[NUM_REGISTER];
 extern uint8_t g_ProtectCfgRegsPows[NUM_REGISTER];
 extern uint16_t g_SysCtrlgRegs[NUM_REGISTER];
 extern uint8_t g_SysCtrlgRegsPows[NUM_REGISTER];
-extern QString g_RunStatus[6];
+extern QString g_RunStatus[7];
 extern uint8_t g_ConfigGetFlag;
 extern uint8_t MODULE;
 #endif // HEADFILE_H
