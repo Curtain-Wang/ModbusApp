@@ -25,6 +25,7 @@
 #define DATA_RECORD_CYCLE  "data_record_cycle"
 #define DEFAULT_DATA_RECORD_CYCLE  60
 #define CONTINUOUS_RUN_TIME    "CONTINUOUS_RUN_TIME"
+#define BROADCAST_ADDR   0xAA
 
 #define NUM_REGISTER 0xFF
 typedef enum
