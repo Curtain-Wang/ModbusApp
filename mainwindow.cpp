@@ -754,26 +754,6 @@ void MainWindow::manualWriteOneCMDBuild(quint16 addr, quint16 value)
     manualFlag = 1;
 }
 
-void MainWindow::broadcast(quint16 addr, quint16 value)
-{
-    if(manualFlag == 1)
-    {
-        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
-        return;
-    }
-    manualSendDataBuf.clear();
-    manualSendDataBuf.append(BROADCAST_ADDR);
-    manualSendDataBuf.append(WRITE_ONE_CMD);
-    manualSendDataBuf.append(addr >> 8);
-    manualSendDataBuf.append(addr & 0xFF);
-    manualSendDataBuf.append(value >> 8);
-    manualSendDataBuf.append(value & 0xFF);
-    QByteArray crcArray = calculateCRCArray(manualSendDataBuf, 6);
-    manualSendDataBuf.append(crcArray[0]);
-    manualSendDataBuf.append(crcArray[1]);
-    manualFlag = 1;
-}
-
 void MainWindow::manualWriteTwoRegBuild(quint16 addr, quint16 value1, quint16 value2)
 {
     if(manualFlag == 1)
@@ -1391,7 +1371,7 @@ void MainWindow::on_actUniDsg_triggered()
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    mainwindow->broadcast(0x4301, (1 << 4));
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 4));
 }
 
 
@@ -1459,7 +1439,7 @@ void MainWindow::on_actParallelChg_triggered()
         QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
         return;
     }
-    mainwindow->broadcast(0x4301, (1 << 8));
+    mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 8));
 }
 
 
