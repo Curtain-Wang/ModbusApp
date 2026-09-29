@@ -33,7 +33,7 @@ quint8 queryStep = 0;
 uint16_t g_TelRegs[NUM_REGISTER];
 uint8_t g_TelRegsPows[NUM_REGISTER] = {2, 1, 2, 1, 0, 0, 2, 2, 4, 4, 0, 0, 0};
 uint16_t g_TempTelRegs[NUM_REGISTER];
-uint8_t g_TempTelRegsPows[NUM_REGISTER] = {1, 1, 1, 1, 1, 1, 1, 1};
+uint8_t g_TempTelRegsPows[NUM_REGISTER] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
 uint16_t g_StatRegs[NUM_REGISTER];
 uint8_t g_StatRegsPows[NUM_REGISTER] = {0};
 uint16_t g_ParallelRegs[NUM_REGISTER];
