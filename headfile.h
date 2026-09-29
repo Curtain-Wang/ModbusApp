@@ -5,7 +5,7 @@
 #define INPUT_REG_START_ADDR    0
 #define HOLDING_REG_START_ADDR  1000
 #define REG_NUM         100
-#define TITLE   "OPS10K-V0.0.8-%1"
+#define TITLE   "OPS10K-V0.0.9-%1"
 #define INPUT_REG_START     0
 #define HOLDING_REG_START   1000
 #define INPUT_REG_NUM       30
