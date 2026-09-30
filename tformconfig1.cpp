@@ -51,6 +51,8 @@ void TFormConfig1::refresh()
     ui->h16905->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[8] * 1.0 / qPow(10, g_ProtectCfgRegsPows[8])), 'f', g_ProtectCfgRegsPows[8]));
     ui->h16906->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[9] * 1.0 / qPow(10, g_ProtectCfgRegsPows[9])), 'f', g_ProtectCfgRegsPows[9]));
     ui->h16907->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[10] * 1.0 / qPow(10, g_ProtectCfgRegsPows[10])), 'f', g_ProtectCfgRegsPows[10]));
+    ui->h16908->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[11] * 1.0 / qPow(10, g_ProtectCfgRegsPows[11])), 'f', g_ProtectCfgRegsPows[11]));
+    ui->h16909->setText(QString::number(static_cast<float>(g_ProtectCfgRegs[12] * 1.0 / qPow(10, g_ProtectCfgRegsPows[12])), 'f', g_ProtectCfgRegsPows[12]));
 
 
     ui->h17154->setText(QString::number(g_SysCtrlgRegs[1]));

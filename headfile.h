@@ -102,7 +102,7 @@ typedef enum {
     MODBUS_BLOCK_SIZE_PRODUCT   = 6,  // 产品标识寄存器数量
     MODBUS_BLOCK_SIZE_CHARGE    = 3,  // 充电参数寄存器数量
     MODBUS_BLOCK_SIZE_DISCHARGE = 4,  // 放电参数寄存器数量
-    MODBUS_BLOCK_SIZE_PROTECT   = 11,  // 保护参数寄存器数量
+    MODBUS_BLOCK_SIZE_PROTECT   = 13,  // 保护参数寄存器数量
     MODBUS_BLOCK_SIZE_CTRL      = 43,  // 控制指令寄存器数量
 } modbus_block_size_addr_t;
 
