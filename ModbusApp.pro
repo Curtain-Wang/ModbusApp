@@ -15,6 +15,7 @@ SOURCES += \
     mylineedit.cpp \
     tform1.cpp \
     tform7.cpp \
+    tformbatch.cpp \
     tformcali.cpp \
     tformcdtest.cpp \
     tformconfig1.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     mylineedit.h \
     tform1.h \
     tform7.h \
+    tformbatch.h \
     tformcali.h \
     tformcdtest.h \
     tformconfig1.h \
@@ -41,6 +43,7 @@ FORMS += \
     mainwindow.ui \
     tform1.ui \
     tform7.ui \
+    tformbatch.ui \
     tformcali.ui \
     tformcdtest.ui \
     tformconfig1.ui \

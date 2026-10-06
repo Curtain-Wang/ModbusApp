@@ -19,6 +19,7 @@
 #include "voltcurchart.h"
 #include "tformcali.h"
 #include "tformcdtest.h"
+#include "tformbatch.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -191,11 +192,6 @@ void MainWindow::sendSerialData(const QByteArray &data)
         txResetTimer->stop();
     }
     txResetTimer->start(500);//500ms后恢复
-}
-
-void MainWindow::on_connBtn_2_clicked()
-{
-    refreshPort();
 }
 
 void MainWindow::onSendTimerTimeout()
@@ -1135,6 +1131,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     {
         tformCDTest = nullptr;
     }
+    if(obj == tformBatch)
+    {
+        tformBatch = nullptr;
+    }
 }
 
 
@@ -1448,5 +1448,17 @@ void MainWindow::on_actParallelChg_triggered()
 void MainWindow::on_cb_addr_currentIndexChanged(int index)
 {
     MODULE = index;
+}
+
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    if(tformBatch == nullptr)
+    {
+        tformBatch = new TFormBatch(this);
+        tformBatch->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformBatch, &TFormBatch::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformBatch->show();
 }
 

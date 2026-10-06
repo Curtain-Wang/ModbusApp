@@ -39,112 +39,6 @@
        <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="groupBox_35">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>250</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-    border: none
-}
-</string>
-         </property>
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_30">
-          <item>
-           <widget class="QLabel" name="label_38">
-            <property name="maximumSize">
-             <size>
-              <width>55</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei</family>
-              <pointsize>-1</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-    font-size: 15px; /* 字体大小 */
-    font-weight: bold; /* 加粗 */
-    text-align: center; /* 文本居中 */
-}
-</string>
-            </property>
-            <property name="text">
-             <string>COM</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_2">
-            <property name="minimumSize">
-             <size>
-              <width>120</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>150</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei</family>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QComboBox {
-    border: 1px solid #cccccc; /* 边框 */
-    border-radius: 5px;
-    background-color: white;  /* 设置下拉框背景为白色 */
-}
-QComboBox::drop-down {
-    border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
-    width: 30px;
-}
-QComboBox::down-arrow {
-    image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
-}
-QComboBox::item:selected {
-    color: black;  /* 选项选中时文字的颜色 */
-}
-
-QComboBox::item:hover {
-    color: black;  /* 鼠标悬浮时的文字颜色 */
-}
-</string>
-            </property>
-            <item>
-             <property name="text">
-              <string/>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
        <item row="0" column="1">
         <widget class="QGroupBox" name="groupBox_36">
          <property name="minimumSize">
@@ -272,6 +166,446 @@ QComboBox::item:hover {
              </property>
             </item>
            </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #66BB6A; /* 更淡的绿色 */
+    border: 2px solid #43A047;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
+}</string>
+         </property>
+         <property name="text">
+          <string>参数配置</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="8">
+        <widget class="QPushButton" name="pushButton_8">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #66BB6A; /* 更淡的绿色 */
+    border: 2px solid #43A047;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
+}</string>
+         </property>
+         <property name="text">
+          <string>固件下载</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox_35">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox {
+    border: none
+}
+</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_30">
+          <item>
+           <widget class="QLabel" name="label_38">
+            <property name="maximumSize">
+             <size>
+              <width>55</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Microsoft YaHei</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    font-size: 15px; /* 字体大小 */
+    font-weight: bold; /* 加粗 */
+    text-align: center; /* 文本居中 */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>COM</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_2">
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Microsoft YaHei</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    border: 1px solid #cccccc; /* 边框 */
+    border-radius: 5px;
+    background-color: white;  /* 设置下拉框背景为白色 */
+}
+QComboBox::drop-down {
+    border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
+    width: 30px;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
+}
+</string>
+            </property>
+            <item>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QPushButton" name="pushButton_9">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #66BB6A; /* 更淡的绿色 */
+    border: 2px solid #43A047;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
+}</string>
+         </property>
+         <property name="text">
+          <string>校准</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QPushButton" name="connBtn">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #66BB6A; /* 更淡的绿色 */
+    border: 2px solid #43A047;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
+}</string>
+         </property>
+         <property name="text">
+          <string>建立连接</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QGroupBox" name="groupBox_18">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox {
+    border: none;
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_29">
+            <item>
+             <widget class="QLabel" name="lab_tx">
+              <property name="minimumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+    border-radius: 5px;
+    background-color: #D3D3D3;
+
+}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Tx</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_32">
+            <item>
+             <widget class="QLabel" name="lab_rx">
+              <property name="minimumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+    border-radius: 5px;
+    background-color: #D3D3D3;
+
+}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Rx</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -1773,342 +2107,8 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item row="0" column="4">
-        <widget class="QGroupBox" name="groupBox_18">
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>50</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-    border: none;
-}</string>
-         </property>
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_29">
-            <item>
-             <widget class="QLabel" name="lab_tx">
-              <property name="minimumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLabel {
-    border-radius: 5px;
-    background-color: #D3D3D3;
-
-}
-</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_11">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Tx</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_32">
-            <item>
-             <widget class="QLabel" name="lab_rx">
-              <property name="minimumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLabel {
-    border-radius: 5px;
-    background-color: #D3D3D3;
-
-}
-</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Rx</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QPushButton" name="connBtn">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>建立连接</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <widget class="QPushButton" name="connBtn_2">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>刷新串口</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="7">
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>参数配置</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="8">
-        <widget class="QPushButton" name="pushButton_9">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>校准</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="9">
-        <widget class="QPushButton" name="pushButton_8">
+        <widget class="QPushButton" name="pushButton_10">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -2156,7 +2156,7 @@ QPushButton:checked {
 }</string>
          </property>
          <property name="text">
-          <string>固件下载</string>
+          <string>配置同步</string>
          </property>
         </widget>
        </item>
@@ -5516,7 +5516,7 @@ QLabel[status=&quot;disconnected&quot;] {
      <x>0</x>
      <y>0</y>
      <width>1598</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

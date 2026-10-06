@@ -15,6 +15,7 @@ class TFormSerNum;
 class VoltCurChart;
 class TFormCali;
 class TFormCDTest;
+class TFormBatch;
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -58,7 +59,6 @@ public:
     void voltCurChartInit();
     QString getSoftVersion(quint16 sftVer);
 private slots:
-    void on_connBtn_2_clicked();
     void onSendTimerTimeout();
     void on_connBtn_clicked();
     void onReceiveTimerTimeout();
@@ -97,6 +97,8 @@ private slots:
 
     void on_cb_addr_currentIndexChanged(int index);
 
+    void on_pushButton_10_clicked();
+
 private:
     Ui::MainWindow *ui;
     TForm1* tform1 = nullptr;
@@ -108,6 +110,7 @@ private:
     TFormDataRecord* tformDataRecord = nullptr;
     TFormSerNum* tformSerNum = nullptr;
     TFormCDTest* tformCDTest = nullptr;
+    TFormBatch* tformBatch = nullptr;
     QTimer* sendTimer = nullptr;
     QTimer* receiveTimer = nullptr;
     QTimer* saveDataTimer = nullptr;
