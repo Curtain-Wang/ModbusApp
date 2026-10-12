@@ -32,3 +32,9 @@ void TFormBatch::on_checkBox_9_clicked(bool checked)
     }
 }
 
+
+void TFormBatch::on_connBtn_clicked()
+{
+
+}
+

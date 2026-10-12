@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>457</width>
-    <height>622</height>
+    <width>515</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
+  <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="minimumSize">
@@ -33,11 +33,11 @@ QGroupBox {
      <property name="title">
       <string/>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="4" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,1">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="1,1">
         <item>
-         <widget class="QLabel" name="label_23">
+         <widget class="QLabel" name="label_33">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -59,7 +59,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧外侧电压K值</string>
+           <string>电池侧电流B值</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -67,7 +67,7 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="MyLineEdit" name="h17167">
+         <widget class="MyLineEdit" name="h17173">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -188,160 +188,6 @@ QLineEdit:disabled {
         </item>
        </layout>
       </item>
-      <item row="3" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="1,1">
-        <item>
-         <widget class="QLabel" name="label_27">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Microsoft YaHei UI</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">/* QLabel 样式 */
-QLabel {
-    padding: 2px;
-    font-size: 20px;
-    color: #333;
-}</string>
-          </property>
-          <property name="text">
-           <string>电池侧内侧电压K值</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="MyLineEdit" name="h17166">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>60</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>20</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLineEdit {
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white; /* 启用状态背景色为白色 */
-    selection-background-color: darkgray;
-}
-
-QLineEdit:disabled {
-    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
-    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
-    color: #888;              /* 禁用状态字体颜色 */
-}
-</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="7" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="1,1">
-        <item>
-         <widget class="QLabel" name="label_29">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>60</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Microsoft YaHei UI</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">/* QLabel 样式 */
-QLabel {
-    padding: 2px;
-    font-size: 20px;
-    color: #333;
-}</string>
-          </property>
-          <property name="text">
-           <string>电池侧负电流K值</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="MyLineEdit" name="h17170">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>60</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>20</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLineEdit {
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white; /* 启用状态背景色为白色 */
-    selection-background-color: darkgray;
-}
-
-QLineEdit:disabled {
-    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
-    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
-    color: #888;              /* 禁用状态字体颜色 */
-}
-</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
       <item row="2" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1,1">
         <item>
@@ -419,14 +265,14 @@ QLineEdit:disabled {
         </item>
        </layout>
       </item>
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="1,1">
+      <item row="3" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="1,1">
         <item>
-         <widget class="QLabel" name="label_33">
+         <widget class="QLabel" name="label_27">
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>60</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -444,7 +290,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧电流B值</string>
+           <string>电池侧内侧电压K值</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -452,7 +298,7 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="MyLineEdit" name="h17173">
+         <widget class="MyLineEdit" name="h17166">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -496,10 +342,10 @@ QLineEdit:disabled {
         </item>
        </layout>
       </item>
-      <item row="8" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1,1">
+      <item row="4" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,1">
         <item>
-         <widget class="QLabel" name="label_35">
+         <widget class="QLabel" name="label_23">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -521,7 +367,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧正电流K值</string>
+           <string>逆变侧外侧电压K值</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -529,7 +375,7 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="MyLineEdit" name="h17171">
+         <widget class="MyLineEdit" name="h17167">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -650,6 +496,237 @@ QLineEdit:disabled {
         </item>
        </layout>
       </item>
+      <item row="6" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="1,1">
+        <item>
+         <widget class="QLabel" name="label_41">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* QLabel 样式 */
+QLabel {
+    padding: 2px;
+    font-size: 20px;
+    color: #333;
+}</string>
+          </property>
+          <property name="text">
+           <string>电池侧正电流K值</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyLineEdit" name="h17169">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white; /* 启用状态背景色为白色 */
+    selection-background-color: darkgray;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
+    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
+    color: #888;              /* 禁用状态字体颜色 */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="7" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="1,1">
+        <item>
+         <widget class="QLabel" name="label_29">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* QLabel 样式 */
+QLabel {
+    padding: 2px;
+    font-size: 20px;
+    color: #333;
+}</string>
+          </property>
+          <property name="text">
+           <string>电池侧负电流K值</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyLineEdit" name="h17170">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white; /* 启用状态背景色为白色 */
+    selection-background-color: darkgray;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
+    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
+    color: #888;              /* 禁用状态字体颜色 */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="8" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1,1">
+        <item>
+         <widget class="QLabel" name="label_35">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* QLabel 样式 */
+QLabel {
+    padding: 2px;
+    font-size: 20px;
+    color: #333;
+}</string>
+          </property>
+          <property name="text">
+           <string>逆变侧正电流K值</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyLineEdit" name="h17171">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white; /* 启用状态背景色为白色 */
+    selection-background-color: darkgray;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
+    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
+    color: #888;              /* 禁用状态字体颜色 */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
       <item row="9" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="1,1">
         <item>
@@ -727,10 +804,10 @@ QLineEdit:disabled {
         </item>
        </layout>
       </item>
-      <item row="6" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="1,1">
+      <item row="10" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="1,1">
         <item>
-         <widget class="QLabel" name="label_41">
+         <widget class="QLabel" name="label_40">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -752,7 +829,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧正电流K值</string>
+           <string>电感电流1B值</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -760,7 +837,161 @@ QLabel {
          </widget>
         </item>
         <item>
-         <widget class="MyLineEdit" name="h17169">
+         <widget class="MyLineEdit" name="h17196">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white; /* 启用状态背景色为白色 */
+    selection-background-color: darkgray;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
+    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
+    color: #888;              /* 禁用状态字体颜色 */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="11" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_22" stretch="1,1">
+        <item>
+         <widget class="QLabel" name="label_42">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* QLabel 样式 */
+QLabel {
+    padding: 2px;
+    font-size: 20px;
+    color: #333;
+}</string>
+          </property>
+          <property name="text">
+           <string>电感电流2B值</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyLineEdit" name="h17197">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white; /* 启用状态背景色为白色 */
+    selection-background-color: darkgray;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0; /* 禁用状态背景色为浅灰色 */
+    border: 1px solid #aaa;    /* 禁用状态边框颜色 */
+    color: #888;              /* 禁用状态字体颜色 */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="12" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="1,1">
+        <item>
+         <widget class="QLabel" name="label_43">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei UI</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* QLabel 样式 */
+QLabel {
+    padding: 2px;
+    font-size: 20px;
+    color: #333;
+}</string>
+          </property>
+          <property name="text">
+           <string>电感电流3B值</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="MyLineEdit" name="h17198">
           <property name="enabled">
            <bool>true</bool>
           </property>

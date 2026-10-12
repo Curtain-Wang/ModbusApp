@@ -31,4 +31,7 @@ void TFormCali::refresh()
     ui->h17172->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[19]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[19])), 'f', g_SysCtrlgRegsPows[19]));
     ui->h17173->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[20]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[20])), 'f', g_SysCtrlgRegsPows[20]));
     ui->h17174->setText(QString::number(static_cast<float>(static_cast<qint16>(g_SysCtrlgRegs[21]) * 1.0 / qPow(10, g_SysCtrlgRegsPows[21])), 'f', g_SysCtrlgRegsPows[21]));
+    ui->h17196->setText(QString::number(g_SysCtrlgRegs[43]));
+    ui->h17197->setText(QString::number(g_SysCtrlgRegs[44]));
+    ui->h17198->setText(QString::number(g_SysCtrlgRegs[45]));
 }

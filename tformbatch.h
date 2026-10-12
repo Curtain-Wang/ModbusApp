@@ -18,6 +18,8 @@ public:
 private slots:
     void on_checkBox_9_clicked(bool checked);
 
+    void on_connBtn_clicked();
+
 private:
     Ui::TFormBatch *ui;
 };
