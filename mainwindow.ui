@@ -4521,7 +4521,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>强充剩余时间</string>
+                 <string>BH</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4589,7 +4589,7 @@ QLineEdit:disabled {
                  </font>
                 </property>
                 <property name="text">
-                 <string>秒</string>
+                 <string/>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -5516,7 +5516,7 @@ QLabel[status=&quot;disconnected&quot;] {
      <x>0</x>
      <y>0</y>
      <width>1598</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
