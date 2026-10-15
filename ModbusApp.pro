@@ -20,6 +20,7 @@ SOURCES += \
     tformcdtest.cpp \
     tformconfig1.cpp \
     tformdatarecord.cpp \
+    tformdebug.cpp \
     tformdownload.cpp \
     tformsernum.cpp \
     voltcurchart.cpp
@@ -35,6 +36,7 @@ HEADERS += \
     tformcdtest.h \
     tformconfig1.h \
     tformdatarecord.h \
+    tformdebug.h \
     tformdownload.h \
     tformsernum.h \
     voltcurchart.h
@@ -48,6 +50,7 @@ FORMS += \
     tformcdtest.ui \
     tformconfig1.ui \
     tformdatarecord.ui \
+    tformdebug.ui \
     tformdownload.ui \
     tformsernum.ui
 

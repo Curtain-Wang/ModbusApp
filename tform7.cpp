@@ -26,7 +26,9 @@ void TForm7::on_lineEdit_returnPressed()
         return;
     }
     double fValue = ui->lineEdit->text().toDouble();
-    if(lastEditAddr >= 17183 && lastEditAddr <= 17193)
+    if((lastEditAddr >= 17183 && lastEditAddr <= 17193)
+        || (lastEditAddr >= 17156 && lastEditAddr <= 17160)
+        || (lastEditAddr >= 17175 && lastEditAddr <= 17177))
     {
         quint32 val = (fValue * 1000000 + 0.5);
         mainwindow->manualWriteTwoRegBuild(lastEditAddr, (val >> 16), (val & 0xFFFF));

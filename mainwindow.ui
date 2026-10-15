@@ -5516,7 +5516,7 @@ QLabel[status=&quot;disconnected&quot;] {
      <x>0</x>
      <y>0</y>
      <width>1598</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -5533,6 +5533,7 @@ QLabel[status=&quot;disconnected&quot;] {
     <addaction name="actDataRecord"/>
     <addaction name="actSerialNum"/>
     <addaction name="actionCDTest"/>
+    <addaction name="actDebugSet"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -5689,6 +5690,17 @@ QLabel[status=&quot;disconnected&quot;] {
    </property>
    <property name="toolTip">
     <string>均流充电</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actDebugSet">
+   <property name="text">
+    <string>调试设置</string>
+   </property>
+   <property name="toolTip">
+    <string>调试设置</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

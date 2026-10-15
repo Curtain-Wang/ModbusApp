@@ -16,6 +16,7 @@ class VoltCurChart;
 class TFormCali;
 class TFormCDTest;
 class TFormBatch;
+class TFormDebug;
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -99,6 +100,8 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+    void on_actDebugSet_triggered();
+
 private:
     Ui::MainWindow *ui;
     TForm1* tform1 = nullptr;
@@ -111,6 +114,7 @@ private:
     TFormSerNum* tformSerNum = nullptr;
     TFormCDTest* tformCDTest = nullptr;
     TFormBatch* tformBatch = nullptr;
+    TFormDebug* tformDebug = nullptr;
     QTimer* sendTimer = nullptr;
     QTimer* receiveTimer = nullptr;
     QTimer* saveDataTimer = nullptr;

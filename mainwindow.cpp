@@ -20,6 +20,7 @@
 #include "tformcali.h"
 #include "tformcdtest.h"
 #include "tformbatch.h"
+#include "tformdebug.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -522,9 +523,14 @@ void MainWindow::dealMessage(quint8 *data)
             {
                 tformCali->refresh();
             }
+            if(tformDebug != nullptr)
+            {
+                tformDebug->refresh();
+            }
         }
 
-        if(tformConfig1 != nullptr || g_ConfigGetFlag == 0 || tformCali != nullptr)
+        if(tformConfig1 != nullptr || g_ConfigGetFlag == 0 || tformCali != nullptr
+            || tformDebug != nullptr)
         {
             queryStep = (queryStep + 1) % 9; //更新步骤
         }else
@@ -1135,6 +1141,10 @@ void MainWindow::onTFormDestroyed(QObject *obj)
     {
         tformBatch = nullptr;
     }
+    if(obj == tformDebug)
+    {
+        tformDebug = nullptr;
+    }
 }
 
 
@@ -1460,5 +1470,17 @@ void MainWindow::on_pushButton_10_clicked()
         connect(tformBatch, &TFormBatch::destroyed, this, &MainWindow::onTFormDestroyed);
     }
     tformBatch->show();
+}
+
+
+void MainWindow::on_actDebugSet_triggered()
+{
+    if(tformDebug == nullptr)
+    {
+        tformDebug = new TFormDebug(this);
+        tformDebug->setAttribute(Qt::WA_DeleteOnClose);
+        connect(tformDebug, &TFormDebug::destroyed, this, &MainWindow::onTFormDestroyed);
+    }
+    tformDebug->show();
 }
 
