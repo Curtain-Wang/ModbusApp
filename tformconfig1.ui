@@ -19,7 +19,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_2">
        <property name="title">
-        <string>放电配置</string>
+        <string>Discharge</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
@@ -42,7 +42,7 @@
               </font>
              </property>
              <property name="text">
-              <string>逆变侧电压设定值</string>
+              <string>Inv Volt Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -137,7 +137,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>逆变侧输出电流限值</string>
+              <string>Inv Cur Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -232,7 +232,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>逆变侧输出功率限值</string>
+              <string>Inv Pow Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -327,7 +327,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电池侧放电功率设定值</string>
+              <string>Bat Pow Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -408,7 +408,7 @@ QLineEdit:disabled {
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="title">
-        <string>充电配置</string>
+        <string>Charge</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -431,7 +431,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电池侧充电电压设定值</string>
+              <string>Bat Volt Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -526,7 +526,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>充电电流限值</string>
+              <string>Limit Cur Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -621,7 +621,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电池侧充电功率设定值</string>
+              <string>Bat Pow Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -725,7 +725,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电池侧过压告警设置</string>
+              <string>Bat OV Warn Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -832,7 +832,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电池侧过压保护设置</string>
+              <string>Bat OV Port Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -939,7 +939,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电池侧欠压保护设置</string>
+              <string>Bat UV Prot Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1046,7 +1046,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>MPPT欠压设置</string>
+              <string>MPPT UV Prot Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1164,7 +1164,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电池侧过流保护设置</string>
+            <string>Bat OC Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1271,7 +1271,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电池侧过功率保护</string>
+            <string>Bat OP Prot Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1378,7 +1378,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>逆变器侧过压告警设置</string>
+            <string>Inv OV Warn Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1485,7 +1485,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>逆变侧过压保护设置</string>
+            <string>Inv OV Prot Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1592,7 +1592,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>逆变侧欠压保护设置</string>
+            <string>Inv UV Prot Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1699,7 +1699,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>逆变侧过流保护设置</string>
+            <string>Inv OC Prot Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1806,7 +1806,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>逆变侧过功率保护</string>
+            <string>Inv OP Prot Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1913,7 +1913,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>超温保护</string>
+            <string>OT Prot</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2020,7 +2020,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>超温保护恢复</string>
+            <string>OT Recovery</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2127,7 +2127,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>高温告警</string>
+            <string>OT Warn</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2231,7 +2231,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>频率设置</string>
+            <string>Freq Set</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2329,7 +2329,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>支路选择</string>
+            <string>Brach</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2427,7 +2427,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>模块地址</string>
+            <string>Addr</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
