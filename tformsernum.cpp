@@ -22,7 +22,7 @@ void TFormSerNum::on_pushButton_7_clicked()
 {
     if (connFlag != CONNECTED)
     {
-        QMessageBox::information(this, "警告", "请先建立连接");
+        QMessageBox::information(this, "Warn", "Please establish the connection first.");
         return;
     }
     raise();

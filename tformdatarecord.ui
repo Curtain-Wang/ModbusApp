@@ -35,7 +35,7 @@
          </font>
         </property>
         <property name="text">
-         <string>实时数据保存周期:</string>
+         <string>Record Cycle</string>
         </property>
        </widget>
       </item>
@@ -128,7 +128,7 @@
          </font>
         </property>
         <property name="text">
-         <string>实时数据保存路径:</string>
+         <string>Record Addr</string>
         </property>
        </widget>
       </item>
@@ -152,7 +152,7 @@
          </font>
         </property>
         <property name="text">
-         <string>更换路径</string>
+         <string>Chose Addr</string>
         </property>
        </widget>
       </item>
@@ -243,7 +243,7 @@
         </font>
        </property>
        <property name="text">
-        <string>保存</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>

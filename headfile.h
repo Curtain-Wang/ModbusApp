@@ -11,7 +11,7 @@
 #define INPUT_REG_NUM       30
 #define HOLDING_REG_NUM     21
 #define DATA_REFRESH_CYCLE  10
-#define NO_WARN_PROT_STR    "无保护事件"
+#define NO_WARN_PROT_STR    "Unprotected incident"
 #define UNCONNECTED     0
 #define CONNECTING      1
 #define CONNECTED       2

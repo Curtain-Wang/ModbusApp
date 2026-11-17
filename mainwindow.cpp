@@ -93,7 +93,7 @@ void MainWindow::init()
     connectStatusLabel->setMinimumWidth(150);
     connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
     ui->statusbar->addWidget(connectStatusLabel);
-    connectStatusLabel->setText(connStatus.arg("未连接"));
+    connectStatusLabel->setText(connStatus.arg("Unconnected"));
     //版本号
     versionLabel->setMidLineWidth(100);
     ui->statusbar->addWidget(versionLabel);
@@ -173,7 +173,7 @@ void MainWindow::sendSerialData(const QByteArray &data)
     //串口未开启
     if(!serialPort->isOpen())
     {
-        QMessageBox::critical(this, "错误", "串口未开启!");
+        QMessageBox::critical(this, "Err", "Serial Port Cant Open!");
         return;
     }
     if(tform1 != nullptr)
@@ -353,12 +353,12 @@ QByteArray MainWindow::calculateCRCArray(const QByteArray &data, int length) {
 
 void MainWindow::on_connBtn_clicked()
 {
-    if(ui->connBtn->text() == "建立连接")
+    if(ui->connBtn->text() == "Conn")
     {
         if(ui->comboBox_2->currentIndex() == -1)
         {
-            QMessageBox::information(this, tr("提示"),
-                                     tr("请选择串口!"));
+            QMessageBox::information(this, tr("Tip"),
+                                     tr("Select Serial Port!"));
             return;
         }
         serialPort->setBaudRate(ui->cb_br->currentText().toInt());
@@ -380,10 +380,10 @@ void MainWindow::on_connBtn_clicked()
         //连接失败
         if(!serialPort->open(QIODevice::ReadWrite))
         {
-            QMessageBox::information(this, tr("错误"),
-                                     tr("无法启动串口通讯！！！"));
+            QMessageBox::information(this, tr("ERR"),
+                                     tr("Cant Open Serial Port Communication!!!"));
             connFlag = UNCONNECTED;
-            connectStatusLabel->setText(connStatus.arg("未连接"));
+            connectStatusLabel->setText(connStatus.arg("Unconnected"));
             connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
             return;
         }
@@ -393,17 +393,17 @@ void MainWindow::on_connBtn_clicked()
             connFlag = CONNECTING;
             ui->comboBox_2->setEnabled(false);
             ui->cb_br->setEnabled(false);
-            ui->connBtn->setText("断开连接");
+            ui->connBtn->setText("DisConn");
             ui->connBtn->setStyleSheet(RED_BUTTON_STYLE);
             sendTimer->start();
             receiveTimer->start();
-            connectStatusLabel->setText(connStatus.arg("连接中..."));
+            connectStatusLabel->setText(connStatus.arg("Connecting..."));
             connectStatusLabel->setStyleSheet("QLabel { background-color : blue; color : white; }");
             portName = ui->comboBox_2->currentText();
             baudRate = ui->cb_br->currentText().toInt();
         }
     }
-    else if(ui->connBtn->text() == "断开连接")
+    else if(ui->connBtn->text() == "DisConn")
     {
         disconnect();
         stopReconnect();
@@ -463,7 +463,7 @@ void MainWindow::dealMessage(quint8 *data)
         g_ConfigGetFlag = 0;
     }
     timeoutTimes = 0;
-    connectStatusLabel->setText(connStatus.arg("已连接"));
+    connectStatusLabel->setText(connStatus.arg("Connected"));
     connectStatusLabel->setStyleSheet("QLabel { background-color : green; color : white; }");
     //查询命令
     if(data[1] == READ_INPUT_CMD || data[1] == READ_HOLDING_CMD)
@@ -656,44 +656,55 @@ void MainWindow::refresh()
 QString MainWindow::getEventText(quint16 fault1, quint16 fault2, quint16 warn1, quint16 warn2)
 {
     QString text;
-    if((fault1 & 1) == 1)   text.append("短路保护、");
-    if(((fault1 >> 1) & 1) == 1)   text.append("超温保护、");
-    if(((fault1 >> 2) & 1) == 1)   text.append("充电过流保护、");
-    if(((fault1 >> 3) & 1) == 1)   text.append("放电过流保护、");
-    if(((fault1 >> 4) & 1) == 1)   text.append("电池侧过压保护、");
-    if(((fault1 >> 5) & 1) == 1)   text.append("电池侧欠压保护、");
-    if(((fault1 >> 6) & 1) == 1)   text.append("逆变侧过压保护、");
-    if(((fault1 >> 7) & 1) == 1)   text.append("逆变侧欠压保护、");
-    if(((fault1 >> 8) & 1) == 1)   text.append("CMP保护、");
-    if(((fault1 >> 9) & 1) == 1)   text.append("B侧内外压差不平衡、");
-    if(((fault1 >> 10) & 1) == 1)   text.append("P侧内外压差不平衡、");
-    if(((fault1 >> 11) & 1) == 1)   text.append("电感不均流保护");
 
+    // Fault 1
+    if((fault1 & 1) == 1)   text.append("Short Circuit Protection, ");
+    if(((fault1 >> 1) & 1) == 1)   text.append("Over-Temp Protection, ");
+    if(((fault1 >> 2) & 1) == 1)   text.append("Charge Over-Current Protection, ");
+    if(((fault1 >> 3) & 1) == 1)   text.append("Discharge Over-Current Protection, ");
+    if(((fault1 >> 4) & 1) == 1)   text.append("Battery Side Over-Voltage Protection, ");
+    if(((fault1 >> 5) & 1) == 1)   text.append("Battery Side Under-Voltage Protection, ");
+    if(((fault1 >> 6) & 1) == 1)   text.append("Inverter Side Over-Voltage Protection, ");
+    if(((fault1 >> 7) & 1) == 1)   text.append("Inverter Side Under-Voltage Protection, ");
+    if(((fault1 >> 8) & 1) == 1)   text.append("CMP Protection, ");
+    if(((fault1 >> 9) & 1) == 1)   text.append("B-Side Pressure Imbalance, ");
+    if(((fault1 >> 10) & 1) == 1)   text.append("P-Side Pressure Imbalance, ");
+    if(((fault1 >> 11) & 1) == 1)   text.append("Inductor Current Imbalance Protection");
 
-    if((fault2 & 1) == 1)   text.append("熔断器故障、");
-    if(((fault2 >> 1) & 1) == 1)   text.append("系统错误、");
-    if(((fault2 >> 2) & 1) == 1)   text.append("通信故障、");
-    if(((fault2 >> 3) & 1) == 1)   text.append("CMP P侧过流保护、");
-    if(((fault2 >> 4) & 1) == 1)   text.append("CMP B侧过流保护、");
-    if(((fault2 >> 5) & 1) == 1)   text.append("CMP P侧过压保护、");
-    if(((fault2 >> 6) & 1) == 1)   text.append("CMP B侧过压保护、");
-    if(((fault2 >> 7) & 1) == 1)   text.append("保护锁定、");
+    // Fault 2
+    if((fault2 & 1) == 1)   text.append("Fuse Fault, ");
+    if(((fault2 >> 1) & 1) == 1)   text.append("System Error, ");
+    if(((fault2 >> 2) & 1) == 1)   text.append("Communication Fault, ");
+    if(((fault2 >> 3) & 1) == 1)   text.append("CMP P-Side Over-Current Protection, ");
+    if(((fault2 >> 4) & 1) == 1)   text.append("CMP B-Side Over-Current Protection, ");
+    if(((fault2 >> 5) & 1) == 1)   text.append("CMP P-Side Over-Voltage Protection, ");
+    if(((fault2 >> 6) & 1) == 1)   text.append("CMP B-Side Over-Voltage Protection, ");
+    if(((fault2 >> 7) & 1) == 1)   text.append("Protection Latched, ");
 
+    // Warn 1
+    if((warn1 & 1) == 1)   text.append("Charge Over-Current Warning, ");
+    if(((warn1 >> 1) & 1) == 1)   text.append("Discharge Over-Current Warning, ");
+    if(((warn1 >> 2) & 1) == 1)   text.append("Battery Side Under-Voltage Warning, ");
+    if(((warn1 >> 3) & 1) == 1)   text.append("Battery Side Over-Voltage Warning, ");
+    if(((warn1 >> 4) & 1) == 1)   text.append("Inverter Side Under-Voltage Warning, ");
+    if(((warn1 >> 5) & 1) == 1)   text.append("Inverter Side Over-Voltage Warning, ");
+    if(((warn1 >> 6) & 1) == 1)   text.append("Host Disconnected, ");
 
+    // Warn 2
+    if((warn2 & 1) == 1)   text.append("High Temp Warning, ");
 
-    if((warn1 & 1) == 1)   text.append("充电过流告警、");
-    if(((warn1 >> 1) & 1) == 1)   text.append("放电过流告警、");
-    if(((warn1 >> 2) & 1) == 1)   text.append("电池侧欠压告警、");
-    if(((warn1 >> 3) & 1) == 1)   text.append("电池侧过压告警、");
-    if(((warn1 >> 4) & 1) == 1)   text.append("逆变侧欠压告警、");
-    if(((warn1 >> 5) & 1) == 1)   text.append("逆变侧过压告警、");
-    if(((warn1 >> 6) & 1) == 1)   text.append("与主机断联、");
-
-    if((warn2 & 1) == 1)   text.append("高温告警、");
-
+    // Remove trailing comma and space if text is not empty
     if(text.length() > 0)
     {
-        text.removeAt(text.length() - 1);
+        // Note: The original code removed only the last character (the comma).
+        // Since we added ", " (comma + space), we should remove the last 2 characters
+        // to keep it clean, or just the last one if you prefer keeping the space.
+        // Here I assume you want to remove the trailing ", " completely.
+        if (text.endsWith(", ")) {
+            text.chop(2);
+        } else if (text.endsWith(",")) {
+            text.chop(1);
+        }
     }
     return text;
 }
@@ -721,7 +732,7 @@ void MainWindow::readHoldingRegCMDBuild()
 {
     if(manualFlag == 1)
     {
-        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
+        QMessageBox::information(this, "Conflict", "Another manual command is currently being sent. Please try again later!");
         return;
     }
     manualSendDataBuf.clear();
@@ -742,7 +753,7 @@ void MainWindow::manualWriteOneCMDBuild(quint16 addr, quint16 value)
 {
     if(manualFlag == 1)
     {
-        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
+        QMessageBox::information(this, "Conflict", "Another manual command is currently being sent. Please try again later!");
         return;
     }
     manualSendDataBuf.clear();
@@ -762,7 +773,7 @@ void MainWindow::manualWriteTwoRegBuild(quint16 addr, quint16 value1, quint16 va
 {
     if(manualFlag == 1)
     {
-        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
+        QMessageBox::information(this, "Conflict", "Another manual command is currently being sent. Please try again later!");
         return;
     }
     manualSendDataBuf.clear();
@@ -787,7 +798,7 @@ void MainWindow::diyCMDBuild(QByteArray data, quint16 len)
 {
     if(manualFlag == 1)
     {
-        QMessageBox::information(this, "冲突", "当前有其他手动命令在发送, 请稍后再试!");
+        QMessageBox::information(this, "Conflict", "Another manual command is currently being sent. Please try again later!");
         return;
     }
     manualSendDataBuf.clear();
@@ -866,11 +877,11 @@ void MainWindow::disconnect()
     connFlag = UNCONNECTED;
     ui->comboBox_2->setEnabled(true);
     ui->cb_br->setEnabled(true);
-    connectStatusLabel->setText(connStatus.arg("未连接"));
+    connectStatusLabel->setText(connStatus.arg("Unconnected"));
     connectStatusLabel->setStyleSheet("QLabel { background-color : red; color : white; }");
-    ui->connBtn->setText("建立连接");
+    ui->connBtn->setText("Conn");
     ui->connBtn->setStyleSheet(GREEN_BUTTON_STYLE);
-    ui->bms_warn_prot->setText("未连接");
+    ui->bms_warn_prot->setText("Unconnected");
     ui->bms_warn_prot->setProperty("status", "disconnected");
     ui->bms_warn_prot->style()->unpolish(ui->bms_warn_prot);
     ui->bms_warn_prot->style()->polish(ui->bms_warn_prot);
@@ -889,26 +900,27 @@ bool MainWindow::ensureSaveDirectoryExists(QString serialNumberStr)
 void MainWindow::initializeCSVFile(QTextStream &out)
 {
     QStringList headers;
-    headers.append("时间");
-    headers.append("累计运行时间");
-    headers.append("运行模式");
-    headers.append("告警保护事件");
-    headers.append("电池侧外侧电压(V)");
-    headers.append("电池侧内侧电压(V)");
-    headers.append("电池侧电流(A)");
-    headers.append("电池侧功率(W)");
-    headers.append("逆变侧外侧电压(V)");
-    headers.append("逆变侧内侧电压(V)");
-    headers.append("逆变侧电流(A)");
-    headers.append("逆变侧功率(W)");
-    headers.append("B侧MOS温度(℃)");
-    headers.append("P侧MOS温度(℃)");
-    headers.append("环境温度(℃)");
-    headers.append("散热器温度(℃)");
-    headers.append("功率电感1温度(℃)");
-    headers.append("功率电感2温度(℃)");
-    headers.append("功率电感3温度(℃)");
-    headers.append("功率电感4温度(℃)");
+    headers.append("Time");
+    headers.append("Total Operating Time");
+    headers.append("Operating Mode");
+    headers.append("Alarm & Protection Events");
+    headers.append("Battery Side Outer Voltage (V)");
+    headers.append("Battery Side Inner Voltage (V)");
+    headers.append("Battery Side Current (A)");
+    headers.append("Battery Side Power (W)");
+    headers.append("Inverter Side Outer Voltage (V)");
+    headers.append("Inverter Side Inner Voltage (V)");
+    headers.append("Inverter Side Current (A)");
+    headers.append("Inverter Side Power (W)");
+    headers.append("B-Side MOSFET Temperature (℃)");
+    headers.append("P-Side MOSFET Temperature (℃)");
+    headers.append("Ambient Temperature (℃)");
+    headers.append("Heatsink Temperature (℃)");
+    headers.append("Power Inductor 1 Temperature (℃)");
+    headers.append("Power Inductor 2 Temperature (℃)");
+    headers.append("Power Inductor 3 Temperature (℃)");
+    headers.append("Power Inductor 4 Temperature (℃)");
+
     out << headers.join(",") << "\n";
 }
 
@@ -1212,8 +1224,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     QMessageBox::StandardButton resBtn;
-    resBtn = QMessageBox::question(this, "提示",
-                                   "确定要退出嘛？",
+    resBtn = QMessageBox::question(this, "Tip",
+                                   "Sure Close？",
                                    QMessageBox::No | QMessageBox::Yes,
                                    QMessageBox::Yes);
     if (resBtn != QMessageBox::Yes) {
@@ -1244,7 +1256,7 @@ void MainWindow::on_saveDataTimer_timeout()
             bool flag = dir.mkpath(".");
             if(tform1 != nullptr && flag)
             {
-                tform1->displayInfo("未找到路径，已创建");
+                tform1->displayInfo("No path found. Created.");
             }
 
         }
@@ -1256,7 +1268,7 @@ void MainWindow::on_saveDataTimer_timeout()
         {
             if(tform1 != nullptr)
             {
-                tform1->displayInfo("无法创建保存目录");
+                tform1->displayInfo("Unable to create the save directory");
             }
             return;
         }
@@ -1266,7 +1278,7 @@ void MainWindow::on_saveDataTimer_timeout()
             if (!csvFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
                 if(tform1 != nullptr)
                 {
-                    tform1->displayInfo("无法打开文件");
+                    tform1->displayInfo("Cannot open the file");
                 }
                 return;
             }
@@ -1336,7 +1348,7 @@ void MainWindow::on_actClrFault_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, 1);
@@ -1347,7 +1359,7 @@ void MainWindow::on_actForceChg_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 1));
@@ -1358,7 +1370,7 @@ void MainWindow::on_actHib_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 2));
@@ -1369,7 +1381,7 @@ void MainWindow::on_actIndDsg_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 3));
@@ -1380,7 +1392,7 @@ void MainWindow::on_actUniDsg_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 4));
@@ -1391,7 +1403,7 @@ void MainWindow::on_actChg_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 5));
@@ -1402,7 +1414,7 @@ void MainWindow::on_actStandby_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 6));
@@ -1413,7 +1425,7 @@ void MainWindow::on_actPowOff_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 7));
@@ -1448,7 +1460,7 @@ void MainWindow::on_actParallelChg_triggered()
 {
     if(connFlag != CONNECTED)
     {
-        QMessageBox::information(this, tr("提示"), tr("请先建立连接!"));
+        QMessageBox::information(this, tr("Tip"), tr("Please establish the connection first!"));
         return;
     }
     mainwindow->manualWriteOneCMDBuild(0x4301, (1 << 8));
@@ -1458,18 +1470,6 @@ void MainWindow::on_actParallelChg_triggered()
 void MainWindow::on_cb_addr_currentIndexChanged(int index)
 {
     MODULE = index;
-}
-
-
-void MainWindow::on_pushButton_10_clicked()
-{
-    if(tformBatch == nullptr)
-    {
-        tformBatch = new TFormBatch(this);
-        tformBatch->setAttribute(Qt::WA_DeleteOnClose);
-        connect(tformBatch, &TFormBatch::destroyed, this, &MainWindow::onTFormDestroyed);
-    }
-    tformBatch->show();
 }
 
 

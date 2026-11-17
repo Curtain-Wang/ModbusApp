@@ -98,7 +98,6 @@ private slots:
 
     void on_cb_addr_currentIndexChanged(int index);
 
-    void on_pushButton_10_clicked();
 
     void on_actDebugSet_triggered();
 

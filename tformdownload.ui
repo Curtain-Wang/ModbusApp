@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>文件路径</string>
+        <string>File Addr</string>
        </property>
       </widget>
      </item>
@@ -35,7 +35,7 @@
         </size>
        </property>
        <property name="text">
-        <string>选择文件</string>
+        <string>Choose File</string>
        </property>
       </widget>
      </item>
@@ -59,7 +59,7 @@
         </size>
        </property>
        <property name="text">
-        <string>下载</string>
+        <string>Download</string>
        </property>
       </widget>
      </item>

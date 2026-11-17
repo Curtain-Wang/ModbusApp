@@ -2,9 +2,9 @@
 #include <mainwindow.h>
 
 int connFlag = 0;
-QString connStatus = "连接状态：%1";
-QString versionStr = "版本：%1";
-QString runTimeStr = "最近一次持续运行时间：%1时 %2分 %3秒";
+QString connStatus = "Conn Status：%1";
+QString versionStr = "Version：%1";
+QString runTimeStr = "Continue Run：%1时 %2分 %3秒";
 int waitMessageRemaingTime = 0;
 int dataRefreshRemaingTime = 0;
 //手动标记，0自动 1手动 2双手动
@@ -26,7 +26,7 @@ int baudRate = 0;
 QString portName = "";
 //超时次数
 quint8 timeoutTimes = 0;
-QString serNum = "未知";
+QString serNum = "Unk";
 quint64 lastRunSecond = 0;
 quint64 runSecond = 0;
 quint8 queryStep = 0;
@@ -48,6 +48,6 @@ uint16_t g_ProtectCfgRegs[NUM_REGISTER];
 uint8_t g_ProtectCfgRegsPows[NUM_REGISTER] = {2, 2, 1, 0, 2, 2, 1, 0, 1, 1, 1, 2, 2, 2};
 uint16_t g_SysCtrlgRegs[NUM_REGISTER];
 uint8_t g_SysCtrlgRegsPows[NUM_REGISTER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3};
-QString g_RunStatus[7] = {"休眠", "待机", "独立放电", "均流放电", "充电", "故障", "均流充电"};
+QString g_RunStatus[7] = {"Sleep", "Standby", "Independent Discharge", "Parallel Discharge", "Charge", "Fault", "Parallel Charge"};
 uint8_t g_ConfigGetFlag = 0;
 uint8_t MODULE = 1;

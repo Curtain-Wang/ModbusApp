@@ -59,7 +59,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧电流B值</string>
+           <string>Bat Cur B</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -136,7 +136,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧电流B值</string>
+           <string>Inv Cur B</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -213,7 +213,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧外侧电压K值</string>
+           <string>Bat Out Volt K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -290,7 +290,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧内侧电压K值</string>
+           <string>Bat In Volt K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -367,7 +367,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧外侧电压K值</string>
+           <string>Inv Out Volt K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -444,7 +444,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧内侧电压K值</string>
+           <string>Inv In Volt K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -521,7 +521,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧正电流K值</string>
+           <string>Bar Pos Cur K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -598,7 +598,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电池侧负电流K值</string>
+           <string>Bar Neg Cur K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -675,7 +675,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧正电流K值</string>
+           <string>Inv Pos Cur K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -752,7 +752,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>逆变侧负电流K值</string>
+           <string>Inv Neg Cur K</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -829,7 +829,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电感电流1B值</string>
+           <string>Inductance Cur B1</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -906,7 +906,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电感电流2B值</string>
+           <string>Inductance Cur B2</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -983,7 +983,7 @@ QLabel {
 }</string>
           </property>
           <property name="text">
-           <string>电感电流3B值</string>
+           <string>Inductance Cur B3</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

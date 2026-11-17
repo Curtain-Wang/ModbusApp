@@ -11,7 +11,7 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
 {
     // 创建图表
     m_chart = new QChart();
-    m_chart->setTitle("P侧实时电压/电流监控"); // 修改标题
+    m_chart->setTitle("Inv Volt/Cur Monitor"); // 修改标题
 
     // >>>>>>>>>>>> 新增：设置标题字体大小 <<<<<<<<<<<
     QFont titleFont = m_chart->titleFont();
@@ -26,13 +26,13 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
 
     // 创建电压系列
     m_series = new QLineSeries();
-    m_series->setName("电压(V)");
+    m_series->setName("Volt(V)");
     m_series->setColor(Qt::red); // 设置电压为红色
     m_chart->addSeries(m_series);
 
     // >>>>>>>>>>>> 新增：创建电流系列 <<<<<<<<<<<
     m_currentSeries = new QLineSeries();
-    m_currentSeries->setName("电流(A)");
+    m_currentSeries->setName("Cur(A)");
     m_currentSeries->setColor(Qt::blue); // 设置电流为蓝色
     m_chart->addSeries(m_currentSeries);
     // >>>>>>>>>>>> 结束新增 <<<<<<<<<<<
@@ -40,7 +40,7 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
     // 创建X轴（时间轴）
     m_axisX = new QDateTimeAxis();
     m_axisX->setFormat("mm:ss");
-    m_axisX->setTitleText("时间(分:秒)");
+    m_axisX->setTitleText("Time(mm:ss)");
     m_axisX->setTickCount(m_timeWindow + 1); // 精确设置刻度数量
     m_axisX->setGridLineVisible(true);
     m_axisX->setMinorGridLineVisible(false);
@@ -54,14 +54,14 @@ VoltCurChart::VoltCurChart(QWidget *parent) :
 
     // 创建Y轴（电压轴）
     m_axisY = new QValueAxis();
-    m_axisY->setTitleText("电压 (V)");
+    m_axisY->setTitleText("Volt (V)");
     m_axisY->setLabelFormat("%.2f V");
     m_chart->addAxis(m_axisY, Qt::AlignLeft);
     m_series->attachAxis(m_axisY);
 
     // >>>>>>>>>>>> 新增：创建电流Y轴 <<<<<<<<<<<
     m_axisCurrent = new QValueAxis();
-    m_axisCurrent->setTitleText("电流 (A)");
+    m_axisCurrent->setTitleText("Cur (A)");
     m_axisCurrent->setLabelFormat("%.2f A");
     m_chart->addAxis(m_axisCurrent, Qt::AlignRight);
     m_currentSeries->attachAxis(m_axisCurrent);
@@ -278,7 +278,7 @@ void VoltCurChart::stop()
 void VoltCurChart::swtichB()
 {
     flag = 1;
-    m_chart->setTitle("B侧实时电压/电流监控"); // 修改标题
+    m_chart->setTitle("Bat Volt/Cur Monitor"); // 修改标题
 }
 
 void VoltCurChart::updateChart()

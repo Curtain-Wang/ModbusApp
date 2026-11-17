@@ -19,7 +19,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_4">
        <property name="title">
-        <string>基础</string>
+        <string>Base</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="2" column="0">
@@ -42,7 +42,7 @@
               </font>
              </property>
              <property name="text">
-              <string>模块地址</string>
+              <string>Addr</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -140,7 +140,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>频率设置</string>
+              <string>Freq Set</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -238,7 +238,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>支路选择</string>
+              <string>Branch</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -322,7 +322,7 @@ QLineEdit:disabled {
      <item>
       <widget class="QGroupBox" name="groupBox_6">
        <property name="title">
-        <string>充电PID</string>
+        <string>Chg PID</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="2" column="0">
@@ -345,7 +345,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电压参数TYPEⅡ参数三</string>
+              <string>Volt TYPEⅡ 3</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -443,7 +443,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电压参数TYPEⅡ参数一</string>
+              <string>Volt TYPEⅡ 1</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -541,7 +541,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电流参数A</string>
+              <string>Cur A</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -639,7 +639,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电压参数TYPEⅡ参数二</string>
+              <string>Volt TYPEⅡ 2</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -737,7 +737,7 @@ QLineEdit:disabled {
               </font>
              </property>
              <property name="text">
-              <string>电流参数B</string>
+              <string>Cur B</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -823,7 +823,7 @@ QLineEdit:disabled {
    <item>
     <widget class="QGroupBox" name="groupBox_5">
      <property name="title">
-      <string>放电PID</string>
+      <string>Dsg PID</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="4" column="0">
@@ -846,7 +846,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电流参数A</string>
+            <string>Cur A</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -944,7 +944,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电流参数B</string>
+            <string>Cur B</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1042,7 +1042,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电压参数TYPEⅡ参数一</string>
+            <string>Volt TYPEⅡ 1</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1140,7 +1140,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电压参数TYPEⅡ参数三</string>
+            <string>Volt TYPEⅡ 3</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1238,7 +1238,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电压参数TYPEⅡ参数四</string>
+            <string>Volt TYPEⅡ 4</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1336,7 +1336,7 @@ QLineEdit:disabled {
             </font>
            </property>
            <property name="text">
-            <string>电压参数TYPEⅡ参数二</string>
+            <string>Volt TYPEⅡ 2</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

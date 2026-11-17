@@ -48,7 +48,7 @@ void TFormDataRecord::init()
 
 void TFormDataRecord::on_pushButton_11_clicked()
 {
-    QString directory = QFileDialog::getExistingDirectory(this, "选择目录", "");
+    QString directory = QFileDialog::getExistingDirectory(this, "Select the Table of Contents", "");
     if (!directory.isEmpty()) {
         ui->lineEdit_2->setText(directory);
     }
@@ -66,6 +66,6 @@ void TFormDataRecord::on_pushButton_6_clicked()
     settings.setValue(DATA_RECORD_FILE_PATH, dataRecordFilePath);
     settings.setValue(DATA_RECORD_CYCLE, dataRecordCycle);
     settings.endGroup();
-    QMessageBox::information(this, "提示", "保存成功!");
+    QMessageBox::information(this, "Tip", "Saved successfully!");
 }
 

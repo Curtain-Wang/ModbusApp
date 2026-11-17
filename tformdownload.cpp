@@ -148,7 +148,7 @@ void TFormDownload::downloadRespDeal()
                 reDownloadFlag = true;
             }
             ui->progressBar->setValue(5);
-            ui->plainTextEdit->appendPlainText("握手成功!");
+            ui->plainTextEdit->appendPlainText("Handshake successful!");
             DownloadTime = 0;
             DownloadTXFlag = 1;
             DownloadRepeatNum = 3;
@@ -161,7 +161,7 @@ void TFormDownload::downloadRespDeal()
             timer->stop();
             DownloadFlag = 4;
             ui->progressBar->setValue(10);
-            ui->plainTextEdit->appendPlainText("擦除成功!");
+            ui->plainTextEdit->appendPlainText("Erased successfully!");
             DownloadTime = 0;
             DownloadTXFlag = 1;
             DownloadRepeatNum = 3;
@@ -182,7 +182,7 @@ void TFormDownload::downloadRespDeal()
             //说明已经下载完成
             if(pageAddr * 128 >= fileLen)
             {
-                ui->plainTextEdit->appendPlainText("数据下载完成!");
+                ui->plainTextEdit->appendPlainText("Data download completed!");
                 DownloadFlag = 5;
             }else
             {
@@ -204,11 +204,11 @@ void TFormDownload::downloadRespDeal()
         {
             ui->progressBar->setValue(100);
 
-            QMessageBox::information(this, "提示", "升级成功!");
+            QMessageBox::information(this, "Tip", "Upgrade successful!");
         }else
         {
-            ui->plainTextEdit->appendPlainText("升级失败");
-            QMessageBox::information(this, "提示", "升级失败!");
+            ui->plainTextEdit->appendPlainText("Upgrade failed");
+            QMessageBox::information(this, "Tip", "Upgrade failed!");
         }
         break;
     }
@@ -248,7 +248,7 @@ void TFormDownload::on_timeout()
             //超过重发次数了
             if(DownloadRepeatNum == 0)
             {
-                ui->plainTextEdit->appendPlainText("通讯超时!");
+                ui->plainTextEdit->appendPlainText("Communication timeout!");
                 endDownload();
                 return;
             }
@@ -264,7 +264,7 @@ void TFormDownload::on_pushButton_clicked()
     QString filter = "Parameter(*.bin)|*.bin";
     QString defaultSuffix = "bin";
     QString initialDir = getInitDir();
-    QString fileName = QFileDialog::getOpenFileName(this, "请选择升级文件", initialDir, filter);
+    QString fileName = QFileDialog::getOpenFileName(this, "Please select the upgrade file", initialDir, filter);
     if (fileName.isEmpty())
         return;
     ui->lineEdit->setText(fileName);
@@ -272,14 +272,14 @@ void TFormDownload::on_pushButton_clicked()
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::information(this, "错误", "文件打开失败!");
+        QMessageBox::information(this, "ERR", "File opening failed!");
         ui->master_btn->setEnabled(false);
         return;
     }
     fileLen = file.size();
     if(fileLen > 50000)
     {
-        QMessageBox::information(this, "错误", "文件过大!");
+        QMessageBox::information(this, "ERR", "The file is too large.!");
         ui->master_btn->setEnabled(false);
         return;
     }

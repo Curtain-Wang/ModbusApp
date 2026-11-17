@@ -170,218 +170,6 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item row="0" column="6">
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>参数配置</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="8">
-        <widget class="QPushButton" name="pushButton_8">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>固件下载</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="groupBox_35">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>250</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QGroupBox {
-    border: none
-}
-</string>
-         </property>
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_30">
-          <item>
-           <widget class="QLabel" name="label_38">
-            <property name="maximumSize">
-             <size>
-              <width>55</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei</family>
-              <pointsize>-1</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel {
-    font-size: 15px; /* 字体大小 */
-    font-weight: bold; /* 加粗 */
-    text-align: center; /* 文本居中 */
-}
-</string>
-            </property>
-            <property name="text">
-             <string>COM</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_2">
-            <property name="minimumSize">
-             <size>
-              <width>120</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>150</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei</family>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QComboBox {
-    border: 1px solid #cccccc; /* 边框 */
-    border-radius: 5px;
-    background-color: white;  /* 设置下拉框背景为白色 */
-}
-QComboBox::drop-down {
-    border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
-    width: 30px;
-}
-QComboBox::down-arrow {
-    image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
-}
-QComboBox::item:selected {
-    color: black;  /* 选项选中时文字的颜色 */
-}
-
-QComboBox::item:hover {
-    color: black;  /* 鼠标悬浮时的文字颜色 */
-}
-</string>
-            </property>
-            <item>
-             <property name="text">
-              <string/>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
        <item row="0" column="7">
         <widget class="QPushButton" name="pushButton_9">
          <property name="minimumSize">
@@ -431,7 +219,7 @@ QPushButton:checked {
 }</string>
          </property>
          <property name="text">
-          <string>校准</string>
+          <string>Cali</string>
          </property>
         </widget>
        </item>
@@ -484,130 +272,61 @@ QPushButton:checked {
 }</string>
          </property>
          <property name="text">
-          <string>建立连接</string>
+          <string>Conn</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="4">
-        <widget class="QGroupBox" name="groupBox_18">
+       <item row="0" column="8">
+        <widget class="QPushButton" name="pushButton_8">
          <property name="minimumSize">
           <size>
-           <width>60</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>50</width>
-           <height>16777215</height>
+           <width>150</width>
+           <height>50</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">QGroupBox {
-    border: none;
+          <string notr="true">QPushButton {
+    background-color: #66BB6A; /* 更淡的绿色 */
+    border: 2px solid #43A047;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
 }</string>
          </property>
-         <property name="title">
-          <string/>
+         <property name="text">
+          <string>Download</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_29">
-            <item>
-             <widget class="QLabel" name="lab_tx">
-              <property name="minimumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLabel {
-    border-radius: 5px;
-    background-color: #D3D3D3;
-
-}
-</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_11">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Tx</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_32">
-            <item>
-             <widget class="QLabel" name="lab_rx">
-              <property name="minimumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>10</width>
-                <height>10</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QLabel {
-    border-radius: 5px;
-    background-color: #D3D3D3;
-
-}
-</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Rx</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
         </widget>
        </item>
        <item row="0" column="2">
@@ -1991,6 +1710,287 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox_35">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox {
+    border: none
+}
+</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_30">
+          <item>
+           <widget class="QLabel" name="label_38">
+            <property name="maximumSize">
+             <size>
+              <width>55</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Microsoft YaHei</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    font-size: 15px; /* 字体大小 */
+    font-weight: bold; /* 加粗 */
+    text-align: center; /* 文本居中 */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>COM</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_2">
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Microsoft YaHei</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+    border: 1px solid #cccccc; /* 边框 */
+    border-radius: 5px;
+    background-color: white;  /* 设置下拉框背景为白色 */
+}
+QComboBox::drop-down {
+    border-left: 1px solid #cccccc; /* 下拉按钮的边框 */
+    width: 30px;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/images/arrow_down.png); /* 您可以替换为您自己的下拉箭头图标 */
+}
+QComboBox::item:selected {
+    color: black;  /* 选项选中时文字的颜色 */
+}
+
+QComboBox::item:hover {
+    color: black;  /* 鼠标悬浮时的文字颜色 */
+}
+</string>
+            </property>
+            <item>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QGroupBox" name="groupBox_18">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox {
+    border: none;
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_29">
+            <item>
+             <widget class="QLabel" name="lab_tx">
+              <property name="minimumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+    border-radius: 5px;
+    background-color: #D3D3D3;
+
+}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Tx</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_32">
+            <item>
+             <widget class="QLabel" name="lab_rx">
+              <property name="minimumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>10</width>
+                <height>10</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+    border-radius: 5px;
+    background-color: #D3D3D3;
+
+}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Rx</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #66BB6A; /* 更淡的绿色 */
+    border: 2px solid #43A047;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #5AAE5E;
+    border: 2px solid #388E3C;
+}
+QPushButton:pressed {
+    background-color: #4CAF50;
+    border: 2px solid #2C6E2E;
+}
+QPushButton:checked {
+    background-color: #4CAF50; /* 不再用过深绿色 */
+    border: 2px solid #2E7D32;
+    color: #E8F5E9;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    font-weight: bold;
+}</string>
+         </property>
+         <property name="text">
+          <string>Param</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="3">
         <widget class="QGroupBox" name="groupBox_38">
          <property name="minimumSize">
@@ -2039,7 +2039,7 @@ QComboBox::item:hover {
 </string>
             </property>
             <property name="text">
-             <string>停止位</string>
+             <string>Stop</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -2107,59 +2107,6 @@ QComboBox::item:hover {
          </layout>
         </widget>
        </item>
-       <item row="0" column="9">
-        <widget class="QPushButton" name="pushButton_10">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #66BB6A; /* 更淡的绿色 */
-    border: 2px solid #43A047;
-    color: white;
-    font-size: 22px;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    text-align: center;
-}
-QPushButton:hover {
-    background-color: #5AAE5E;
-    border: 2px solid #388E3C;
-}
-QPushButton:pressed {
-    background-color: #4CAF50;
-    border: 2px solid #2C6E2E;
-}
-QPushButton:checked {
-    background-color: #4CAF50; /* 不再用过深绿色 */
-    border: 2px solid #2E7D32;
-    color: #E8F5E9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    font-weight: bold;
-}</string>
-         </property>
-         <property name="text">
-          <string>配置同步</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
@@ -2198,7 +2145,7 @@ QPushButton:checked {
             </font>
            </property>
            <property name="text">
-            <string>状态：</string>
+            <string>Status：</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2225,7 +2172,7 @@ QPushButton:checked {
             </font>
            </property>
            <property name="text">
-            <string>待机</string>
+            <string>Standby</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -2289,7 +2236,7 @@ QPushButton:checked {
             </font>
            </property>
            <property name="text">
-            <string>B侧继电器</string>
+            <string>Relay B</string>
            </property>
           </widget>
          </item>
@@ -2337,7 +2284,7 @@ QPushButton:checked {
             </font>
            </property>
            <property name="text">
-            <string>P侧继电器</string>
+            <string>Relay P</string>
            </property>
           </widget>
          </item>
@@ -2354,11 +2301,11 @@ QPushButton:checked {
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>遥测</string>
+        <string>Remote</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -2395,7 +2342,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电池侧外侧电压</string>
+                 <string>Bat Out Volt</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2504,7 +2451,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电池侧内侧电压</string>
+                 <string>Bat In Volt</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2613,7 +2560,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电池测电流</string>
+                 <string>Bat Cur</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2719,7 +2666,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电池侧功率</string>
+                 <string>Bat Pow</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2825,7 +2772,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>逆变侧外侧电压</string>
+                 <string>Inv Out Volt</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2931,7 +2878,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>逆变侧内侧电压</string>
+                 <string>Inv In Volt</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3037,7 +2984,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>逆变侧电流</string>
+                 <string>Inv Cur</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3143,7 +3090,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>逆变侧功率</string>
+                 <string>Inv Pow</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3249,7 +3196,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>B侧MOS温度</string>
+                 <string>Bat Mos Temp</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3355,7 +3302,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>P侧MOS温度</string>
+                 <string>Inv Mos Temp</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3461,7 +3408,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>环境温度</string>
+                 <string>Env Temp</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3567,7 +3514,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>散热器温度</string>
+                 <string>Radiator Temp</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3673,7 +3620,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>功率电感1温度</string>
+                 <string>Pow Inductance Temp1</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3779,7 +3726,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>功率电感2温度</string>
+                 <string>Pow Inductance Temp2</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3885,7 +3832,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>功率电感3温度</string>
+                 <string>Pow Inductance Temp3</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3991,7 +3938,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>功率电感4温度</string>
+                 <string>Pow Inductance Temp4</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4203,7 +4150,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电感1电流值</string>
+                 <string>Inductance Cur1</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4309,7 +4256,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电感2电流值</string>
+                 <string>Inductance Cur2</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4415,7 +4362,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>电感3电流值</string>
+                 <string>Inductance Cur3</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4627,7 +4574,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>集群最大温度</string>
+                 <string>Max Temp</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4712,7 +4659,7 @@ QLineEdit:disabled {
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>并机</string>
+        <string>Parallel</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
@@ -4749,7 +4696,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>本机地址</string>
+                 <string>Addr</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4858,7 +4805,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>主机地址</string>
+                 <string>Master Addr</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4967,7 +4914,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>并机数量</string>
+                 <string>Parallel Num</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -5076,7 +5023,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>本机角色</string>
+                 <string>Role</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -5185,7 +5132,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>本机输出电流</string>
+                 <string>Cur</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -5294,7 +5241,7 @@ QGroupBox  {
                  </font>
                 </property>
                 <property name="text">
-                 <string>系统总输出电流</string>
+                 <string>Total Cur</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -5409,7 +5356,7 @@ QLineEdit:disabled {
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
-          <string>B侧</string>
+          <string>Bat Side</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
@@ -5419,7 +5366,7 @@ QLineEdit:disabled {
         </widget>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
-          <string>P侧</string>
+          <string>Pow Side</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
@@ -5492,7 +5439,7 @@ QLabel[status=&quot;disconnected&quot;] {
 }</string>
         </property>
         <property name="text">
-         <string>未连接</string>
+         <string>Unconnected</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -5516,28 +5463,27 @@ QLabel[status=&quot;disconnected&quot;] {
      <x>0</x>
      <y>0</y>
      <width>1598</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>文件</string>
+     <string>File</string>
     </property>
     <addaction name="actQuit"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>工具</string>
+     <string>Tool</string>
     </property>
     <addaction name="actionRefreshPort"/>
     <addaction name="actDataRecord"/>
     <addaction name="actSerialNum"/>
     <addaction name="actionCDTest"/>
-    <addaction name="actDebugSet"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>指令</string>
+     <string>CMD</string>
     </property>
     <addaction name="actClrFault"/>
     <addaction name="actIndDsg"/>
@@ -5552,10 +5498,10 @@ QLabel[status=&quot;disconnected&quot;] {
   </widget>
   <action name="actQuit">
    <property name="text">
-    <string>退出</string>
+    <string>Quit</string>
    </property>
    <property name="toolTip">
-    <string>退出</string>
+    <string>Quit</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -5563,10 +5509,10 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actionRefreshPort">
    <property name="text">
-    <string>刷新端口</string>
+    <string>Refresh Port</string>
    </property>
    <property name="toolTip">
-    <string>刷新端口</string>
+    <string>Refresh Port</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -5574,7 +5520,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actDataRecord">
    <property name="text">
-    <string>数据记录</string>
+    <string>Data Record</string>
    </property>
    <property name="toolTip">
     <string>数据记录</string>
@@ -5585,7 +5531,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actSerialNum">
    <property name="text">
-    <string>序列号</string>
+    <string>Serial Num</string>
    </property>
    <property name="toolTip">
     <string>序列号</string>
@@ -5596,7 +5542,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actClrFault">
    <property name="text">
-    <string>清除故障</string>
+    <string>Clear Fault</string>
    </property>
    <property name="toolTip">
     <string>清除故障</string>
@@ -5607,7 +5553,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actForceChg">
    <property name="text">
-    <string>强充使能</string>
+    <string>Force Charge</string>
    </property>
    <property name="toolTip">
     <string>强充使能</string>
@@ -5618,7 +5564,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actHib">
    <property name="text">
-    <string>休眠</string>
+    <string>Sleep</string>
    </property>
    <property name="toolTip">
     <string>休眠</string>
@@ -5629,7 +5575,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actIndDsg">
    <property name="text">
-    <string>独立放电</string>
+    <string>Independent Discharge</string>
    </property>
    <property name="toolTip">
     <string>独立放电</string>
@@ -5640,7 +5586,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actUniDsg">
    <property name="text">
-    <string>均流放电</string>
+    <string>Parallel Discharge</string>
    </property>
    <property name="toolTip">
     <string>均流放电</string>
@@ -5651,7 +5597,10 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actChg">
    <property name="text">
-    <string>充电</string>
+    <string>Charge</string>
+   </property>
+   <property name="toolTip">
+    <string>Charge</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -5659,7 +5608,10 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actStandby">
    <property name="text">
-    <string>待机</string>
+    <string>Standby</string>
+   </property>
+   <property name="toolTip">
+    <string>Standby</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -5667,7 +5619,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actPowOff">
    <property name="text">
-    <string>关机</string>
+    <string>Turn Off</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
@@ -5675,7 +5627,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actionCDTest">
    <property name="text">
-    <string>充放电调试</string>
+    <string>Charge Discharge Test</string>
    </property>
    <property name="toolTip">
     <string>充放电调试</string>
@@ -5686,7 +5638,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actParallelChg">
    <property name="text">
-    <string>均流充电</string>
+    <string>Parallel Charge</string>
    </property>
    <property name="toolTip">
     <string>均流充电</string>
@@ -5697,7 +5649,7 @@ QLabel[status=&quot;disconnected&quot;] {
   </action>
   <action name="actDebugSet">
    <property name="text">
-    <string>调试设置</string>
+    <string>Debug Set</string>
    </property>
    <property name="toolTip">
     <string>调试设置</string>
